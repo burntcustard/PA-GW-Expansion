@@ -1,7 +1,7 @@
 {
   "context": "client",
   "identifier": "io.pa.burnt.gwe",
-  "display_name": "Galactic War Expenasion",
+  "display_name": "Galactic War Expansion",
   "description": "Improves and expands upon Galactic War",
   "author": "burntcustard",
   "version": "0.1.0",
