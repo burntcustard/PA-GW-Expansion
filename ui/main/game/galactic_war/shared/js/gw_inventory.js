@@ -44,6 +44,13 @@ define(['require'], function(require) {
 
             self.applyCards = function() {};
             self.cards(config.cards || []);
+            self.cardsOfType = config.cardsOfType || {
+                commanderPrimary: [],
+                commanderSecondary: [],
+                commanderPassive: [],
+                units: [],
+                upgrades: []
+            };
             delete self.applyCards;
 
             self.minions(config.minions || []);
@@ -130,6 +137,8 @@ define(['require'], function(require) {
                     finishPhase();
             };
             var applyCardOp = function(op, cardParams) {
+                //console.log("Applying card OP " + op + " for card with params:");
+                //console.log(cardParams);
                 var cardId;
                 if (typeof cardParams === 'string') {
                     cardId = cardParams;

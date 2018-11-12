@@ -1525,6 +1525,7 @@ requireGW([
                 });
             });
 
+            // A big chunk of debug for different types of cards
             // console.log("Final card models");
             // console.log("Main card model list:");
             // console.log(cardModels);
