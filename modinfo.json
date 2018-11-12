@@ -1,0 +1,17 @@
+{
+  "context": "client",
+  "identifier": "io.pa.burnt.gwe",
+  "display_name": "Galactic War Expenasion",
+  "description": "Improves and expands upon Galactic War",
+  "author": "burntcustard",
+  "version": "0.1.0",
+  "build": "112314",
+  "date": "2018-11-12",
+  "signature": " ",
+  "forum": "https://",
+  "category": [
+    "gw",
+    "gameplay",
+    "titans"
+  ]
+}
