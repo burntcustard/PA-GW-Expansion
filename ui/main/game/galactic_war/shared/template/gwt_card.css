@@ -15,6 +15,7 @@
     .card > .type {
         text-align: center;
         font-weight: 600;
+        padding: 0 4px;
     }
 
     .card > .summary {
@@ -25,7 +26,6 @@
         width: 100%;
         text-align: left;
         margin: 0;
-        padding: 0 4px;
         flex-grow: 1;
     }
 

@@ -525,10 +525,14 @@ html, body {
         font-size: 20px;
         color: #01ff4f;
         text-shadow: none;
-        margin: 0px 0px 6px 0px;
+        margin-bottom: 3px;
         max-width: 372px;
         line-height: 1;
         flex-shrink: 0;
+    }
+
+    .card .col2 .desc, .div_card_type {
+        margin: 0px 0px 7px 0px;
     }
 
     .card .col2 .desc, .div_card_desc {

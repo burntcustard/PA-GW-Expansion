@@ -10,7 +10,7 @@ globals.CardViewModel = function (params) {
         return (typeof p === 'object') ? p.id : p;
     });
 
-    self.visible = ko.observable(false);
+    self.visible = ko.observable(true);
     self.desc = ko.observable();
     self.locDesc = ko.computed(function () {
         return loc(self.desc());
@@ -50,10 +50,10 @@ globals.CardViewModel = function (params) {
             self.icon(card.icon && card.icon(data));
             self.iconPlaceholder(!self.icon() && (self.summary() || self.desc()));
             self.audio(card.audio && card.audio(data));
-            self.visible((card.visible === true) || !!(card.visible && card.visible(data)));
+            self.visible(!(card.visible === false) || !!(card.visible && card.visible(data)));
             self.type(card.type && card.type());
             if (self.type()) {
-                self.viewType(self.cardTypeName[self.type()] || 'Error: undefined or invalid tech type');
+                self.viewType(self.cardTypeNames[self.type()] || 'Error: undefined or invalid tech type');
             }
         }
         loaded.resolve(card);

@@ -1208,11 +1208,10 @@ requireGW([
 
             game.winTurn(selected_card_index).then(function(didWin) {
 
-                // To test with lets pretent we win every time
-                // if (!didWin) {
-                //     console.error('Failed winning turn', game);
-                //     return;
-                // }
+                if (!didWin) {
+                    console.error('Failed winning turn', game);
+                    return;
+                }
 
                 self.maybePlayCaptureSound();
                 self.driveAccessInProgress(true);

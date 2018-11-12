@@ -4,12 +4,10 @@ define([
     require
 ) {
     var deck = [
-        'gwc_bld_efficiency_cdr',
-        'gwc_bld_efficiency_fabs',
-        'gwc_cost_air',
-        'gwc_cost_artillery',
-        'gwc_cost_bots',
-        'gwc_cost_defenses'
+        'gwc_enable_booms',
+        'gwc_enable_infernos',
+        'gwc_enable_sparks',
+        'gwc_laser_tanks_t1'
     ];
 
     var aiDeck = [
@@ -37,7 +35,15 @@ define([
     ];
 
     var extraDeck = [
-        'gwc_start_gwe'
+        'gwc_start_gwe',
+        'gwc_start_vehicle',
+        'gwc_start_air',
+        'gwc_start_bot',
+        'gwc_start_orbital',
+        'gwc_start_artillery',
+        'gwc_start_subcdr',
+        'gwc_start_combatcdr',
+        'gwc_start_allfactory'
     ];
 
     var cards = [];
@@ -51,6 +57,7 @@ define([
     var saveDeck = deck;
     deck = [];
     _.forEach(saveDeck, function (cardId) {
+        console.log("Saving deck?");
         //api.debug.log('ADDING CARD: '+cardId);
         require(['cards/' + cardId], function (card) {
             card.id = cardId;
@@ -310,6 +317,8 @@ define([
                     _.forEach(star.cardList(), function (id, cardIndex) {
                         var card = _.find(allCards, { id: id });
                         // Simulate a deal
+                        console.log("Trying to load a boss card: ");
+                        console.log(card);
                         var context = card.getContext && card.getContext(params.galaxy, params.inventory);
 
                         var deal = (card.deal && card.deal(params.star, context));

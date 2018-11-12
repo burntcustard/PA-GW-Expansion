@@ -52,7 +52,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json',
                 '/pa/units/land/assault_bot/assault_bot.json',
                 '/pa/units/land/bot_grenadier/bot_grenadier.json',
-                '/pa/units/land/bot_bomb/bot_bomb.json',
+                //'/pa/units/land/bot_bomb/bot_bomb.json',
                 //'/pa/units/land/bot_tesla/bot_tesla.json',
                 // T2 Bots
                 //'/pa/units/land/bot_factory_adv/bot_factory_adv.json',
@@ -119,7 +119,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/land_mine/land_mine.json',
                 '/pa/units/land/air_defense/air_defense.json',
                 '/pa/units/land/laser_defense_single/laser_defense_single.json',
-                '/pa/units/land/laser_defense/laser_defense.json',
+                //'/pa/units/land/laser_defense/laser_defense.json',
                 '/pa/units/land/artillery_short/artillery_short.json',
                 //'/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json',
                 '/pa/units/sea/torpedo_launcher/torpedo_launcher.json',
