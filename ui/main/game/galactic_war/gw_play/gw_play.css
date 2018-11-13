@@ -482,7 +482,7 @@ html, body {
 }
 
 #hover-card, #system-card {
-    height: 300px;
+    height: 330px;
     width: 300px;
     background: linear-gradient(to top, #222 0%, #000 100%);
     padding: 24px 4px 0px 4px;
@@ -530,12 +530,12 @@ html, body {
     }
 
     .card .col2 .desc, .div_card_desc {
-        height: 81px;
+        max-height: 90px;
         max-width: 372px;
         font-family: 'Sansation Regular TTF';
-        line-height: 1.5;
-        margin: 0px -20px 0px 0px;
-        overflow: auto;
+        line-height: 1.4;
+        padding-left: 4px;
+        padding-right: 4px;
     }
 
 .close {
