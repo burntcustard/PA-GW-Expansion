@@ -2,9 +2,8 @@
 define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'upgrades'; },
-        visible: function(params) { return true; },
         describe: function(params) {
-            return 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>(+40% speed, +20% RoF, -20% damage)';
+            return 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br> • +20% speed<br> • +20% RoF<br> • -20% damage';
         },
         summarize: function(params) {
             return 'Light Laser Tank';
@@ -43,18 +42,12 @@ define(['shared/gw_common'], function (GW) {
                     file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
                     path: 'description',
                     op: 'replace',
-                    value: 'Tank: More maneuverable/lower damage variANT. (+40% speed, +20% RoF, -20% damage)'
+                    value: 'Tank: More maneuverable/lower damage variANT.<br>+20% speed, +20% RoF, -20% damage'
                 },
                 {
-                    // 10 to 14 move speed
+                    // 10 to 12 move speed
                     file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
                     path: 'navigation.move_speed',
-                    op: 'multiply',
-                    value: 1.4
-                },
-                {
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
-                    path: 'navigation.turn_speed',
                     op: 'multiply',
                     value: 1.2
                 },

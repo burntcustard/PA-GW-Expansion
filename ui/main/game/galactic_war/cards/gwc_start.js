@@ -11,13 +11,13 @@ define(['shared/gw_common'], function (GW) {
         describe: function(params) { return ''; },
         deal: function(system) { return false; },
         buff: function(inventory) {
-            inventory.maxCards(5);
+            inventory.maxCards(18);
             inventory.maxCardsOfType({
                 commanderPrimary: 1,
                 commanderSecondary: 1,
                 commanderPassive: 2,
                 units: 8,
-                upgrades: 4
+                upgrades: 6
             });
 
             var commander = inventory.getTag('global', 'commander');
@@ -115,12 +115,12 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/orbital/orbital_railgun/orbital_railgun.json',
                 '/pa/units/orbital/orbital_battleship/orbital_battleship.json',
                 // T1 Defenses
-                '/pa/units/land/land_barrier/land_barrier.json',
-                '/pa/units/land/land_mine/land_mine.json',
+                //'/pa/units/land/land_barrier/land_barrier.json',
+                //'/pa/units/land/land_mine/land_mine.json',
                 '/pa/units/land/air_defense/air_defense.json',
                 '/pa/units/land/laser_defense_single/laser_defense_single.json',
                 //'/pa/units/land/laser_defense/laser_defense.json',
-                '/pa/units/land/artillery_short/artillery_short.json',
+                //'/pa/units/land/artillery_short/artillery_short.json',
                 //'/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json',
                 '/pa/units/sea/torpedo_launcher/torpedo_launcher.json',
                 // T2 Defenses

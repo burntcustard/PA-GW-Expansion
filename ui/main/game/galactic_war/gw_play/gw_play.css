@@ -411,12 +411,6 @@ html, body {
             margin-right: 10px;
         }
 
-        /* commanderPrimary: 1,
-        commanderSecondary: 1,
-        commanderPassive: 2,
-        units: 8,
-        upgrades: 4 */
-
         #inventory .tech_bar_types_cont .tech_bar_type.commanderPrimary,
         .div_build_bar_tab_cont .span_build_bar_tab.commanderPrimary {
             width: 101px;
@@ -435,7 +429,7 @@ html, body {
         }
         #inventory .tech_bar_types_cont .tech_bar_type.upgrades,
         .div_build_bar_tab_cont .span_build_bar_tab.upgrades {
-            width: 202px;
+            width: 303px;
         }
 
 /*

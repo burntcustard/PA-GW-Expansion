@@ -3,17 +3,17 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'units'; },
         describe: function(params) {
-            return 'Enables building of the Inferno Heavy Flamethrower Tank from basic vehicle factories.';
+            return 'Activates the Tech to build the Holkins T2 artillery cannon.';
         },
         summarize: function(params) {
-            return 'Inferno Heavy<br>Flamethrower Tank';
+            return 'Artillery Tech';
         },
         icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
+            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
         },
         audio: function (parms) {
             return {
-                found: '/VO/Computer/gw/board_tech_available_vehicle'
+                found: '/VO/Computer/gw/board_tech_available_artillery'
             }
         },
         getContext: function (galaxy) {
@@ -24,14 +24,15 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_infernos')) {
-                chance = (dist <= 5 ? 40 : 0);
+            if (!inventory.hasCard('gwc_enable_artillery')) {
+                chance = (2 < dist && dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
+
         },
         buff: function(inventory, params) {
             inventory.addUnits([
-                '/pa/units/land/tank_armor/tank_armor.json'
+                '/pa/units/land/artillery_long/artillery_long.json'
             ]);
         },
         dull: function(inventory) {

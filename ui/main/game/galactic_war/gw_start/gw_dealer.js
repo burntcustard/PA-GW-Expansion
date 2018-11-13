@@ -4,10 +4,14 @@ define([
     require
 ) {
     var deck = [
+        'gwc_commander_regen',
+        'gwc_enable_artillery_t2',
         'gwc_enable_booms',
+        'gwc_enable_defenses_t1',
         'gwc_enable_infernos',
         'gwc_enable_sparks',
-        'gwc_laser_tanks_t1'
+        'gwc_laser_tanks_t1',
+        'gwc_minion'
     ];
 
     var aiDeck = [

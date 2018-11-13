@@ -31,8 +31,8 @@ define(['require'], function(require) {
                 commanderPrimary: 1,
                 commanderSecondary: 1,
                 commanderPassive: 2,
-                units: 5,
-                upgrades: 1
+                units: 8,
+                upgrades: 6
             });
             self.currentCardsOfType({
                 commanderPrimary: 0,
