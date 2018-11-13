@@ -21,10 +21,12 @@ define(['shared/gw_common'], function(GW) {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context) {
+        deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-                chance = (dist < 5) ? 40:0;
+            if (!inventory.hasCard('gwc_commander_regen')) {
+                chance = (dist <= 5) ? 40:0;
+            }
             return { chance: chance };
         },
         buff: function(inventory, params) {

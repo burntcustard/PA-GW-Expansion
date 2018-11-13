@@ -3,7 +3,7 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderPassive'; },
         describe: function(params) {
-            return 'Equips the Bumblebee basic bomber with a larger bomb bay.<br><br> • +100% ammo capacity';
+            return 'Equips the Bumblebee basic bomber with a larger bomb bay.<br><br>+100% ammo capacity';
         },
         summarize: function(params) {
             return 'Extra Bombs';

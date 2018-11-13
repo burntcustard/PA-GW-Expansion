@@ -4,14 +4,22 @@ define([
     require
 ) {
     var deck = [
+        'gwc_bomber_capacity',
         'gwc_commander_regen',
+        'gwc_commander_servo',
+        'gwc_enable_air_t2',
         'gwc_enable_artillery_t2',
         'gwc_enable_booms',
         'gwc_enable_defenses_t1',
         'gwc_enable_infernos',
+        'gwc_enable_lob',
         'gwc_enable_sparks',
+        'gwc_flamethrower_gunships',
+        'gwc_flamethrower_range',
+        'gwc_health_vehicles',
         'gwc_laser_tanks_t1',
-        'gwc_minion'
+        'gwc_minion',
+        'gwc_overcharged_tesla'
     ];
 
     var aiDeck = [

@@ -53,7 +53,7 @@ define([
                     minion: minion,
                     unique: Math.random()
                 },
-                chance: chance = (dist <= 5 ? 40 : 0);
+                chance: (dist <= 5 ? 40 : 0)
             };
         },
         buff: function(inventory, params) {

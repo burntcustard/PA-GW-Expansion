@@ -3,7 +3,7 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderPassive'; },
         describe: function(params) {
-            return 'Commander Servo Tech upgrades the armor and increases movement speed of the commander.<br><br> • +50% max health<br> • +25% movement speed';
+            return 'Commander Servo Tech upgrades the armor and increases movement speed of the commander.<br><br>+50% max health, +25% movement speed';
         },
         summarize: function(params) {
             return 'Commander Servo Tech';
@@ -21,10 +21,12 @@ define(['shared/gw_common'], function(GW) {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context) {
+        deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-                chance = (dist < 5) ? 40:0;
+            if (!inventory.hasCard('gwc_commander_servo')) {
+                chance = (dist <= 5) ? 40:0;
+            }
             return { chance: chance };
         },
         buff: function(inventory, params) {

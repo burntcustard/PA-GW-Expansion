@@ -3,7 +3,7 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'upgrades'; },
         describe: function(params) {
-            return 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br> • +20% speed<br> • +20% RoF<br> • -20% damage';
+            return 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>+20% speed, +20% RoF, -20% damage';
         },
         summarize: function(params) {
             return 'Light Laser Tank';

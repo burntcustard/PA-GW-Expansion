@@ -37,6 +37,7 @@ define(['shared/gw_common'], function(GW) {
             var mods = [];
             var modUnit = function(unit) {
                 mods.push({
+                    // Range 20 -> 24
                     file: unit,
                     path: 'max_range',
                     op: 'multiply',
