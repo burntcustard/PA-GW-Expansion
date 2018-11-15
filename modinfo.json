@@ -13,5 +13,6 @@
     "gw",
     "gameplay",
     "titans"
-  ]
+  ],
+  "titansOnly": true
 }
