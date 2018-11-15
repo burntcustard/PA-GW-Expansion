@@ -37,7 +37,8 @@ define(['shared/gw_common'], function (GW) {
 
             var weaps = [
                 '/pa/units/land/bot_tesla/bot_tesla_weapon.json',
-                '/pa/units/air/solar_drone/solar_drone_tool_weapon'
+                '/pa/units/air/solar_drone/solar_drone_tool_weapon.json',
+                '/pa/units/air/titan_air/titan_air_tool_weapon.json'
             ];
             _.forEach(weaps, function(weap) {
                 mods.push({
@@ -62,8 +63,8 @@ define(['shared/gw_common'], function (GW) {
 
             var ammos = [
                 '/pa/units/land/bot_tesla/bot_tesla_ammo.json',     // Spark ammo 160 -> 240 damage
-                '/pa/units/land/solar_drone/solar_drone_ammo.json', // Icarus ammo 160 -> 240 damage
-                '/pa/units/land/titan_air/titan_air_ammo.json'      // Zeus ammo 1500 -> 2250 damage
+                '/pa/units/air/solar_drone/solar_drone_ammo.json', // Icarus ammo 160 -> 240 damage
+                '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus ammo 1500 -> 2250 damage
             ];
             _.forEach(ammos, function(ammo) {
                 mods.push({
