@@ -196,7 +196,7 @@ define(['shared/gw_common'], function(GW) {
                 value: [{
                     "channel": "sight",
                     "layer": "surface_and_air",
-                    "radius": 10,
+                    "radius": 20,
                     "shape": "capsule"
                 }]
             },
