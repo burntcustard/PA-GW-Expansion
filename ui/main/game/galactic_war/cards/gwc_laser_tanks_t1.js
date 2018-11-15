@@ -24,7 +24,7 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_laser_tanks_t1s')) {
+            if (!inventory.hasCard('gwc_enable_laser_tanks_t1')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };

@@ -6,7 +6,7 @@ define(['shared/gw_common'], function (GW) {
             return 'Enables building of the Lob Bot Launcher by basic fabricators.';
         },
         summarize: function(params) {
-            return 'Bot Launcher Tech';
+            return 'Dox Bot Launcher Tech';
         },
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
@@ -24,8 +24,8 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_lob')) {
-                chance = (2 < dist && dist <= 5 ? 40 : 0);
+            if (!inventory.hasCard('gwc_enable_lob_dox')) {
+                chance = (0 < dist && dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
 
@@ -33,6 +33,20 @@ define(['shared/gw_common'], function (GW) {
         buff: function(inventory, params) {
             inventory.addUnits([
                 '/pa/units/land/artillery_long/artillery_unit_launcher.json'
+            ]);
+            inventory.addMods([
+                {
+                    file: '/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json',
+                    path: 'display_name',
+                    op: 'replace',
+                    value: 'Dox Lob'
+                },
+                {
+                    file: '/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json',
+                    path: 'description',
+                    op: 'replace',
+                    value: 'Assault Bot Launcher- Builds and fires Dox at nearby targets.'
+                }
             ]);
         },
         dull: function(inventory) {

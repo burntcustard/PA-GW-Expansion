@@ -46,7 +46,7 @@ var startCards = [
     { id: 'gwc_start_gwe' }
 ];
 
-var baseNeutralStars = 2;
+var baseNeutralStars = 4;
 
 $(document).ready(function () {
     // Needed to reset the music when returning to this screen from the play screen

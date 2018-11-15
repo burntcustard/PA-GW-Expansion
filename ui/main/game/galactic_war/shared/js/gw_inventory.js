@@ -137,8 +137,8 @@ define(['require'], function(require) {
                     finishPhase();
             };
             var applyCardOp = function(op, cardParams) {
-                //console.log("Applying card OP " + op + " for card with params:");
-                //console.log(cardParams);
+                console.log("Applying card OP " + op + " for card with params:");
+                console.log(cardParams);
                 var cardId;
                 if (typeof cardParams === 'string') {
                     cardId = cardParams;
@@ -149,6 +149,8 @@ define(['require'], function(require) {
                 require(['cards/' + cardId], function(card) {
                     curCard = cardId;
                     card[op](self, cardParams);
+                    console.log("Success doing a card op?");
+                    console.log(card);
                     finishCard();
                 }, function(error) {
                     console.error('Failed loading card', cardId,':', error);

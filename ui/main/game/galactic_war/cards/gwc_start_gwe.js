@@ -55,7 +55,6 @@ define([
                 var buffCount = inventory.getTag('', 'buffCount', 0);
                 if (buffCount) {
                     // Perform dulls here
-
                     inventory.setTag('', 'buffCount', undefined);
                 }
             }
