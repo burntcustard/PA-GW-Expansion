@@ -197,14 +197,23 @@ define([], function() {
                         loaded = _.cloneDeep(loaded);
                     specs[value + specTag] = loaded || attribute;
                 },
-                tag: function(attribute, value) { return attribute + specTag; }
+                tag: function(attribute, value) { return attribute + specTag; },
+                remove: function(attribute, value, file, path) {
+                    try {
+                        delete specs[file + '.player'][path];
+                    }
+                    catch(error) {
+                        console.error('Failed to remove ' + attribute + ' from ' + path);
+                    }
+
+                }
             };
             var applyMod = function(mod) {
-                console.log("Trying to apply:");
-                console.log(mod);
+                //console.log("Trying to apply:");
+                //console.log(mod);
                 var spec = load(mod.file);
-                console.log("Spec:");
-                console.log(spec);
+                //console.log("Spec:");
+                //console.log(spec);
                 if (!spec)
                     return api.debug.log('Warning: File not found in mod', mod);
                 if (!ops.hasOwnProperty(mod.op))
@@ -252,10 +261,10 @@ define([], function() {
 
                 if (path.length && path[0]) {
                     var leaf = cookStep(path[0]);
-                    spec[leaf] = ops[mod.op](spec[leaf], mod.value);
+                    spec[leaf] = ops[mod.op](spec[leaf], mod.value, mod.file, mod.path);
                 }
                 else
-                    ops[mod.op](spec, mod.value);
+                    ops[mod.op](spec, mod.value, mod.file, mod.path);
             };
             _.forEach(mods, applyMod);
         }

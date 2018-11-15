@@ -160,12 +160,11 @@ define(['shared/gw_common'], function(GW) {
                 op: 'replace',
                 value: 'WL_Air'
             },
-            // {
-            //     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
-            //     path: 'sim_fire_effect',
-            //     op: 'replace',
-            //     value: ''
-            // },
+            {
+                file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
+                path: 'sim_fire_effect',
+                op: 'remove'
+            },
             // {
             //     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
             //     path: 'impact_decals',
@@ -178,12 +177,12 @@ define(['shared/gw_common'], function(GW) {
             //     op: 'replace',
             //     value: ''
             // },
-            {
-                file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
-                path: 'base_spec',
-                op: 'replace',
-                value: '/pa/ammo/base_artillery/base_artillery.json'
-            },
+            // {
+            //     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
+            //     path: 'base_spec',
+            //     op: 'replace',
+            //     value: '/pa/ammo/base_artillery/base_artillery.json'
+            // },
             {
                 file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
                 path: 'model.filename',
