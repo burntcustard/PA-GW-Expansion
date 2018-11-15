@@ -25,7 +25,7 @@ define(['shared/gw_common'], function (GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_enable_icarus')) {
-                chance = (dist <= 5 ? 40 : 0);
+                chance = (dist <= 5 ? 400 : 0);
             }
             return { chance: chance };
         },
@@ -36,13 +36,26 @@ define(['shared/gw_common'], function (GW) {
             ];
             _.forEach(units, function(unit) {
                 inventory.addUnits([unit]);
-                mods.push({
-                    // TODO: Replace with something that makes them smaller
-                    file: unit,
-                    path: 'selection_icon.diameter',
-                    op: 'replace',
-                    value: 20
-                });
+                mods.push(
+                    {
+                        // Shrink the select icon 21 -> 20
+                        file: unit,
+                        path: 'selection_icon.diameter',
+                        op: 'replace',
+                        value: 20
+                    },
+                    {
+                        // Make the units in formation not spread out so much 13.5 -> 11
+                        file: unit,
+                        path: 'mesh_bounds',
+                        op: 'replace',
+                        value: [
+                            11,
+                            10,
+                            4
+                        ]
+                    }
+                );
             });
             inventory.addMods(mods);
         },

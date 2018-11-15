@@ -26,7 +26,7 @@ define(['shared/gw_common'], function (GW) {
             var dist = system.distance();
             if (!inventory.hasCard('gwc_icarus_gunships') &&
                 inventory.hasCard('gwc_enable_icarus')) {
-                chance = (dist <= 5 ? 40 : 0);
+                chance = (dist <= 5 ? 400 : 0);
             }
             return { chance: chance };
         },
@@ -70,11 +70,11 @@ define(['shared/gw_common'], function (GW) {
                     },
                     // General movement speed increases
                     {
-                        // Acceleration 30 -> 45
+                        // Acceleration 30 -> 60
                         file: unit,
                         path: 'navigation.acceleration',
                         op: 'multiply',
-                        value: 1.5
+                        value: 2
                     },
                     {
                         // Move speed 30 -> 60
