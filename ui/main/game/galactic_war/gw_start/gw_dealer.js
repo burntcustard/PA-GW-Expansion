@@ -11,6 +11,7 @@ define([
         'gwc_enable_artillery_t2',
         'gwc_enable_booms',
         'gwc_enable_defenses_t1',
+        'gwc_enable_icarus',
         'gwc_enable_infernos',
         'gwc_enable_lob_booms',
         'gwc_enable_lob_dox',
@@ -18,6 +19,7 @@ define([
         'gwc_flamethrower_gunships',
         'gwc_flamethrower_range',
         'gwc_health_vehicles',
+        'gwc_icarus_gunships',
         'gwc_jumpy_booms',
         'gwc_laser_tanks_t1',
         'gwc_minion',
@@ -45,7 +47,7 @@ define([
         'gwc_bld_efficiency_fabs',
         'gwc_storage_1',
         'gwc_storage_and_buff',
-        'gwc_minion',
+        'gwc_minion'
     ];
 
     var extraDeck = [

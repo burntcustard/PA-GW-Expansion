@@ -26,7 +26,7 @@ define(['shared/gw_common'], function(GW) {
             var dist = system.distance();
             if (!inventory.hasCard('gwc_jumpy_booms') &&
                 inventory.hasCard('gwc_enable_booms')) { // Only findable after booms unlocked
-                chance = (dist <= 5 ? 400 : 0);
+                chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },
@@ -217,13 +217,15 @@ define(['shared/gw_common'], function(GW) {
                     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
                     path: 'recon',
                     op: 'replace',
-                    value: "observer": {
-                        items: [{
-                            "channel": "sight",
-                            "layer": "surface_and_air",
-                            "radius": 20,
-                            "shape": "capsule"
-                        }]
+                    value: {
+                        "observer": {
+                            items: [{
+                                "channel": "sight",
+                                "layer": "surface_and_air",
+                                "radius": 20,
+                                "shape": "capsule"
+                            }]
+                        }
                     }
                 },
                 {
