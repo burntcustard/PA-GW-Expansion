@@ -3,7 +3,7 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'upgrades'; },
         describe: function(params) {
-            return 'Redirects a portion of the Icarus solar drones energy to it\'s engines and modified navigation systems, converting it into a light gunship';
+            return 'Redirects a portion of the Icarus solar drones energy to it\'s engines and modified navigation systems, converting it to fly like a gunship.';
         },
         summarize: function(params) {
             return 'Icarus Gunship<br>Modifications';
@@ -90,12 +90,12 @@ define(['shared/gw_common'], function (GW) {
                         op: 'multiply',
                         value: 1.33
                     },
-                    // Reducing the energy from 175 -> 150
+                    // Reducing the energy from 175 -> 125
                     {
                         file: unit,
                         path: 'production.energy',
-                        op: 'replace',
-                        value: 125
+                        op: 'sub',
+                        value: 50
                     }
                 );
             });

@@ -30,20 +30,18 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
-                mods.push({
-                    file: '/pa/units/air/bomber/bomber.json',
-                    path: 'description',
-                    op: 'replace',
-                    value: 'Bomber- Equipped with basic anti-land and anti-naval bombs.<br>Extra bombs: +100% ammo capacity'
-                },
-                {
-                    file: '/pa/units/air/bomber/bomber_tool_weapon.json',
-                    path: 'ammo_capacity',
-                    op: 'multiply',
-                    value: 2
-                });
-            inventory.addMods(mods);
+            inventory.addMods({
+                file: '/pa/units/air/bomber/bomber.json',
+                path: 'description',
+                op: 'replace',
+                value: 'Bomber- Equipped with basic anti-land and anti-naval bombs.<br>Extra bombs: +100% ammo capacity'
+            },
+            {
+                file: '/pa/units/air/bomber/bomber_tool_weapon.json',
+                path: 'ammo_capacity',
+                op: 'multiply',
+                value: 2
+            });
         },
         dull: function(inventory) {
         }

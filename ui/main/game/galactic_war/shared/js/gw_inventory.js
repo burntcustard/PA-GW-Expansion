@@ -169,7 +169,7 @@ define(['require'], function(require) {
                 resetCardCount();
                 finishPhase = finishApplyCards;
                 _.forEach(cards, _.bind(applyCardOp, self, 'dull'));
-            }
+            };
 
             self.units([]);
             self.mods([]);

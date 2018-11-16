@@ -20,8 +20,18 @@ define(['shared/gw_common'], function (GW) {
                 upgrades: 6
             });
 
+            // Add the commander unit(?)
             var commander = inventory.getTag('global', 'commander');
             commander && inventory.addUnits([commander]);
+
+            // Remove the commanders Uber cannon by removing secondaryFire
+            inventory.addMods({
+                file: '/pa/units/commanders/base_commander/base_commander.json',
+                path: 'command_caps',
+                op: 'pull',
+                value: 'ORDER_FireSecondaryWeapon'
+            });
+
             inventory.addUnits([
                 // Economy
                 '/pa/units/land/energy_plant/energy_plant.json',

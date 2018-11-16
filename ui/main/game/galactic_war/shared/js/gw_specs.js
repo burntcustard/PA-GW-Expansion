@@ -179,6 +179,7 @@ define([], function() {
             var ops = {
                 multiply: function(attribute, value) { return (attribute !== undefined) ? (attribute * value) : value; },
                 add: function(attribute, value) { return (attribute !== undefined) ? (attribute + value) : value; },
+                sub: function(attribute, value) { return (attribute !== undefined) ? (attribute - value) : value; },
                 replace: function(attribute, value) { return value; },
                 merge: function (attribute, value) { return _.extend({}, attribute, value); },
                 push: function(attribute, value) {
@@ -190,6 +191,16 @@ define([], function() {
                         attribute.push(value);
                     return attribute;
                 },
+                pull: function(attribute, value) {
+                    if (!_.isArray(attribute)) {
+                        console.error('Failed to pull ' + value + ' from non-array attribute');
+                    }
+                    if (_.isArray(value))
+                        _.pullAll(attribute, value);
+                    else
+                        _.pull(attribute, value);
+                    return attribute;
+                },
                 eval: function(attribute, value) { return new Function('attribute', value)(attribute); },
                 clone: function(attribute, value) {
                     var loaded = load(attribute);
@@ -198,7 +209,7 @@ define([], function() {
                     specs[value + specTag] = loaded || attribute;
                 },
                 tag: function(attribute, value) { return attribute + specTag; },
-                remove: function(attribute, value, file, path) {
+                delete: function(attribute, value, file, path) {
                     try {
                         delete specs[file + '.player'][path];
                     }

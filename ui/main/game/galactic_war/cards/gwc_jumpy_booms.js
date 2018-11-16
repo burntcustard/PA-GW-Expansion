@@ -74,7 +74,7 @@ define(['shared/gw_common'], function(GW) {
                     // Remove scorch mark when the Boom "jumps"
                     file: '/pa/units/land/bot_bomb/bot_bomb.json',
                     path: 'death.decals',
-                    op: 'remove'
+                    op: 'delete'
                 },
                 {
                     file: '/pa/units/land/bot_bomb/bot_bomb.json',
@@ -156,12 +156,12 @@ define(['shared/gw_common'], function(GW) {
                 {
                     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
                     path: 'damage_volume',
-                    op: 'remove'
+                    op: 'delete'
                 },
                 {
                     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
                     path: 'sim_fire_effect',
-                    op: 'remove'
+                    op: 'delete'
                 },
                 {
                     file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
