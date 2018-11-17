@@ -6,7 +6,7 @@ define(['shared/gw_common'], function(GW) {
             return 'Increases the range of flamethrowers by 20%';
         },
         summarize: function(params) {
-            return 'Flamethrower range +20%';
+            return 'Flamethrower range +25%';
         },
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png';
@@ -31,17 +31,31 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
+            var units = [
+                '/pa/units/land/tank_armor/tank_armor.json'
+            ];
+            _.forEach(units, function(unit) {
+                inventory.addMods([
+                    {
+                        file: unit,
+                        path: 'description',
+                        op: 'add',
+                        value: ' +25% range'
+                    }
+                ]);
+            });
+
             var weaps = [
                 '/pa/units/land/tank_armor/tank_armor_tool_weapon.json'
             ];
             _.forEach(weaps, function(weap) {
                 inventory.addMods([
                     {
-                    // Range 20 -> 24
+                    // Range 20 -> 25
                     file: weap,
                     path: 'max_range',
                     op: 'multiply',
-                    value: 1.2
+                    value: 1.25
                 }//,
                 //{
                     // // Make the gunships circle around enemies at slightly longer distance.
@@ -53,273 +67,111 @@ define(['shared/gw_common'], function(GW) {
                 //}
                 ]);
             });
-            // "emitterLifetime": 0.3,
-            // "endDistance": 1600,
-            // "gravity": 25,
-            // "lifetime": 0.5,
             var effects = [
                 '/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx'
-            ]
+            ];
             _.forEach(effects, function(effect) {
                 inventory.addMods([
                     {
                         file: effect,
-                        path: 'emitters[1].emitterLifetime',
-                        op: 'multiply',
-                        value: 3,
+                        path: 'emitters',
+                        op: 'splice',
+                        value: 1
                     },
                     {
                         file: effect,
-                        path: 'emitters[1].endDistance',
-                        op: 'multiply',
-                        value: 3,
-                    },
-                    {
-                        file: effect,
-                        path: 'emitters[1].lifetime',
-                        op: 'multiply',
-                        value: 3,
+                        path: 'emitters',
+                        op: 'push',
+                        value: {
+                            "bLoop": false,
+                            "drag": 0.92,
+                            "emissionBursts": 1,
+                            "emissionRate": 70,
+                            "emitterLifetime": 0.6,
+                            "endDistance": 3200,
+                            "gravity": 25,
+                            "lifetime": 1,
+                            "sizeRangeY": 1.5,
+                            "sizeX": 2,
+                            "sizeY": 3.5,
+                            "spec": {
+                                "baseTexture": "/pa/effects/textures/particles/flamethrower.papa",
+                                "blue": {
+                                    "keys": [
+                                        [
+                                            0,
+                                            2
+                                        ],
+                                        [
+                                            0.2,
+                                            0.2
+                                        ],
+                                        [
+                                            0.65,
+                                            0.01
+                                        ]
+                                    ]
+                                },
+                                "dataChannelFormat": "PositionColorAndAlignVector",
+                                "facing": "velocity",
+                                "green": {
+                                    "keys": [
+                                        [
+                                            0,
+                                            2
+                                        ],
+                                        [
+                                            0.2,
+                                            0.6
+                                        ],
+                                        [
+                                            0.65,
+                                            0.05
+                                        ]
+                                    ]
+                                },
+                                "red": {
+                                    "keys": [
+                                        [
+                                            0,
+                                            2
+                                        ],
+                                        [
+                                            0.2,
+                                            2
+                                        ],
+                                        [
+                                            0.65,
+                                            1.5
+                                        ]
+                                    ]
+                                },
+                                "shader": "particle_transparent",
+                                "size": {
+                                    "keys": [
+                                        [
+                                            0,
+                                            0.75
+                                        ],
+                                        [
+                                            0.5,
+                                            1.25
+                                        ],
+                                        [
+                                            1,
+                                            0
+                                        ]
+                                    ]
+                                }
+                            },
+                            "useWorldSpace": true,
+                            "velocity": 85,
+                            "velocityRange": 30,
+                            "velocityRangeX": 0.07,
+                            "velocityRangeZ": 0.07,
+                            "velocityY": -1
+                        }
                     }
-                    // {
-                    //     file: '/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx',
-                    //     path: 'emitters',
-                    //     op: 'replace',
-                    //     value: [
-                    //         {
-                    //           "spec":{
-                    //             "shape":"pointlight",
-                    //             "red":1.0,
-                    //             "green":0.4,
-                    //             "blue":0.0,
-                    //             "alpha":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   0
-                    //                 ],
-                    //                 [
-                    //                   0.5,
-                    //                   10
-                    //                 ],
-                    //                 [
-                    //                   1,
-                    //                   0
-                    //                 ]
-                    //               ]
-                    //             }
-                    //           },
-                    //           "velocityY":-1,
-                    //           "velocity":0.0,
-                    //           "sizeX":10,
-                    //           "sizeRangeX":1,
-                    //           "emissionBursts":[
-                    //             {
-                    //               "time":0,
-                    //               "count":1
-                    //             },
-                    //             {
-                    //               "time":0.15,
-                    //               "count":1
-                    //             }
-                    //           ],
-                    //           "lifetime":0.3,
-                    //           "emitterLifetime":0.3,
-                    //           "killOnDeactivate":true,
-                    //           "bLoop":false,
-                    //           "endDistance":850
-                    //         },
-                    //         {
-                    //           "spec":{
-                    //             "shader":"particle_transparent",
-                    //             "facing":"velocity",
-                    //             "size":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   0.75
-                    //                 ],
-                    //                 [
-                    //                   0.5,
-                    //                   1.25
-                    //                 ],
-                    //                 [
-                    //                   1,
-                    //                   0
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "red":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   1.5
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "green":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   0.6
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   0.05
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "blue":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   0.2
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   0.01
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "baseTexture":"/pa/effects/textures/particles/flamethrower.papa",
-                    //             "dataChannelFormat":"PositionColorAndAlignVector"
-                    //           },
-                    //           "velocityY":-1,
-                    //           "velocityRangeX":0.07,
-                    //           "velocityRangeZ":0.07,
-                    //           "velocity":130.0,
-                    //           "velocityRange":30.0,
-                    //           "drag":0.96,
-                    //           "gravity":25,
-                    //           "sizeX":2,
-                    //           "sizeY":3.5,
-                    //           "sizeRangeY":1.5,
-                    //           "emissionBursts":1,
-                    //           "emissionRate":85,
-                    //           "lifetime":2.5,
-                    //           "emitterLifetime":1.5,
-                    //           "useWorldSpace":true,
-                    //           "endDistance":8000,
-                    //           "bLoop":false
-                    //         },
-                    //         {
-                    //           "spec":{
-                    //             "shader":"particle_add_soft",
-                    //             "size":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   0.75
-                    //                 ],
-                    //                 [
-                    //                   0.5,
-                    //                   1.25
-                    //                 ],
-                    //                 [
-                    //                   1,
-                    //                   0
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "red":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   1.5
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "green":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   0.6
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   0.05
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "blue":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   2.0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   0.2
-                    //                 ],
-                    //                 [
-                    //                   0.65,
-                    //                   0.01
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "alpha":{
-                    //               "keys":[
-                    //                 [
-                    //                   0,
-                    //                   0
-                    //                 ],
-                    //                 [
-                    //                   0.2,
-                    //                   1
-                    //                 ],
-                    //                 [
-                    //                   1,
-                    //                   0
-                    //                 ]
-                    //               ]
-                    //             },
-                    //             "cameraPush":0.5,
-                    //             "baseTexture":"/pa/effects/textures/particles/softdot.papa",
-                    //             "dataChannelFormat":"PositionAndColor"
-                    //           },
-                    //           "offsetY":-0.3,
-                    //           "velocityY":-1,
-                    //           "velocity":5.0,
-                    //           "sizeX":4,
-                    //           "emissionBursts":1,
-                    //           "emissionRate":10,
-                    //           "lifetime":0.25,
-                    //           "lifetimeRange":0.1,
-                    //           "emitterLifetime":0.3,
-                    //           "useWorldSpace":true,
-                    //           "endDistance":400,
-                    //           "bLoop":false,
-                    //           "sort":"NoSort"
-                    //         }
-                    //     ]
-                    // }
                 ]);
             });
 

@@ -243,6 +243,15 @@ define([], function() {
                         _.pull(attribute, value);
                     return attribute;
                 },
+                splice: function(attribute, value) {
+                    try {
+                        attribute.splice(value, 1);
+                    }
+                    catch (error) {
+                        console.error('Failed to splice nth(' + value + ') from ' + attribute);
+                    }
+                    return attribute;
+                },
                 eval: function(attribute, value) { return new Function('attribute', value)(attribute); },
                 clone: function(attribute, value) {
                     var loaded = load(attribute);

@@ -73,7 +73,7 @@ define([
     var saveDeck = deck;
     deck = [];
     _.forEach(saveDeck, function (cardId) {
-        console.log("Saving deck?");
+        //console.log("Saving deck?");
         //api.debug.log('ADDING CARD: '+cardId);
         require(['cards/' + cardId], function (card) {
             card.id = cardId;
@@ -300,8 +300,8 @@ define([
 
                 var deal = (card.deal && card.deal(params.star, context));
 
-                console.log("Dealing this card out to a star:");
-                console.log(card);
+                //console.log("Dealing this card out to a star:");
+                //console.log(card);
 
                 var product = {
                     id: params.id
@@ -333,8 +333,8 @@ define([
                     _.forEach(star.cardList(), function (id, cardIndex) {
                         var card = _.find(allCards, { id: id });
                         // Simulate a deal
-                        console.log("Trying to load a boss card: ");
-                        console.log(card);
+                        //console.log("Trying to load a boss card: ");
+                        //console.log(card);
                         var context = card.getContext && card.getContext(params.galaxy, params.inventory);
 
                         var deal = (card.deal && card.deal(params.star, context));
