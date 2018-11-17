@@ -25,7 +25,7 @@ define(['shared/gw_common'], function (GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_enable_sparks')) {
-                chance = (dist <= 5 ? 400 : 0);
+                chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },

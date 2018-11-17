@@ -26,7 +26,7 @@ define(['shared/gw_common'], function (GW) {
             var dist = system.distance();
             if (!inventory.hasCard('gwc_icarus_gunships') &&
                 inventory.hasCard('gwc_enable_icarus')) {
-                chance = (dist <= 5 ? 400 : 0);
+                chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },
