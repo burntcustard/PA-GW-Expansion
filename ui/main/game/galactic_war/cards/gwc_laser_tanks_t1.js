@@ -43,7 +43,7 @@ define(['shared/gw_common'], function (GW) {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Tank: More maneuverable/lower damage variANT.<br>+20% speed, +20% RoF, -20% damage'
+                    value: 'Tank: More maneuverable/lower damage variANT. +20% speed, +20% RoF, -20% damage'
                 },
                 {
                     // 10 to 12 move speed

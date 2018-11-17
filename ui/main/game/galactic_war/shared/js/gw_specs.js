@@ -7,13 +7,42 @@ define([], function() {
         var applyTag = function(obj, key) {
             if (obj.hasOwnProperty(key)) {
                 if (typeof obj[key] === 'string') {
-                    moreWork.push(obj[key]);
-                    obj[key] = obj[key] + tag;
+                    var value = '' + obj[key];
+                    //console.log("String value: " + value);
+                    if (value.indexOf(' ') > 0) {
+                        var substrs = value.split(' ');
+                        //console.log("There were spaces in the string: " + value);
+                        //console.log("JSONS:");
+                        //console.log(jsons);
+                        _.forEach(substrs, function(substr, i) {
+                            if (substr.indexOf('/pa/') === 0) {
+                                moreWork.push(new String(substr));
+                                substrs[i] += tag;
+                            }
+                        });
+                        obj[key] = new String(substrs.join(' '));
+                        console.log("New tagged spec:");
+                        console.log(obj[key]);
+
+                    } else {
+                      moreWork.push(obj[key]);
+                      obj[key] = obj[key] + tag;
+                    }
                 }
                 else if (_.isArray(obj[key])) {
                     obj[key] = _.map(obj[key], function(value) {
-                        moreWork.push(value);
-                        return value + tag;
+                        // if (value.includes(' ')) {
+                        //     var jsons = _.filter(
+                        //         value.split(' '), function(v) { return v.includes('/pa/'); }
+                        //     );
+                        //     _.forEach(jsons, function(json) {
+                        //         moreWork.push(json);
+                        //         return json + tag;
+                        //     });
+                        // } else {
+                            moreWork.push(value);
+                            return value + tag;
+                        //}
                     });
                 }
             }
@@ -41,6 +70,13 @@ define([], function() {
                 });
             }
         }
+        // Effects
+        if (spec.events && spec.events.fired && _.isString(spec.events.fired.effect_spec)) {
+            //console.log("Applying tag for spec.events.fired.effect_spec:");
+            //console.log(spec.events.fired.effect_spec);
+            applyTag(spec.events.fired, 'effect_spec');
+        }
+
         return moreWork;
     }
 
@@ -79,29 +115,35 @@ define([], function() {
                 var item;
                 var pending = 0;
                 var fetch = function(item) {
-                    $.ajax({
-                        url: 'coui:/' + item,
-                        success: function(data) {
-                            try
-                            {
-                                data = JSON.parse(data);
+                    //console.log("Item: " + item);
+                    if (!item) {
+                        console.log("Missing item");
+                        _.delay(step);
+                    } else {
+                        $.ajax({
+                            url: 'coui:/' + item,
+                            success: function(data) {
+                                try
+                                {
+                                    data = JSON.parse(data);
+                                }
+                                catch (e)
+                                {
+                                }
+                                var newWork = tagSpec(item, tag, data);
+                                work = work.concat(newWork);
+                                results[item + tag] = data;
+                            },
+                            error: function(request, status, error) {
+                                console.log('error loading spec:', item, request, status, error);
+                            },
+                            complete: function() {
+                                --pending;
+                                if (!pending)
+                                    _.delay(step);
                             }
-                            catch (e)
-                            {
-                            }
-                            var newWork = tagSpec(item, tag, data);
-                            work = work.concat(newWork);
-                            results[item + tag] = data;
-                        },
-                        error: function(request, status, error) {
-                            console.log('error loading spec:', item, request, status, error);
-                        },
-                        complete: function() {
-                            --pending;
-                            if (!pending)
-                                _.delay(step);
-                        }
-                    });
+                        });
+                    }
                 };
                 while (work.length)
                 {
@@ -220,8 +262,8 @@ define([], function() {
                 }
             };
             var applyMod = function(mod) {
-                //console.log("Trying to apply:");
-                //console.log(mod);
+                console.log("Trying to apply:");
+                console.log(mod);
                 var spec = load(mod.file);
                 //console.log("Spec:");
                 //console.log(spec);
