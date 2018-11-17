@@ -30,32 +30,28 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var units = [
-                '/pa/units/air/solar_drone/solar_drone.json'
-            ];
-            _.forEach(units, function(unit) {
-                inventory.addUnits([unit]);
-                inventory.addMods(
-                    {
-                        // Shrink the select icon 21 -> 20
-                        file: unit,
-                        path: 'selection_icon.diameter',
-                        op: 'replace',
-                        value: 20
-                    },
-                    {
-                        // Make the units in formation not spread out so much 13.5 -> 11
-                        file: unit,
-                        path: 'mesh_bounds',
-                        op: 'replace',
-                        value: [
-                            11,
-                            10,
-                            4
-                        ]
-                    }
-                );
-            });
+            var unit = '/pa/units/air/solar_drone/solar_drone.json';
+            inventory.addUnits([unit]);
+            inventory.addMods([
+                {
+                    // Shrink the select icon 21 -> 20
+                    file: unit,
+                    path: 'selection_icon.diameter',
+                    op: 'replace',
+                    value: 20
+                },
+                {
+                    // Make the units in formation not spread out so much 13.5 -> 11
+                    file: unit,
+                    path: 'mesh_bounds',
+                    op: 'replace',
+                    value: [
+                        11,
+                        10,
+                        4
+                    ]
+                }
+            ]);
         }
     };
 });

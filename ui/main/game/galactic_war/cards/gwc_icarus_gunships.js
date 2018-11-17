@@ -31,75 +31,69 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var units = [
-                '/pa/units/air/solar_drone/solar_drone.json'
-            ];
-            _.forEach(units, function(unit) {
-                inventory.addMods(
-                    // Giving it gunship-like movement
-                    {
-                        file: unit,
-                        path: 'navigation.aggressive_behavior',
-                        op: 'replace',
-                        value: 'circle'
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.aggressive_distance',
-                        op: 'replace',
-                        value: 60
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.bank_factor',
-                        op: 'replace',
-                        value: 1
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.circle_max_time',
-                        op: 'replace',
-                        value: 2
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.circle_min_time',
-                        op: 'replace',
-                        value: 1
-                    },
-                    // General movement speed increases
-                    {
-                        // Acceleration 30 -> 60
-                        file: unit,
-                        path: 'navigation.acceleration',
-                        op: 'multiply',
-                        value: 2
-                    },
-                    {
-                        // Move speed 30 -> 60
-                        file: unit,
-                        path: 'navigation.move_speed',
-                        op: 'multiply',
-                        value: 2
-                    },
-                    {
-                        // Turn speed 90 -> 120
-                        file: unit,
-                        path: 'navigation.turn_speed',
-                        op: 'multiply',
-                        value: 1.33
-                    },
-                    // Reducing the energy from 175 -> 125
-                    {
-                        file: unit,
-                        path: 'production.energy',
-                        op: 'sub',
-                        value: 50
-                    }
-                );
-            });
-        },
-        dull: function(inventory) {
+            var unit = '/pa/units/air/solar_drone/solar_drone.json';
+            inventory.addMods([
+                // Giving it gunship-like movement
+                {
+                    file: unit,
+                    path: 'navigation.aggressive_behavior',
+                    op: 'replace',
+                    value: 'circle'
+                },
+                {
+                    file: unit,
+                    path: 'navigation.aggressive_distance',
+                    op: 'replace',
+                    value: 60
+                },
+                {
+                    file: unit,
+                    path: 'navigation.bank_factor',
+                    op: 'replace',
+                    value: 1
+                },
+                {
+                    file: unit,
+                    path: 'navigation.circle_max_time',
+                    op: 'replace',
+                    value: 2
+                },
+                {
+                    file: unit,
+                    path: 'navigation.circle_min_time',
+                    op: 'replace',
+                    value: 1
+                },
+                // General movement speed increases
+                {
+                    // Acceleration 30 -> 60
+                    file: unit,
+                    path: 'navigation.acceleration',
+                    op: 'multiply',
+                    value: 2
+                },
+                {
+                    // Move speed 30 -> 60
+                    file: unit,
+                    path: 'navigation.move_speed',
+                    op: 'multiply',
+                    value: 2
+                },
+                {
+                    // Turn speed 90 -> 120
+                    file: unit,
+                    path: 'navigation.turn_speed',
+                    op: 'multiply',
+                    value: 1.33
+                },
+                // Reducing the energy from 175 -> 125
+                {
+                    file: unit,
+                    path: 'production.energy',
+                    op: 'sub',
+                    value: 50
+                }
+            ]);
         }
     };
 });

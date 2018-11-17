@@ -33,8 +33,6 @@ define(['shared/gw_common'], function (GW) {
             inventory.addUnits([
                 '/pa/units/land/bot_bomb/bot_bomb.json',
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

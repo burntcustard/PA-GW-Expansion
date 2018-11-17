@@ -33,8 +33,6 @@ define(['shared/gw_common'], function (GW) {
             inventory.addUnits([
                 '/pa/units/land/artillery_long/artillery_long.json'
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

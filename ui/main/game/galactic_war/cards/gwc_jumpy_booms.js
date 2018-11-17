@@ -282,8 +282,6 @@ define(['shared/gw_common'], function(GW) {
                     value: ["/pa/effects/specs/scorch_a_01.json"]
                 }
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

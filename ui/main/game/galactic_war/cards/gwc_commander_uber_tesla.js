@@ -27,35 +27,34 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
-                mods.push({
-                    file: '/pa/tools/uber_cannon/uber_cannon.json',
+            var weap = '/pa/tools/uber_cannon/uber_cannon.json'
+            inventory.addMods([
+                {
+                    file: weap,
                     path: 'ammo_capacity',
                     op: 'multiply',
                     value: 2.0
                 },
                 {
                     // Draws twice as much power as default Uber Cannon while recharging
-                    file: '/pa/tools/uber_cannon/uber_cannon.json',
+                    file: weap,
                     path: 'ammo_demand',
                     op: 'multiply',
                     value: 2.0
                 },
                 {
-                    file: '/pa/tools/uber_cannon/uber_cannon.json',
+                    file: weap,
                     path: 'ammo_per_shot',
                     op: 'multiply',
                     value: 2.0
                 },
                 {
-                    file: '/pa/tools/uber_cannon/uber_cannon.json',
+                    file: weap,
                     path: 'ammo_id',
                     op: 'replace',
                     value: '/pa/units/air/titan_air_ammo/titan_air_ammo.json'
-                });
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
+                }
+            ]);
         }
     };
 });

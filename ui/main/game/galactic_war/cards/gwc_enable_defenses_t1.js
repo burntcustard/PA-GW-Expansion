@@ -13,7 +13,7 @@ define(['shared/gw_common'], function (GW) {
         },
         audio: function (parms) {
             return {
-                found: '/VO/Computer/gw/board_tech_available_bot'
+                found: '/VO/Computer/gw/board_tech_available_artillery'
             }
         },
         getContext: function (galaxy) {
@@ -24,7 +24,7 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_booms')) {
+            if (!inventory.hasCard('gwc_enable_defences_t1')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
@@ -36,8 +36,6 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/laser_defense/laser_defense.json',
                 '/pa/units/land/artillery_short/artillery_short.json',
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

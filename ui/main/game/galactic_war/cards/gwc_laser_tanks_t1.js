@@ -30,29 +30,30 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
-            mods.push(
+            var unit = '/pa/units/land/tank_light_laser/tank_light_laser.json';
+            var weap =  '/pa/units/land/tank_light_laser/tank_light_laser_tool_weapon.json';
+            inventory.addMods([
                 {
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
+                    file: unit,
                     path: 'display_name',
                     op: 'replace',
                     value: 'Light Laser Tank'
                 },
                 {
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
+                    file: unit,
                     path: 'description',
                     op: 'replace',
                     value: 'Tank: More maneuverable/lower damage variANT.<br>+20% speed, +20% RoF, -20% damage'
                 },
                 {
                     // 10 to 12 move speed
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
+                    file: unit,
                     path: 'navigation.move_speed',
                     op: 'multiply',
                     value: 1.2
                 },
                 {
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser.json',
+                    file: unit,
                     path: 'events.fired',
                     op: 'replace',
                     value: {
@@ -60,24 +61,21 @@ define(['shared/gw_common'], function (GW) {
                         "effect_spec":"/pa/effects/specs/tank_muzzle_flash.pfx socket_muzzle"
                     }
                 },
-                // Weapon
                 {
-                    // 0.5/s rate of fire to 0.6/s
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser_tool_weapon.json',
+                    // Rate of fire to  .5/s -> .6/s
+                    file: weap,
                     path: 'rate_of_fire',
                     op: 'multiply',
                     value: 1.2
                 },
                 {
                     // Give it the anchor anti-orbital ammo (65 damage)
-                    file: '/pa/units/land/tank_light_laser/tank_light_laser_tool_weapon.json',
+                    file: weap,
                     path: 'ammo_id',
                     op: 'replace',
                     value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital.json'
-                });
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
+                }
+            ]);
         }
     };
 });

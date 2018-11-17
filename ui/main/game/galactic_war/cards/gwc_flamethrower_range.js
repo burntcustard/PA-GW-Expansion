@@ -31,13 +31,13 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var units = [
+            var weaps = [
                 '/pa/units/land/tank_armor/tank_armor_tool_weapon.json',
             ];
-            _.forEach(units, function(unit) {
+            _.forEach(weaps, function(weap) {
                 mods.push({
                     // Range 20 -> 24
-                    file: unit,
+                    file: weap,
                     path: 'max_range',
                     op: 'multiply',
                     value: 1.2
@@ -52,7 +52,6 @@ define(['shared/gw_common'], function(GW) {
                 //}
                 );
             });
-        },
-        dull: function() {}
+        }
     };
 });

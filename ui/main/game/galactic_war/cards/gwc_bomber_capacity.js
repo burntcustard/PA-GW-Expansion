@@ -1,7 +1,7 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'commanderPassive'; },
+        type: function() { return 'upgrades'; },
         describe: function(params) {
             return 'Equips the Bumblebee basic bomber with a larger bomb bay.<br><br>+100% ammo capacity';
         },
@@ -30,20 +30,20 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            inventory.addMods({
-                file: '/pa/units/air/bomber/bomber.json',
-                path: 'description',
-                op: 'replace',
-                value: 'Bomber- Equipped with basic anti-land and anti-naval bombs.<br>Extra bombs: +100% ammo capacity'
-            },
-            {
-                file: '/pa/units/air/bomber/bomber_tool_weapon.json',
-                path: 'ammo_capacity',
-                op: 'multiply',
-                value: 2
-            });
-        },
-        dull: function(inventory) {
+            inventory.addMods([
+                {
+                    file: '/pa/units/air/bomber/bomber.json',
+                    path: 'description',
+                    op: 'replace',
+                    value: 'Bomber- Equipped with basic anti-land and anti-naval bombs. Extra bombs tech: +100% ammo capacity'
+                },
+                {
+                    file: '/pa/units/air/bomber/bomber_tool_weapon.json',
+                    path: 'ammo_capacity',
+                    op: 'multiply',
+                    value: 2
+                }
+            ]);
         }
     };
 });

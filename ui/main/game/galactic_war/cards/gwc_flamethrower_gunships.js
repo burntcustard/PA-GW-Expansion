@@ -30,77 +30,76 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
-            mods.push({
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'display_name',
-                op: 'replace',
-                value: 'Phoenix'
-            },
-            {
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'description',
-                op: 'replace',
-                value: 'Phoenix Gunship: Strong short range anti-ground.'
-            },
-            {
-                // 300 to 450 HP
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'max_health',
-                op: 'multiply',
-                value: 1.5
-            },
-            {
-                // 600 to 900 build cost
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'build_metal_cost',
-                op: 'multiply',
-                value: 1.5
-            },
-            {
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'navigation.aggressive_distance',
-                op: 'replace',
-                value: 20
-            },
-            {
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'events.fired',
-                op: 'replace',
-                value: {
-                    "audio_cue":"/SE/Weapons/veh/tank_flame",
-                    "effect_spec":"/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_rightMuzzle /pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_leftMuzzle"
-                }
-            },
-            {
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'events.died',
-                op: 'replace',
-                value: {
-                  "audio_cue":"/SE/Impacts/bomb_bot_plasma",
-                  "effect_spec":"/pa/units/land/bot_bomb/bot_bomb_ammo_explosion.pfx"
-                }
-            },
-            {
-                file: '/pa/units/air/gunship/gunship.json',
-                path: 'tools',
-                op: 'replace',
-                value: [
-                    {
-                      "spec_id":"/pa/units/land/tank_armor/tank_armor_tool_weapon.json",
-                      "aim_bone":"bone_rightRecoil",
-                      "muzzle_bone":"socket_rightMuzzle"
-                    },
-                    {
-                      "spec_id":"/pa/units/land/tank_armor/tank_armor_tool_weapon.json",
-                      "aim_bone":"bone_leftRecoil",
-                      "muzzle_bone":"socket_leftMuzzle"
+            var unit = '/pa/units/air/gunship/gunship.json';
+            inventory.addMods([
+                {
+                    file: unit,
+                    path: 'display_name',
+                    op: 'replace',
+                    value: 'Phoenix'
+                },
+                {
+                    file: unit,
+                    path: 'description',
+                    op: 'replace',
+                    value: 'Phoenix Gunship: Strong short range anti-ground.'
+                },
+                {
+                    // 300 to 450 HP
+                    file: unit,
+                    path: 'max_health',
+                    op: 'multiply',
+                    value: 1.5
+                },
+                {
+                    // 600 to 900 build cost
+                    file: unit,
+                    path: 'build_metal_cost',
+                    op: 'multiply',
+                    value: 1.5
+                },
+                {
+                    file: unit,
+                    path: 'navigation.aggressive_distance',
+                    op: 'replace',
+                    value: 20
+                },
+                {
+                    file: unit,
+                    path: 'events.fired',
+                    op: 'replace',
+                    value: {
+                        "audio_cue":"/SE/Weapons/veh/tank_flame",
+                        "effect_spec":"/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_rightMuzzle /pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_leftMuzzle"
                     }
-                ]
-            });
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
+                },
+                {
+                    file: unit,
+                    path: 'events.died',
+                    op: 'replace',
+                    value: {
+                      "audio_cue":"/SE/Impacts/bomb_bot_plasma",
+                      "effect_spec":"/pa/units/land/bot_bomb/bot_bomb_ammo_explosion.pfx"
+                    }
+                },
+                {
+                    file: unit,
+                    path: 'tools',
+                    op: 'replace',
+                    value: [
+                        {
+                          "spec_id":"/pa/units/land/tank_armor/tank_armor_tool_weapon.json",
+                          "aim_bone":"bone_rightRecoil",
+                          "muzzle_bone":"socket_rightMuzzle"
+                        },
+                        {
+                          "spec_id":"/pa/units/land/tank_armor/tank_armor_tool_weapon.json",
+                          "aim_bone":"bone_leftRecoil",
+                          "muzzle_bone":"socket_leftMuzzle"
+                        }
+                    ]
+                }
+            ]);
         }
     };
 });

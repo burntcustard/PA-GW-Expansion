@@ -30,12 +30,9 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var units = [
-                '/pa/units/commanders/base_commander/base_commander.json',
-            ];
-            var mods = [];
-            var modUnit = function (unit) {
-                mods.push({
+            var unit = '/pa/units/commanders/base_commander/base_commander.json';
+            inventory.addMods([
+                {
                     file: unit,
                     path: 'max_health',
                     op: 'multiply',
@@ -64,12 +61,8 @@ define(['shared/gw_common'], function(GW) {
                     path: 'navigation.turn_speed',
                     op: 'multiply',
                     value: 1.25
-                });
-            };
-            _.forEach(units, modUnit);
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
+                }
+            ]);
         }
     };
 });

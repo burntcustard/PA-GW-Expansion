@@ -30,12 +30,9 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var units = [
-                '/pa/units/commanders/base_commander/base_commander.json',
-            ];
-            var mods = [];
-            var modUnit = function (unit) {
-                mods.push({
+            var unit = '/pa/units/commanders/base_commander/base_commander.json';
+            inventory.addMods([
+                {
                     file: unit,
                     path: 'passive_health_regen',
                     op: 'replace',
@@ -53,12 +50,8 @@ define(['shared/gw_common'], function(GW) {
                     path: 'build_metal_cost',
                     op: 'replace',
                     value: 5000
-                });
-            };
-            _.forEach(units, modUnit);
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
+                }
+            ]);
         }
     };
 });

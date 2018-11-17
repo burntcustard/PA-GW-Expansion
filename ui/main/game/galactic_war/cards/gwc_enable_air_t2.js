@@ -34,8 +34,6 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/air/air_factory_adv/air_factory_adv.json',
                 '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json'
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

@@ -53,8 +53,6 @@ define(['shared/gw_common'], function (GW) {
                     value: 1.3
                 });
             });
-        },
-        dull: function(inventory) {
         }
     };
 });

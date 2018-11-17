@@ -48,8 +48,6 @@ define(['shared/gw_common'], function (GW) {
                     value: 'Assault Bot Launcher- Builds and fires Dox at nearby targets.'
                 }
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

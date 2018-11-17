@@ -54,8 +54,6 @@ define(['shared/gw_common'], function (GW) {
                     value: '/pa/units/land/bot_bomb/bot_bomb.json'
                 }
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });

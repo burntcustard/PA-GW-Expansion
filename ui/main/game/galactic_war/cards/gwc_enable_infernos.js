@@ -33,8 +33,6 @@ define(['shared/gw_common'], function (GW) {
             inventory.addUnits([
                 '/pa/units/land/tank_armor/tank_armor.json'
             ]);
-        },
-        dull: function(inventory) {
         }
     };
 });
