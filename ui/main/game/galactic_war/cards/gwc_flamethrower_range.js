@@ -34,8 +34,7 @@ define(['shared/gw_common'], function(GW) {
             var units = [
                 '/pa/units/land/tank_armor/tank_armor_tool_weapon.json',
             ];
-            var mods = [];
-            var modUnit = function(unit) {
+            _.forEach(units, function(unit) {
                 mods.push({
                     // Range 20 -> 24
                     file: unit,
@@ -52,11 +51,8 @@ define(['shared/gw_common'], function(GW) {
                     // value: 1.2
                 //}
                 );
-            };
-            _.forEach(units, modUnit);
-            inventory.addMods(mods);
+            });
         },
-        dull: function(inventory) {
-        }
+        dull: function() {}
     };
 });

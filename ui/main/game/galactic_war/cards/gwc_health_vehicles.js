@@ -45,17 +45,14 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/tank_flak/tank_flak.json',
                 '/pa/units/land/tank_nuke/tank_nuke.json'
             ];
-            var mods = [];
-            var modUnit = function(unit) {
-                mods.push({
+            _.forEach(units, function(unit) {
+                inventory.addMods({
                     file: unit,
                     path: 'max_health',
                     op: 'multiply',
                     value: 1.3
                 });
-            };
-            _.forEach(units, modUnit);
-            inventory.addMods(mods);
+            });
         },
         dull: function(inventory) {
         }

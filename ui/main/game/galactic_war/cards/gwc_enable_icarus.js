@@ -30,13 +30,12 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
             var units = [
                 '/pa/units/air/solar_drone/solar_drone.json'
             ];
             _.forEach(units, function(unit) {
                 inventory.addUnits([unit]);
-                mods.push(
+                inventory.addMods(
                     {
                         // Shrink the select icon 21 -> 20
                         file: unit,
@@ -57,9 +56,6 @@ define(['shared/gw_common'], function (GW) {
                     }
                 );
             });
-            inventory.addMods(mods);
-        },
-        dull: function(inventory) {
         }
     };
 });

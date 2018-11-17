@@ -31,12 +31,11 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            var mods = [];
             var units = [
                 '/pa/units/air/solar_drone/solar_drone.json'
             ];
             _.forEach(units, function(unit) {
-                mods.push(
+                inventory.addMods(
                     // Giving it gunship-like movement
                     {
                         file: unit,
@@ -99,7 +98,6 @@ define(['shared/gw_common'], function (GW) {
                     }
                 );
             });
-            inventory.addMods(mods);
         },
         dull: function(inventory) {
         }

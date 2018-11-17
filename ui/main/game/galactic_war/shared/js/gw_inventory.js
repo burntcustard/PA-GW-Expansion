@@ -148,7 +148,9 @@ define(['require'], function(require) {
                     cardId = cardParams.id;
                 require(['cards/' + cardId], function(card) {
                     curCard = cardId;
-                    card[op](self, cardParams);
+                    if (card[op]) {
+                        card[op](self, cardParams);
+                    }
                     //console.log("Success doing a card op?");
                     //console.log(card);
                     finishCard();
