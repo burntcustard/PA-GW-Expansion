@@ -11,12 +11,12 @@ define(['shared/gw_common'], function (GW) {
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: '/VO/Computer/gw/board_tech_available_bot'
             }
         },
-        getContext: function (galaxy) {
+        getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
             };

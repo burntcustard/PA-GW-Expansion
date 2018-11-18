@@ -1,3 +1,4 @@
+// !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'upgrades'; },
@@ -10,17 +11,17 @@ define(['shared/gw_common'], function(GW) {
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
             }
         },
-        getContext: function (galaxy) {
+        getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context, inventory) {
+        deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_gunships') &&

@@ -33,12 +33,12 @@ define([
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/shared/img/red-commander.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: '/VO/Computer/gw/board_tech_available_subcommander'
             }
         },
-        getContext: function (galaxy, inventory) {
+        getContext: function(galaxy, inventory) {
             return {
                 totalSize: galaxy.stars().length,
                 faction: inventory.getTag('global', 'playerFaction') || 0

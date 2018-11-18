@@ -10,20 +10,22 @@ define(['shared/gw_common'], function(GW) {
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
             }
         },
-        getContext: function (galaxy) {
+        getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context) {
+        deal: function(system, context) {
             var chance = 0;
             var dist = system.distance();
-                chance = (dist >= 2) ? 200:0;
+            if (!inventory.hasCard('gwc_commander_uber_tesla')) {
+                chance = (dist >= 2) ? 40:0;
+            }
             return { chance: chance };
         },
         buff: function(inventory, params) {

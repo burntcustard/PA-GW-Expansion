@@ -126,7 +126,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/orbital/orbital_battleship/orbital_battleship.json',
                 // T1 Defenses
                 //'/pa/units/land/land_barrier/land_barrier.json',
-                //'/pa/units/land/land_mine/land_mine.json',
+                '/pa/units/land/land_mine/land_mine.json',
                 '/pa/units/land/air_defense/air_defense.json',
                 '/pa/units/land/laser_defense_single/laser_defense_single.json',
                 //'/pa/units/land/laser_defense/laser_defense.json',
@@ -134,19 +134,19 @@ define(['shared/gw_common'], function (GW) {
                 //'/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json',
                 '/pa/units/sea/torpedo_launcher/torpedo_launcher.json',
                 // T2 Defenses
-                '/pa/units/land/air_defense_adv/air_defense_adv.json',
-                '/pa/units/land/laser_defense_adv/laser_defense_adv.json',
+                //'/pa/units/land/air_defense_adv/air_defense_adv.json',
+                //'/pa/units/land/laser_defense_adv/laser_defense_adv.json',
                 //'/pa/units/land/artillery_long/artillery_long.json',
                 '/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json',
-                '/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json',
-                '/pa/units/land/nuke_launcher/nuke_launcher.json',
-                '/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json',
-                '/pa/units/land/control_module/control_module.json',
+                //'/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json',
+                //'/pa/units/land/nuke_launcher/nuke_launcher.json',
+                //'/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json',
+                //'/pa/units/land/control_module/control_module.json',
                 // T1 Intel
                 '/pa/units/land/radar/radar.json',
-                '/pa/units/land/teleporter/teleporter.json',
+                //'/pa/units/land/teleporter/teleporter.json',
                 // T2 Intel
-                '/pa/units/land/radar_adv/radar_adv.json',
+                //'/pa/units/land/radar_adv/radar_adv.json',
                 // Unit Cannon
                 //'/pa/units/land/unit_cannon/unit_cannon.json',
                 // Titans

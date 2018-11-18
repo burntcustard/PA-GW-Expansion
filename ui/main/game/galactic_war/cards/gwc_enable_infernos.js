@@ -11,17 +11,17 @@ define(['shared/gw_common'], function (GW) {
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: '/VO/Computer/gw/board_tech_available_vehicle'
             }
         },
-        getContext: function (galaxy) {
+        getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context, inventory) {
+        deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_enable_infernos')) {

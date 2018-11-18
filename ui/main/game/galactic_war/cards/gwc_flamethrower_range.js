@@ -11,17 +11,17 @@ define(['shared/gw_common'], function(GW) {
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png';
         },
-        audio: function (parms) {
+        audio: function(parms) {
             return {
                 found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
             }
         },
-        getContext: function (galaxy) {
+        getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
             };
         },
-        deal: function (system, context, inventory) {
+        deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_range') &&
@@ -40,7 +40,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' +25% range'
+                        value: ' +25% range.'
                     }
                 ]);
             });
@@ -73,12 +73,14 @@ define(['shared/gw_common'], function(GW) {
             _.forEach(effects, function(effect) {
                 inventory.addMods([
                     {
+                        // Remove the original flames effect
                         file: effect,
                         path: 'emitters',
                         op: 'splice',
                         value: 1
                     },
                     {
+                        // Add in longer flames effect
                         file: effect,
                         path: 'emitters',
                         op: 'push',

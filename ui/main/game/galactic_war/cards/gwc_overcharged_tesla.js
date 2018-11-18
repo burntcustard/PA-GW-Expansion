@@ -28,12 +28,12 @@ define(['shared/gw_common'], function (GW) {
                 // Only findable after Sparks or Icarus
                 (inventory.hasCard('gwc_enable_sparks') ||
                  inventory.hasCard('gwc_enable_icarus'))) {
-                chance = (dist <= 5) ? 400:0;
+                chance = (dist <= 5) ? 40:0;
             }
             return { chance: chance };
         },
         buff: function(inventory, params) {
-            
+
             var units = [
                 '/pa/units/land/bot_tesla/bot_tesla.json',
                 '/pa/units/air/solar_drone/solar_drone.json',
@@ -45,7 +45,7 @@ define(['shared/gw_common'], function (GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Tesla: +40% damage'
+                        value: ' Overcharged Tesla: +40% damage.'
                     }
                 ]);
             });
