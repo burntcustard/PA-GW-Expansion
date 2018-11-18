@@ -16,11 +16,11 @@ define([], function() {
                         //console.log(jsons);
                         _.forEach(substrs, function(substr, i) {
                             if (substr.indexOf('/pa/') === 0) {
-                                moreWork.push(new String(substr));
+                                moreWork.push(substr);
                                 substrs[i] += tag;
                             }
                         });
-                        obj[key] = new String(substrs.join(' '));
+                        obj[key] = substrs.join(' ');
                         console.log("New tagged spec:");
                         console.log(obj[key]);
 
@@ -242,10 +242,15 @@ define([], function() {
                 },
                 eval: function(attribute, value) { return new Function('attribute', value)(attribute); },
                 clone: function(attribute, value) {
+                    console.log('Trying to clone a thing');
+                    console.log('attribute: ' + attribute);
+                    console.log('value: ' + value);
                     var loaded = load(attribute);
                     if (loaded)
                         loaded = _.cloneDeep(loaded);
                     specs[value + specTag] = loaded || attribute;
+                    console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
+                    console.log(specs[value + specTag]);
                 },
                 tag: function(attribute, value) { return attribute + specTag; },
                 delete: function(attribute, value, file, path) {

@@ -152,7 +152,7 @@ define(['shared/gw_common'], function (GW) {
                 // Titans
                 // '/pa/units/land/titan_bot/titan_bot.json',
                 // '/pa/units/land/titan_vehicle/titan_vehicle.json',
-                // '/pa/units/land/titan_air/titan_air.json',
+                // '/pa/units/air/titan_air/titan_air.json',
                 // '/pa/units/land/titan_structure/titan_structure.json',
                 // '/pa/units/land/titan_orbital/titan_orbital.json'
             ]);

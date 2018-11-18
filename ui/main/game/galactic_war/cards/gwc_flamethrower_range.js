@@ -3,7 +3,7 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'upgrades'; },
         describe: function(params) {
-            return 'Increases the range of flamethrowers by 20%';
+            return 'Increases the range of flamethrowers by 25%';
         },
         summarize: function(params) {
             return 'Flamethrower range +25%';

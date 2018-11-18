@@ -38,7 +38,7 @@ define(['shared/gw_common'], function (GW) {
                     path: 'display_name',
                     op: 'add',
                     value: ' Gunship'
-                }
+                },
                 {
                     file: unit,
                     path: 'description',

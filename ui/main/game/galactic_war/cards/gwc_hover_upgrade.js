@@ -43,13 +43,13 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'navigation.acceleration',
                         op: 'multiply',
-                        value: 1 + i / 10;
+                        value: 1 + i / 10
                     },
                     {
                         file: unit,
                         path: 'navigation.brake',
                         op: 'multiply',
-                        value: 1 + i / 10;
+                        value: 1 + i / 10
                     },
                     {
                         // % Wise this is incorrect but gives nice numbers & is close enough
@@ -62,7 +62,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'navigation.turn_speed',
                         op: 'multiply',
-                        value: 1 + i / 10;
+                        value: 1 + i / 10
                     },
                     {
                         file: unit,
