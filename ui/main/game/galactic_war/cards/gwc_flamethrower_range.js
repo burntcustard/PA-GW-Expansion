@@ -25,7 +25,7 @@ define(['shared/gw_common'], function(GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_range') &&
-                inventory.hasCard('gwc_enable_infernos')) { // Only enabled after you unlock infernos!
+                inventory.hasCard('gwc_enable_infernos')) { // Only finadable after infernos
                 chance = (dist <= 5) ? 400:0;
             }
             return { chance: chance };

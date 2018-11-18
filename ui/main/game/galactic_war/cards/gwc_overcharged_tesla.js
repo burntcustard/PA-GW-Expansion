@@ -25,7 +25,7 @@ define(['shared/gw_common'], function (GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_overchanged_tesla') &&
-                // Only findable after Sparks or Icarus unlocked
+                // Only findable after Sparks or Icarus
                 (inventory.hasCard('gwc_enable_sparks') ||
                  inventory.hasCard('gwc_enable_icarus'))) {
                 chance = (dist <= 5) ? 400:0;
@@ -33,6 +33,22 @@ define(['shared/gw_common'], function (GW) {
             return { chance: chance };
         },
         buff: function(inventory, params) {
+            
+            var units = [
+                '/pa/units/land/bot_tesla/bot_tesla.json',
+                '/pa/units/air/solar_drone/solar_drone.json',
+                '/pa/units/air/titan_air/titan_air.json'
+            ];
+            _.forEach(units, function(unit) {
+                inventory.addMods([
+                    {
+                        file: unit,
+                        path: 'description',
+                        op: 'add',
+                        value: ' Overcharged Tesla: +40% damage'
+                    }
+                ]);
+            });
 
             var weaps = [
                 '/pa/units/land/bot_tesla/bot_tesla_weapon.json',
@@ -63,9 +79,9 @@ define(['shared/gw_common'], function (GW) {
             });
 
             var ammos = [
-                '/pa/units/land/bot_tesla/bot_tesla_ammo.json',    // Spark ammo 160 -> 240 damage
-                '/pa/units/air/solar_drone/solar_drone_ammo.json', // Icarus ammo 25 -> 37.5 damage
-                '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus ammo 1500 -> 2250 damage
+                '/pa/units/land/bot_tesla/bot_tesla_ammo.json',    // Spark ammo damage 160 -> 224
+                '/pa/units/air/solar_drone/solar_drone_ammo.json', // Icarus ammo damage 25 -> 35
+                '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus ammo damage 1600 -> 2100
             ];
             _.forEach(ammos, function(ammo) {
                 inventory.addMods([
@@ -73,7 +89,7 @@ define(['shared/gw_common'], function (GW) {
                         file: ammo,
                         path: 'damage',
                         op: 'multiply',
-                        value: 1.5
+                        value: 1.4
                     }
                 ]);
             });

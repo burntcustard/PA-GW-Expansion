@@ -3,17 +3,17 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'units'; },
         describe: function(params) {
-            return 'Enables building of advanced mobile air units and factories. Advanced air factories are built via any air fabricator.';
+            return 'Enables construction of the Holkins T2 artillery cannon via any advanced fabricator.';
         },
         summarize: function(params) {
-            return 'Advanced Air Tech';
+            return 'Artillery Tech';
         },
         icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
+            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
         },
         audio: function (parms) {
             return {
-                found: '/VO/Computer/gw/board_tech_available_air'
+                found: '/VO/Computer/gw/board_tech_available_artillery'
             }
         },
         getContext: function (galaxy) {
@@ -24,15 +24,14 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_air_t2')) {
+            if (!inventory.hasCard('gwc_enable_t2_artillery')) {
                 chance = (2 < dist && dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },
         buff: function(inventory, params) {
             inventory.addUnits([
-                '/pa/units/air/air_factory_adv/air_factory_adv.json',
-                '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json'
+                '/pa/units/land/artillery_long/artillery_long.json'
             ]);
         }
     };

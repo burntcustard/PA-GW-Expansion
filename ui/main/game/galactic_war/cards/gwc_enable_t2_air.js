@@ -3,17 +3,17 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'units'; },
         describe: function(params) {
-            return 'Activates the Tech to build the Holkins T2 artillery cannon.';
+            return 'Enables construction of advanced air units (Kestrel, Phoenix, Hornet, Angel) from the Advanced Air Factory, built via any air fabricator.';
         },
         summarize: function(params) {
-            return 'Artillery Tech';
+            return 'Advanced Air Tech';
         },
         icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
+            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
         },
         audio: function (parms) {
             return {
-                found: '/VO/Computer/gw/board_tech_available_artillery'
+                found: '/VO/Computer/gw/board_tech_available_air'
             }
         },
         getContext: function (galaxy) {
@@ -24,14 +24,14 @@ define(['shared/gw_common'], function (GW) {
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_artillery_t2')) {
+            if (!inventory.hasCard('gwc_enable_t2_air')) {
                 chance = (2 < dist && dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },
         buff: function(inventory, params) {
             inventory.addUnits([
-                '/pa/units/land/artillery_long/artillery_long.json'
+                '/pa/units/air/air_factory_adv/air_factory_adv.json'
             ]);
         }
     };

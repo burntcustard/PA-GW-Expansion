@@ -2,7 +2,7 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderUber'; },
         describe: function(params) {
-            return 'Replaces the commanders Uber Cannon with a powerful Uber Tesla Gun';
+            return 'A powerful Uber Tesla Gun';
         },
         summarize: function(params) {
             return 'Uber Tesla Gun';
@@ -29,6 +29,13 @@ define(['shared/gw_common'], function(GW) {
         buff: function(inventory, params) {
             var weap = '/pa/tools/uber_cannon/uber_cannon.json'
             inventory.addMods([
+                {
+                    // Re-add secondary fire
+                    file: '/pa/units/commanders/base_commander/base_commander.json',
+                    path: 'command_caps',
+                    op: 'push',
+                    value: 'ORDER_FireSecondaryWeapon'
+                },
                 {
                     file: weap,
                     path: 'ammo_capacity',

@@ -33,6 +33,18 @@ define(['shared/gw_common'], function (GW) {
         buff: function(inventory, params) {
             var unit = '/pa/units/air/solar_drone/solar_drone.json';
             inventory.addMods([
+                {
+                    file: unit,
+                    path: 'display_name',
+                    op: 'add',
+                    value: ' Gunship'
+                }
+                {
+                    file: unit,
+                    path: 'description',
+                    op: 'add',
+                    value: ' Gunship Modifications: 2x speed.'
+                },
                 // Giving it gunship-like movement
                 {
                     file: unit,

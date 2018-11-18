@@ -31,18 +31,8 @@ define([], function() {
                 }
                 else if (_.isArray(obj[key])) {
                     obj[key] = _.map(obj[key], function(value) {
-                        // if (value.includes(' ')) {
-                        //     var jsons = _.filter(
-                        //         value.split(' '), function(v) { return v.includes('/pa/'); }
-                        //     );
-                        //     _.forEach(jsons, function(json) {
-                        //         moreWork.push(json);
-                        //         return json + tag;
-                        //     });
-                        // } else {
-                            moreWork.push(value);
-                            return value + tag;
-                        //}
+                        moreWork.push(value);
+                        return value + tag;
                     });
                 }
             }
@@ -72,8 +62,6 @@ define([], function() {
         }
         // Effects
         if (spec.events && spec.events.fired && _.isString(spec.events.fired.effect_spec)) {
-            //console.log("Applying tag for spec.events.fired.effect_spec:");
-            //console.log(spec.events.fired.effect_spec);
             applyTag(spec.events.fired, 'effect_spec');
         }
 
@@ -117,7 +105,7 @@ define([], function() {
                 var fetch = function(item) {
                     //console.log("Item: " + item);
                     if (!item) {
-                        console.log("Missing item");
+                        console.log("Missing item when loading spec");
                         _.delay(step);
                     } else {
                         $.ajax({

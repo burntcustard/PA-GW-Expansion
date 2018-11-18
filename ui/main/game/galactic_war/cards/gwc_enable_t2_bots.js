@@ -1,0 +1,38 @@
+// !LOCNS:galactic_war
+define(['shared/gw_common'], function (GW) {
+    return {
+        type: function() { return 'units'; },
+        describe: function(params) {
+            return 'Enables construction of advanced bots (Slammer, Bluehawk, Gil-E) from the Advanced Bot Factory, built via any bot fabricator.';
+        },
+        summarize: function(params) {
+            return 'Advanced Bot Tech';
+        },
+        icon: function(params) {
+            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
+        },
+        audio: function (parms) {
+            return {
+                found: '/VO/Computer/gw/board_tech_available_bot'
+            }
+        },
+        getContext: function (galaxy) {
+            return {
+                totalSize: galaxy.stars().length
+            };
+        },
+        deal: function (system, context, inventory) {
+            var chance = 0;
+            var dist = system.distance();
+            if (!inventory.hasCard('gwc_enable_t2_bots')) {
+                chance = (2 < dist && dist <= 5 ? 40 : 0);
+            }
+            return { chance: chance };
+        },
+        buff: function(inventory, params) {
+            inventory.addUnits([
+                '/pa/units/air/bot_factory_adv/bot_factory_adv.json'
+            ]);
+        }
+    };
+});

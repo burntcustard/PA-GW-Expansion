@@ -2,10 +2,10 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'upgrades'; },
         describe: function(params) {
-            return 'Replaces the Kestrel gunship with the flamethrower-wiedling Phoenix. Built by advanced Air Factories.';
+            return 'Replaces the Kestrel gunship with the flamethrower-wiedling Fire Raptor. Built by advanced Air Factories.';
         },
         summarize: function(params) {
-            return 'Phoenix Gunship';
+            return 'Fire Raptor Gunship';
         },
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
@@ -24,7 +24,7 @@ define(['shared/gw_common'], function(GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_gunships') &&
-                inventory.hasCard('gwc_enable_air_t2')) {
+                inventory.hasCard('gwc_enable_t2_air')) {
                 chance = (dist >= 4) ? 40:0;
             }
             return { chance: chance };
@@ -36,23 +36,23 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'display_name',
                     op: 'replace',
-                    value: 'Phoenix'
+                    value: 'Fire Raptor'
                 },
                 {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Phoenix Gunship: Strong short range anti-ground.'
+                    value: 'Fire Raptor Gunship- Devastating short range anti-ground.'
                 },
                 {
-                    // 300 to 450 HP
+                    // 300 -> 450 HP
                     file: unit,
                     path: 'max_health',
                     op: 'multiply',
                     value: 1.5
                 },
                 {
-                    // 600 to 900 build cost
+                    // 600 -> 900 build cost
                     file: unit,
                     path: 'build_metal_cost',
                     op: 'multiply',
