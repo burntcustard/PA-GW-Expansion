@@ -29,79 +29,9 @@ define(['shared/gw_common'], function(GW) {
             return { chance: 9000 };
         },
         buff: function(inventory, params) {
-
-            // This is an example of how to use duplicated specs.  This would
-            // only be necessary if the build arms were being shared, which they
-            // currently are not.
-//            var units = [
-//                '/pa/units/land/fabrication_bot/fabrication_bot.json',
-//                '/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json',
-//                '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
-//                '/pa/air/fabrication_aircraft/fabrication_aircraft.json',
-//                '/pa/sea/fabrication_ship/fabrication_ship.json',
-//            ];
-//            var mods = [];
-//            var modUnit = function(unit) {
-//                var newBuildArm = unit + '.' + params.id + '.build_arm.' + (inventory.mods().length + mods.length).toString();
-//                mods = mods.concat([{
-//                    file: unit,
-//                    path: 'tools.0.spec_id',
-//                    op: 'clone',
-//                    value: newBuildArm
-//                }, {
-//                    file: newBuildArm,
-//                    path: 'construction_demand.energy',
-//                    op: 'multiply',
-//                    value: params.multiplier
-//                }, {
-//                    file: unit,
-//                    path: 'tools.0.spec_id',
-//                    op: 'replace',
-//                    value: newBuildArm
-//                }, {
-//                    file: unit,
-//                    path: 'tools.0.spec_id',
-//                    op: 'tag',
-//                    value: ''
-//                }]);
-            //            };
-
-            var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
-            var teslaWeap = '/pa/units/air/titan_air/titan_air_tool_weapon.json';
-            var teslaAmmo = '/pa/units/air/titan_air/titan_air_ammo.json';
-            var uberTeslaAmmo = teslaAmmo + '.' + params.id + '.uber_ammo.' + (inventory.mods().length).toString();
-            // console.log("uberTeslaAmmo: " + uberTeslaAmmo);
-
-            var newBuildArm = comm + '.' + params.id + '.build_arm.' + (inventory.mods().length).toString();
-            console.log("newBuildArm: " + newBuildArm);
-            inventory.addMods([
-                {
-                    file: comm,
-                    path: 'tools.0.spec_id',
-                    op: 'clone',
-                    value: newBuildArm
-                },
-                {
-                    file: newBuildArm,
-                    path: 'construction_demand.energy',
-                    op: 'multiply',
-                    value: 0.001
-                },
-                {
-                    file: comm,
-                    path: 'tools.0.spec_id',
-                    op: 'replace',
-                    value: newBuildArm
-                },
-                {
-                    file: comm,
-                    path: 'tools.0.spec_id',
-                    op: 'tag',
-                    value: ''
-                }
-            ]);
-
+            var weap = '/pa/tools/uber_cannon/uber_cannon.json';
+            var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';
             inventory.addMods([
                 {
                     // Re-add secondary fire
@@ -111,23 +41,125 @@ define(['shared/gw_common'], function(GW) {
                     value: 'ORDER_FireSecondaryWeapon'
                 },
                 {
-                    file: teslaWeap,
-                    path: 'ammo_id',
-                    op: 'clone',
-                    value: uberTeslaAmmo
+                    file: ammo,
+                    path: 'burn_damage',
+                    op: 'delete'
                 },
                 {
-                    // Change uber cannon ammo
-                    file: weap,
-                    path: 'ammo_id',
+                    file: ammo,
+                    path: 'burn_radius',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'events',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'flight_type',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'fx_trail',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'initial_velocity',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'max_velocity',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'physics',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'spawn_layers',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'turn_rate',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'ammo_type',
                     op: 'replace',
-                    value: uberTeslaAmmo
+                    value: 'AMMO_Beamn'
                 },
                 {
-                    file: weap,
-                    path: 'ammo_id',
-                    op: 'tag',
-                    value: ''
+                    file: ammo,
+                    path: 'collision_check',
+                    op: 'replace',
+                    value: 'target'
+                },
+                {
+                    file: ammo,
+                    path: 'collision_response',
+                    op: 'replace',
+                    value: 'impact'
+                },
+                {
+                    file: ammo,
+                    path: 'collision_audio',
+                    op: 'replace',
+                    value: '/SE/Impacts/laser_blast'
+                },
+                {
+                    file: ammo,
+                    path: 'damage',
+                    op: 'replace',
+                    value: 1500
+                },
+                {
+                    file: ammo,
+                    path: 'damage_volume',
+                    op: 'replace',
+                    value: {
+                        "delay": 0.1,
+                        "initial_radius": 5,
+                        "radius_accel": 0,
+                        "radius_velocity": 80
+                    }
+                },
+                {
+                    file: ammo,
+                    path: 'full_damage_splash_radius',
+                    op: 'replace',
+                    value: 5
+                },
+                // {
+                //     file: ammo,
+                //     path: 'fx_beam_spec',
+                //     op: 'replace',
+                //     value: '/pa/units/air/titan_air/titan_air_ammo_beam.pfx'
+                // },
+                // {
+                //     file: ammo,
+                //     path: 'fx_collision_spec',
+                //     op: 'replace',
+                //     value: '/pa/units/air/titan_air/titan_air_ammo_beam_hit.pfx'
+                // },
+                {
+                    file: ammo,
+                    path: 'splash_damage',
+                    op: 'replace',
+                    value: 500
+                },
+                {
+                    file: ammo,
+                    path: 'splash_radius',
+                    op: 'replace',
+                    value: 50
                 }
             ]);
         }
