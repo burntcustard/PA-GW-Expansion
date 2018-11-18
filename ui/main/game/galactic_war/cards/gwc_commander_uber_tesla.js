@@ -71,54 +71,84 @@ define(['shared/gw_common'], function(GW) {
             var teslaWeap = '/pa/units/air/titan_air/titan_air_tool_weapon.json';
             var teslaAmmo = '/pa/units/air/titan_air/titan_air_ammo.json';
             var uberTeslaAmmo = teslaAmmo + '.' + params.id;
-            console.log("uberTeslaAmmo: " + uberTeslaAmmo);
+            // console.log("uberTeslaAmmo: " + uberTeslaAmmo);
+
+            var newBuildArm = unit + '.' + params.id + '.build_arm.' + (inventory.mods().length).toString();
+            console.log("newBuildArm: " + newBuildArm);
             inventory.addMods([
                 {
-                    // Re-add secondary fire
-                    file: comm,
-                    path: 'command_caps',
-                    op: 'push',
-                    value: 'ORDER_FireSecondaryWeapon'
-                },
-                {
-                    file: teslaWeap,
-                    path: 'ammo_id',
+                    file: unit,
+                    path: 'tools.0.spec_id',
                     op: 'clone',
-                    value: uberTeslaAmmo
+                    value: newBuildArm
                 },
                 {
-                    // Change uber cannon ammo
-                    file: weap,
-                    path: 'ammo_id', // If this doesn't work try just 'ammo_id'?
+                    file: newBuildArm,
+                    path: 'construction_demand.energy',
+                    op: 'multiply',
+                    value: 0.001
+                },
+                {
+                    file: unit,
+                    path: 'tools.0.spec_id',
                     op: 'replace',
-                    value: uberTeslaAmmo
-                }//,
-                // {
-                //     file: weap,
-                //     path: 'ammo_id',
-                //     op: 'tag',
-                //     value: ''
-                // }
-                // {
-                //     // Draws twice as much power as default Uber Cannon while recharging
-                //     file: weap,
-                //     path: 'ammo_demand',
-                //     op: 'multiply',
-                //     value: 2.0
-                // },
-                // {
-                //     file: weap,
-                //     path: 'ammo_per_shot',
-                //     op: 'multiply',
-                //     value: 2.0
-                // },
-                // {
-                //     file: weap,
-                //     path: 'ammo_id',
-                //     op: 'replace',
-                //     value: '/pa/units/air/titan_air_ammo/titan_air_ammo.json'
-                // }
+                    value: newBuildArm
+                },
+                {
+                    file: unit,
+                    path: 'tools.0.spec_id',
+                    op: 'tag',
+                    value: ''
+                }
             ]);
+
+            // inventory.addMods([
+            //     // {
+            //     //     // Re-add secondary fire
+            //     //     file: comm,
+            //     //     path: 'command_caps',
+            //     //     op: 'push',
+            //     //     value: 'ORDER_FireSecondaryWeapon'
+            //     // },
+            //     // {
+            //     //     file: teslaWeap,
+            //     //     path: 'ammo_id.ammo_id',
+            //     //     op: 'clone',
+            //     //     value: uberTeslaAmmo
+            //     // },
+            //     // {
+            //     //     // Change uber cannon ammo
+            //     //     file: weap,
+            //     //     path: 'ammo_id.ammo_id', // If this doesn't work try just 'ammo_id'?
+            //     //     op: 'replace',
+            //     //     value: uberTeslaAmmo
+            //     // },
+            //     // {
+            //     //     file: weap,
+            //     //     path: 'ammo_id.ammo_id',
+            //     //     op: 'tag',
+            //     //     value: ''
+            //     // }
+            //     // {
+            //     //     // Draws twice as much power as default Uber Cannon while recharging
+            //     //     file: weap,
+            //     //     path: 'ammo_demand',
+            //     //     op: 'multiply',
+            //     //     value: 2.0
+            //     // },
+            //     // {
+            //     //     file: weap,
+            //     //     path: 'ammo_per_shot',
+            //     //     op: 'multiply',
+            //     //     value: 2.0
+            //     // },
+            //     // {
+            //     //     file: weap,
+            //     //     path: 'ammo_id',
+            //     //     op: 'replace',
+            //     //     value: '/pa/units/air/titan_air_ammo/titan_air_ammo.json'
+            //     // }
+            // ]);
         }
     };
 });

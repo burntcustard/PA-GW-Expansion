@@ -38,7 +38,7 @@ define([], function() {
             }
         };
         // Units
-        applyTag(spec, 'base_spec');
+        applyTag(spec, 'base_spec'); // Thing that it inherits from e.g. Dox inherit from base_bot
         if (spec.tools) {
             _.forEach(spec.tools, function(tool) {
                 applyTag(tool, 'spec_id');
