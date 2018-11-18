@@ -36,16 +36,6 @@ define(['shared/gw_common'], function(GW) {
                     path: 'command_caps',
                     op: 'push',
                     value: 'ORDER_FireSecondaryWeapon'
-                },
-                {
-                    // Do more damage than vanilla to other commanders & structures .25 -> .5
-                    file: '/pa/ammo/cannon_uber',
-                    path: 'armour_damage_map',
-                    op: 'replace',
-                    value: {
-                        "AT_Commander": 0.5,
-                        "AT_Structure": 0.5
-                    }
                 }
             ]);
         }

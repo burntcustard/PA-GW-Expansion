@@ -64,6 +64,9 @@ define([], function() {
         if (spec.events && spec.events.fired && _.isString(spec.events.fired.effect_spec)) {
             applyTag(spec.events.fired, 'effect_spec');
         }
+        if (spec.fx_trail && _.isString(spec.fx_trail.filename)) {
+            applyTag(spec.fx_trail, 'filename');
+        }
 
         return moreWork;
     }
