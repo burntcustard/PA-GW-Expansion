@@ -73,11 +73,11 @@ define(['shared/gw_common'], function(GW) {
             var uberTeslaAmmo = teslaAmmo + '.' + params.id;
             // console.log("uberTeslaAmmo: " + uberTeslaAmmo);
 
-            var newBuildArm = unit + '.' + params.id + '.build_arm.' + (inventory.mods().length).toString();
+            var newBuildArm = comm + '.' + params.id + '.build_arm.' + (inventory.mods().length).toString();
             console.log("newBuildArm: " + newBuildArm);
             inventory.addMods([
                 {
-                    file: unit,
+                    file: comm,
                     path: 'tools.0.spec_id',
                     op: 'clone',
                     value: newBuildArm
@@ -89,66 +89,47 @@ define(['shared/gw_common'], function(GW) {
                     value: 0.001
                 },
                 {
-                    file: unit,
+                    file: comm,
                     path: 'tools.0.spec_id',
                     op: 'replace',
                     value: newBuildArm
                 },
                 {
-                    file: unit,
+                    file: comm,
                     path: 'tools.0.spec_id',
                     op: 'tag',
                     value: ''
                 }
             ]);
 
-            // inventory.addMods([
-            //     // {
-            //     //     // Re-add secondary fire
-            //     //     file: comm,
-            //     //     path: 'command_caps',
-            //     //     op: 'push',
-            //     //     value: 'ORDER_FireSecondaryWeapon'
-            //     // },
-            //     // {
-            //     //     file: teslaWeap,
-            //     //     path: 'ammo_id.ammo_id',
-            //     //     op: 'clone',
-            //     //     value: uberTeslaAmmo
-            //     // },
-            //     // {
-            //     //     // Change uber cannon ammo
-            //     //     file: weap,
-            //     //     path: 'ammo_id.ammo_id', // If this doesn't work try just 'ammo_id'?
-            //     //     op: 'replace',
-            //     //     value: uberTeslaAmmo
-            //     // },
-            //     // {
-            //     //     file: weap,
-            //     //     path: 'ammo_id.ammo_id',
-            //     //     op: 'tag',
-            //     //     value: ''
-            //     // }
-            //     // {
-            //     //     // Draws twice as much power as default Uber Cannon while recharging
-            //     //     file: weap,
-            //     //     path: 'ammo_demand',
-            //     //     op: 'multiply',
-            //     //     value: 2.0
-            //     // },
-            //     // {
-            //     //     file: weap,
-            //     //     path: 'ammo_per_shot',
-            //     //     op: 'multiply',
-            //     //     value: 2.0
-            //     // },
-            //     // {
-            //     //     file: weap,
-            //     //     path: 'ammo_id',
-            //     //     op: 'replace',
-            //     //     value: '/pa/units/air/titan_air_ammo/titan_air_ammo.json'
-            //     // }
-            // ]);
+            inventory.addMods([
+                {
+                    // Re-add secondary fire
+                    file: comm,
+                    path: 'command_caps',
+                    op: 'push',
+                    value: 'ORDER_FireSecondaryWeapon'
+                },
+                {
+                    file: teslaWeap,
+                    path: 'ammo_id',
+                    op: 'clone',
+                    value: uberTeslaAmmo
+                },
+                {
+                    // Change uber cannon ammo
+                    file: weap,
+                    path: 'ammo_id',
+                    op: 'replace',
+                    value: uberTeslaAmmo
+                },
+                {
+                    file: weap,
+                    path: 'ammo_id',
+                    op: 'tag',
+                    value: ''
+                }
+            ]);
         }
     };
 });
