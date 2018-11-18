@@ -70,7 +70,7 @@ define(['shared/gw_common'], function(GW) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var teslaWeap = '/pa/units/air/titan_air/titan_air_tool_weapon.json';
             var teslaAmmo = '/pa/units/air/titan_air/titan_air_ammo.json';
-            var uberTeslaAmmo = teslaAmmo + '.' + params.id;
+            var uberTeslaAmmo = teslaAmmo + '.' + params.id + '.uber_ammo.' + (inventory.mods().length).toString();
             // console.log("uberTeslaAmmo: " + uberTeslaAmmo);
 
             var newBuildArm = comm + '.' + params.id + '.build_arm.' + (inventory.mods().length).toString();
