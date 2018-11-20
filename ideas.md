@@ -101,4 +101,4 @@ Hover tanks upgrade - Make them more "drifty" and generally better but energy co
 Flamethrower Gunships
 Flamethrower range
 Gunship Icarus movement
-Tesla Damage (& more energy consumption)
+ Tesla Damage (& more energy consumption)

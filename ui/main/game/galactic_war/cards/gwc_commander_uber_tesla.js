@@ -1,3 +1,4 @@
+// !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderSecondary'; },
