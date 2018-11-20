@@ -476,6 +476,16 @@ html, body {
             background: black;
         }
 
+    #inventory .tech_bar_type.units .one-card {
+        width: 68px;
+        height: 64px;
+    }
+
+    #inventory .tech_bar_type.units .one-card .icon {
+        width: 48px;
+        height: 48px;
+    }
+
 #hover-card, #system-card {
     justify-content: center;
     pointer-events: all;

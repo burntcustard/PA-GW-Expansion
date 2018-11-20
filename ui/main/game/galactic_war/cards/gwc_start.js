@@ -11,12 +11,12 @@ define(['shared/gw_common'], function (GW) {
         describe: function(params) { return ''; },
         deal: function(system) { return false; },
         buff: function(inventory) {
-            inventory.maxCards(18);
+            inventory.maxCards(28);
             inventory.maxCardsOfType({
                 commanderPrimary: 1,
                 commanderSecondary: 1,
                 commanderPassive: 2,
-                units: 8,
+                units: 18,
                 upgrades: 6
             });
 

@@ -26,7 +26,7 @@ define([
         'gwc_enable_titan_bot',
         'gwc_enable_titan_orbital',
         'gwc_enable_titan_structure',
-        'gwc_enable_titan_vehicles',
+        'gwc_enable_titan_vehicle',
         'gwc_flamethrower_gunships',
         'gwc_flamethrower_range',
         'gwc_flamethrower_slammers',
