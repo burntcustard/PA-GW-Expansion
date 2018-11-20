@@ -43,13 +43,15 @@ B: Boss cards
 
 ### Commander Primary Weapon
 //Plasma blaster (default)
-E-L Flamethrower
-E- L Laser
+E-M Flamethrower
+E-M Laser
+E-M Shotgun
 
 ### Commander Uber Weapon
-E Uber Cannon (default)
-M Uber Laser (the SSX gun?)
-M Boom Bot Launcher (if it's possible)
+E-E Uber Cannon (default)
+M-L Uber Laser (the SSX gun?)
+M-L Boom Bot Launcher (if it's possible)
+M-M Uber Tesla
 
 ### Commander Chassis
 E Advanced Servo Tech (+20% armour and speed?)
@@ -62,19 +64,41 @@ T2 Bots (minus locusts & ?)
 T2 Vehicles (minus ?)
 T2 Naval (minus ?)
 T2 Air (minus ?)
+T1 Orbital (?)
 T2 Orbital
-T2 Economy
-T2 Artillery?
+T2 Economy & Radar
+E-E T1 Defence
+M-L T2 Defence - inc antinukes(?)
+M-M Lob Booms
+M-M Lob Dox
+E-E Inferno
 E-M Hover tank
 M-L Kaiju
-B-B Ares
+B-B Titan Vehicle Ares
+B-B Titan Bots
+B-B Titan Air
+B-B Titan Orbital
+B-B Titan Struct
+L-L Halleys
+L-L Catalyst
+L-L Nukes
+L-L Unit Cannon
 E-M Boom bot
+E-M Spark
+E-M Icarus
+E-M Teleporter
+L-L Sub commanders w/same primary weapon as main commander?
+E-M Combat Fab (?)
+M-L Combat Fab T2 (?)
+L-L Locusts
 
 Hover tanks (T1 tank, Kaiju, Ares) - all individual
 
 ### Mods & Upgrades
-Long Range Flamethrower tech (+~20% flamethrower range)
-Light laser tanks (Ants faster and have lasers)
+Light laser tanks - Ants faster and have lasers
 Jumpy boom bots
-Hover tanks upgrade (Make them more "drifty" and generally better but energy consuming)
+Hover tanks upgrade - Make them more "drifty" and generally better but energy consuming(?)
 Flamethrower Gunships
+Flamethrower range
+Gunship Icarus movement
+Tesla Damage (& more energy consumption)

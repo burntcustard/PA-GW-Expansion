@@ -3,17 +3,17 @@ define(['shared/gw_common'], function (GW) {
     return {
         type: function() { return 'units'; },
         describe: function(params) {
-            return 'Enables construction of advanced vehicles (Leveler, Storm, Sheller, Vanguard) from the Advanced Vehicle Factory, built via any vehicle fabricator.';
+            return 'Enables construction of the Ares Titan, built via advanced vehicle fabricators.';
         },
         summarize: function(params) {
-            return 'Advanced Vehicle Tech';
+            return 'Ares Titan';
         },
         icon: function(params) {
             return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
         },
         audio: function(parms) {
             return {
-                found: '/VO/Computer/gw/board_tech_available_vehicle'
+                found: '/VO/Computer/gw/board_tech_available_titans_all'
             }
         },
         getContext: function(galaxy) {
@@ -31,7 +31,7 @@ define(['shared/gw_common'], function (GW) {
         },
         buff: function(inventory, params) {
             inventory.addUnits([
-                '/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json'
+                '/pa/units/land/titan_vehicle/titan_vehicle.json'
             ]);
         }
     };

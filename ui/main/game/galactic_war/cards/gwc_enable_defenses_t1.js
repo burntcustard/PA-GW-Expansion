@@ -9,7 +9,7 @@ define(['shared/gw_common'], function (GW) {
             return 'Defensive Tech';
         },
         icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
+            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_turret.png';
         },
         audio: function(parms) {
             return {

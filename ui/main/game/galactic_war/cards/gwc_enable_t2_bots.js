@@ -31,7 +31,7 @@ define(['shared/gw_common'], function (GW) {
         },
         buff: function(inventory, params) {
             inventory.addUnits([
-                '/pa/units/air/bot_factory_adv/bot_factory_adv.json'
+                '/pa/units/land/bot_factory_adv/bot_factory_adv.json'
             ]);
         }
     };
