@@ -199,6 +199,8 @@ define([
                                 });
 
                                 var result = card.deal && card.deal(system, context, inventory);
+
+                                // Stops two identical cards being in the same set to choose from?
                                 if (match)
                                     result.chance = 0;
 
@@ -480,6 +482,7 @@ define([
           var count = ids.length;
           _.forEach(ids, function (cardId) {
               //api.debug.log('ADDING CARD: '+cardId);
+              console.log("Adding Normal card: " + cardId);
               require(['cards/' + cardId], function (card) {
                   card.id = cardId;
                   cards.push(card);
@@ -508,6 +511,7 @@ define([
           var count = ids.length;
           _.forEach(ids, function (cardId) {
               //api.debug.log('ADDING CARD: '+cardId);
+              console.log("Adding AI card: " + cardId);
               require(['cards/' + cardId], function (card) {
                   card.id = cardId;
                   aiCards.push(card);
@@ -535,6 +539,7 @@ define([
           var myLoad = $.Deferred();
           var count = ids.length;
           _.forEach(ids, function(cardId) {
+              console.log("Adding start card: " + cardId);
               require(['cards/' + cardId], function(card) {
                   card.id = cardId;
                   extraCards[cardId] = card;
@@ -552,6 +557,7 @@ define([
         removeStartCards: function(ids) {
           extraDeck = _.difference(extraDeck, ids);
           ids.forEach(function(cardId) {
+            console.log("Removing start card: " + cardId);
             delete extraCards[cardId];
           })
           return loaded.then(function() {
