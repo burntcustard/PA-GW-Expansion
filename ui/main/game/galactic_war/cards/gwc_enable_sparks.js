@@ -3,7 +3,7 @@ define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'units'; },
         describe: function(params) {
-            return 'Enables building of the Spark bot from basic bot factories.';
+            return 'Enables building of the Spark tesla bot from basic bot factories.';
         },
         summarize: function(params) {
             return 'Sparks';
