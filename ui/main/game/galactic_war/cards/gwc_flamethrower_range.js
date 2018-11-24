@@ -26,7 +26,7 @@ define(['shared/gw_common'], function(GW) {
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_range') &&
                 inventory.hasCard('gwc_enable_infernos')) { // Only finadable after infernos
-                chance = (dist <= 5) ? 400:0;
+                chance = (dist <= 5) ? 40 : 0;
             }
             return { chance: chance };
         },

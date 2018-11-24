@@ -1,3 +1,5 @@
+## Burntcustard's very messy scribbling down of ideas for the mod
+
 Potential Cards:
 
 I: initial card(may be )
