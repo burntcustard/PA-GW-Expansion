@@ -1,5 +1,5 @@
 # PA-GW-Expansion
-A mod for Planetary Annihilation that updates and improves Galactic War.
+A mod for Planetary Annihilation that updates and improves Galactic War (GW).
 
 This mod will not be in the community mods list for a while. If you'd like to test it out, you need to download or clone it into your [Planetary Annihilation Data Directory's](https://wiki.palobby.com/wiki/Planetary_Annihilation_Data_Directory) client_mods folder, then enable it in game.
 
@@ -11,10 +11,9 @@ If you'd like to help development, please fork this repo, work on the dev branch
 * New buff operations (pull, splice, delete).
 
 ### Work In Progress
-* 'Enable unit x' cards.
-* Commander primary, secondary, and passive cards.
-* Upgrade cards.
-* New UI to fit card types including _many_ unit cards.
+* New GW cards.
+* GW card chance balancing. - E.g. when they become available.
+* New UI to fit card types including _many_ unit card slots.
 
 ### Planned features (plz send help)
 * New way to specify a map set with appropriate rules for choosing systems.
