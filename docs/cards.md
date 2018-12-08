@@ -119,7 +119,11 @@ _.forEach(weaps, function(weap) {
 });
 ```
 
+
+## Available buff ops
+
 The ops are in `/shared/js/gw_specs.js`, but are explained here in detail. Some of these are _new to GWE_ rather than from vanilla PA GW. __GWE also allows modding of effects.__
+
 
 ### multiply
 Float used to multiply a value, can be < 1.0 to reduce it. E.g. to reduce a unit 80% move speed:
