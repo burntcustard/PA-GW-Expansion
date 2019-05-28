@@ -84,7 +84,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/bot_tactical_missile/bot_tactical_missile.json',
                 '/pa/units/land/bot_sniper/bot_sniper.json',
                 //'/pa/units/land/bot_nanoswarm/bot_nanoswarm.json',
-                //'/pa/units/land/bot_support_commander/bot_support_commander.json',
+                '/pa/units/land/bot_support_commander/bot_support_commander.json',
                 // T1 Air
                 '/pa/units/air/air_factory/air_factory.json',
                 '/pa/units/air/fabrication_aircraft/fabrication_aircraft.json',

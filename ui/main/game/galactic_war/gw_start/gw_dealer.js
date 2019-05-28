@@ -7,6 +7,8 @@ define([
         'gwc_bomber_capacity',
         //'gwc_commander_regen', // Disabled due to passive_health_regen not working
         'gwc_commander_servo',
+        'gwc_commander_uber_dox',
+        'gwc_commander_uber_summon',
         'gwc_commander_uber_tesla',
         'gwc_enable_booms',
         'gwc_enable_defenses_t1',

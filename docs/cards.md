@@ -1,7 +1,7 @@
-## Galactic War Card Creation
+# Galactic War Card Creation
 What makes up a Galactic War Card in the Galactic War Expansion mod (GWE)?
 
-#### type (new in GWE)
+## type (new in GWE)
 A card in this mod has a type which determines what slot in the Galactic War inventory it takes up. The order of these in the card files should follow the order they're listed in here, and the format (whitespace etc.) for consistency.
 ```
 type: function() { return 'upgrades'; },
@@ -9,7 +9,7 @@ type: function() { return 'upgrades'; },
 The available types are:  
 `commanderPrimary` `commanderSecondary` `commanderPassive` `units` `upgrades`
 
-#### describe
+## describe
 A description of the card.
 ```
 describe: function(params) {
@@ -17,7 +17,7 @@ describe: function(params) {
 },
 ```
 
-### summarize
+## summarize
 The title of the card. Can use a `<br>` tag to force a line break.
 ```
 summarize: function(params) {
@@ -25,7 +25,7 @@ summarize: function(params) {
 },
 ```
 
-### icon
+## icon
 A file path to an icon for the card.
 ```
 icon: function(params) {
@@ -33,7 +33,7 @@ icon: function(params) {
 },
 ```
 
-### audio
+## audio
 A file path to an audio clip that plays when the card is placed in the player's inventory.
 ```
 audio: function(parms) {
@@ -43,7 +43,7 @@ audio: function(parms) {
 },
 ```
 
-### getContext
+## getContext
 Extra parameters for the card. See `gwc_minion.js` for an example of more than just the basic `totalSize: galaxy.stars().length`, which most cards have.   
 ```
 getContext: function(galaxy) {
@@ -54,7 +54,7 @@ getContext: function(galaxy) {
 ```
 _burntcustard is wanting to set this as the default value so that it doesn't have to be in every single card, but hasn't figured out how yet..._
 
-### deal
+## deal
 A function which determines when the card appears in the star map.
 In this example:
  * The card (flamethrower range) won't appear if it's  already in the players inventory.
@@ -75,7 +75,7 @@ deal: function(system, context, inventory) {
 ```
 
 
-### buff
+## buff
 
 What the card actually does!
 
@@ -119,9 +119,13 @@ _.forEach(weaps, function(weap) {
 });
 ```
 
+
+## Available buff ops
+
 The ops are in `/shared/js/gw_specs.js`, but are explained here in detail. Some of these are _new to GWE_ rather than from vanilla PA GW. __GWE also allows modding of effects.__
 
-##### multiply
+
+### multiply
 Float used to multiply a value, can be < 1.0 to reduce it. E.g. to reduce a unit 80% move speed:
 ```
 file: unit,
@@ -130,7 +134,7 @@ op: 'multiply',
 value: 0.8
 ```
 
-##### add / sub _(modified in GWE)_
+### add / sub _(modified in GWE)_
 Add or subtract from a value. Allows numerical addition, as well as string concatenation (e.g. to add to a units description).
 ```
 file: unit,
@@ -139,13 +143,13 @@ op: 'add',
 value: ' +25% range.'
 ```
 
-##### replace
+### replace
 Replace the value of an individual property. - _Prefer to use add, sub, and multiply when possible, so that in the event of game rebalances, percentage based card descriptions remain accurate._
 
-##### merge (currently unused)
+### merge (currently unused)
 Uses [lodash .extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
 
-##### push
+### push
 Add a property or an array of properties. Can be used to e.g. add order options to units:
 ```
 file: comm,
@@ -154,7 +158,7 @@ op: 'push',
 value: 'ORDER_FireSecondaryWeapon'
 ```
 
-##### pull _(new in GWE)_
+### pull _(new in GWE)_
 Remove a particular value from an array. Can be used to e.g. remove order options from units:
 ```
 file: '/pa/units/commanders/base_commander/base_commander.json',
@@ -163,7 +167,7 @@ op: 'pull',
 value: 'ORDER_FireSecondaryWeapon'
 ```
 
-##### splice _(new in GWE)_
+### splice _(new in GWE)_
 Remove a value at a specified index from an array. E.g. to remove part of an effect:
 ```
 file: effect,
@@ -172,10 +176,10 @@ op: 'splice',
 value: 1
 ```
 
-##### eval, clone, tag (currently unused)
+### eval, clone, tag (currently unused)
 Advanced ops that literally no one has figured out how to use constructively. Some explanation can be found in `/media/ui/main/game/galactic_war/cards/gwc_storage_1.js`
 
-##### delete _(new in GWE)_
+### delete _(new in GWE)_
 Remove a property and it's value. - _Use this instead of attempting to `'replace'` with empty strings or 0 (which can cause errors)._
 ```
 file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
