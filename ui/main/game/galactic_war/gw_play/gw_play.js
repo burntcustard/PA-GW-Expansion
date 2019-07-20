@@ -1585,7 +1585,7 @@ requireGW([
                 var duplicate = inventory.hasCard(element) && element.visible();
                 var fit = inventory.canFitCard(element);
                 var loadout = element.isLoadout();
-                var type = (element.type && element.type()) || 'ERROR: Card has no type'
+                var type = _.isFunction(element.type) ? element.type() : element.type || 'ERROR: Card has no type'
                 return {
                     'duplicate': duplicate,
                     'can_fit': fit,

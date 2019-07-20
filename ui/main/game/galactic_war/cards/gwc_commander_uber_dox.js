@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'commanderSecondary'; },
-        describe: function(params) {
-            return 'Gives the commander a Dox launcher alt fire ability';
-        },
-        summarize: function(params) {
-            return 'Commander Dox Launcher';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'commanderSecondary',
+        describe: 'Gives the commander a Dox launcher alt fire ability!',
+        summarize: 'Commander Dox Launcher',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
@@ -29,7 +19,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: 999 };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';

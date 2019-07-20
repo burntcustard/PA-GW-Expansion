@@ -327,7 +327,7 @@ define([
                 if (cardParams && _.isObject(cardParams))
                     _.extend(product, cardParams);
 
-                var tempType = (card.type && card.type()) || 'noTypeSad';
+                var tempType = _.isFunction(card.type) ? card.type() : card.type || 'none';
                 _.extend(product, { type: tempType });
 
                 card.keep && card.keep(deal, context);
@@ -406,7 +406,7 @@ define([
 
                         var result = card.deal && card.deal(star, context, inventory);
 
-                        var tempType = (card.type && card.type()) || 'noTypeSad';
+                        var tempType = _.isFunction(card.type) ? card.type() : card.type || 'noType';
                         _.extend(result, { type: tempType });
 
                         if (match)
