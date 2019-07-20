@@ -114,7 +114,6 @@ requireGW([
             require(['pages/gw_start/gw_dealer'], function(GWDealer) {
                 GWDealer.allCards().then(function(cards) {
                     _.forEach(cards, function(card) {
-                        console.log("bloop (testCards)");
                         if (card.id.startsWith('gwc_start')) {
                             api.debug.log('Skipping start card', card.id);
                         }
@@ -150,8 +149,6 @@ requireGW([
                                 }
                                 else {
                                     api.debug.log(' ', product.id, '%', deal && deal.chance, product);
-                                    console.log("Adding this card to the inventory(?): ");
-                                    console.log(product);
                                     game.inventory().cards.push(product)
                                     game.inventory().cards.pop();
                                 }
@@ -1608,20 +1605,12 @@ requireGW([
 
             var result =  _.any(self.currentSystemCardListConditions(), function (element) {
                 if (!element.can_fit) {
-                    console.log("Looking at ");
-                    console.log(element);
-                    console.log("Can't fit any more + " + element.type + " cards!");
+                    //console.log("Looking at ");
+                    //console.log(element);
+                    //console.log("Can't fit any more + " + element.type + " cards!");
                     return element.type;
                 }
             });
-
-            // var list = _.map(self.currentSystemCardList(), function (element) {
-            //     var result =  { test: true };
-            //     return result;
-            // });
-
-            console.log("Result of showDataBankFullWarning: ");
-            console.log(result);
 
             self.showDataBankFullWarning(result);
         });

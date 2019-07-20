@@ -207,20 +207,13 @@ define(['require'], function(require) {
 
             var testType = _.isFunction(test.type) ? test.type() : test.type || 'noTestTypeGrr';
 
-            console.log("Seeing if '" + testType + "' card can fit...");
-
-            // if (self.currentCardsOfType()[testType] >= self.maxCardsOfType()[testType]) {
-            //     console.log("Can't fit any more " + test.type() + " cards!");
-            //     return false;
-            // }
-
             if (self.handIsFullOfType(testType)) {
-                console.log("Can't fit any more " + testType + " cards");
+                //console.log("Can't fit any more " + testType + " cards");
                 return false;
             }
 
             if (self.cards().length >= self.maxCards()) {
-                console.log("Can't fit any more cards of any type")
+                //console.log("Can't fit any more cards of any type")
                 return false;
             }
 

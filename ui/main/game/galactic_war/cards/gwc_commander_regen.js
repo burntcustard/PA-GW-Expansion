@@ -39,7 +39,7 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'build_metal_cost',
                     op: 'replace',
-                    value: 5000
+                    value: 5
                 }
             ]);
         }

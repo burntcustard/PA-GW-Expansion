@@ -58,7 +58,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' +' + i + '0% Move Speed.'
+                        value: ' ＋' + i + '0% Move Speed.'
                     }
                 ]);
                 i++;
