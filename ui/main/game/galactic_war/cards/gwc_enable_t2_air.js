@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of advanced air units (Kestrel, Phoenix, Hornet, Angel) from the Advanced Air Factory, built via any air fabricator.';
-        },
-        summarize: function(params) {
-            return 'Advanced Air Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_air'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of advanced air units (Kestrel, Phoenix, Hornet, Angel) from the Advanced Air Factory, built via any air fabricator.',
+        summarize: 'Advanced Air Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png',
+        audio: '/VO/Computer/gw/board_tech_available_air',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

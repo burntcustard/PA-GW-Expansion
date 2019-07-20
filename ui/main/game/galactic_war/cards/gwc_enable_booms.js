@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables building of the Boom bot from basic bot factories.';
-        },
-        summarize: function(params) {
-            return 'Boom Bots';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_bot'
-            }
-        },
+        type: 'units',
+        describe: 'Enables building of the Boom bot from basic bot factories.',
+        summarize: 'Boom Bots',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
+        audio: '/VO/Computer/gw/board_tech_available_bot',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

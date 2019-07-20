@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Redirects a portion of the Icarus solar drones energy to it\'s engines and modified navigation systems, converting it to fly like a gunship.';
-        },
-        summarize: function(params) {
-            return 'Icarus Gunship<br>Modifications';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_air_engine.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_air'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Redirects a portion of the Icarus solar drones energy to it\'s engines and modified navigation systems.',
+        summarize: 'Icarus Gunship<br>Modifications',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_air_engine.png',
+        audio: '/VO/Computer/gw/board_tech_available_air',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

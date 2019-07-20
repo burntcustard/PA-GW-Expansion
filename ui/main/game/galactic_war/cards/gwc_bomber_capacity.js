@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Equips the Bumblebee basic bomber with a larger bomb bay.<br><br>+100% ammo capacity';
-        },
-        summarize: function(params) {
-            return 'Extra Bombs';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Equips the Bumblebee basic bomber with a larger bomb bay.<br><br>+100% ammo capacity',
+        summarize: 'Extra Bombs',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

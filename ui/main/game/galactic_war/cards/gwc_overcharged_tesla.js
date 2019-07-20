@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return "Increase the damage and the energy consumption of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon";
-        },
-        summarize: function(params) {
-            return 'Overcharged Tesla Weapons';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function (parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'upgrades',
+        describe: "Increase the damage and the energy consumption of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon",
+        summarize: 'Overcharged Tesla Weapons',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: '/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function (galaxy) {
             return {
                 totalSize: galaxy.stars().length
@@ -45,7 +35,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Tesla: +40% damage.'
+                        value: ' Overcharged Tesla: ＋40% damage.'
                     }
                 ]);
             });

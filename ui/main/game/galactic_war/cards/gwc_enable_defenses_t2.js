@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of the Holkins T2 artillery cannon via any advanced fabricator.';
-        },
-        summarize: function(params) {
-            return 'Artillery Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_artillery'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of the Holkins T2 artillery cannon via any advanced fabricator.',
+        summarize: 'Artillery Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png',
+        audio: '/VO/Computer/gw/board_tech_available_artillery',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

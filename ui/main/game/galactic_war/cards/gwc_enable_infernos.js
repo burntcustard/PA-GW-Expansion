@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables building of the Inferno Heavy Flamethrower Tank from basic vehicle factories.';
-        },
-        summarize: function(params) {
-            return 'Inferno Heavy<br>Flamethrower Tank';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_vehicle'
-            }
-        },
+        type: 'units',
+        describe: 'Enables building of the Inferno Heavy Flamethrower Tank from basic vehicle factories.',
+        summarize: 'Inferno Heavy<br>Flamethrower Tank',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
+        audio: '/VO/Computer/gw/board_tech_available_vehicle',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

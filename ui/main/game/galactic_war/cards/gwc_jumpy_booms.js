@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Gives Boom bots larger view distance and allows them to leap onto their enemies.';
-        },
-        summarize: function(params) {
-            return 'Leaping Boom bots';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Gives Boom bots larger view distance and allows them to leap onto their enemies.',
+        summarize: 'Leaping Boom bots',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

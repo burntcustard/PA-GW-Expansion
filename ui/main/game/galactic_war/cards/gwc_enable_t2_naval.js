@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function (params) {
-            return 'Enables construction of advanced naval units (Kraken, Stringray, Leviathan) from the Advanced Naval Factory, built via any naval fabricator.';
-        },
-        summarize: function(params) {
-            return 'Advanced Naval Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_naval.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_sea'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of advanced naval units (Kraken, Stringray, Leviathan) from the Advanced Naval Factory, built via any naval fabricator.',
+        summarize: 'Advanced Naval Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_naval.png',
+        audio: '/VO/Computer/gw/board_tech_available_sea',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of the Ares Titan, built via advanced vehicle fabricators.';
-        },
-        summarize: function(params) {
-            return 'Ares Titan';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_titans_all'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of the Ares Titan, built via advanced vehicle fabricators.',
+        summarize: 'Ares Titan',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
+        audio: '/VO/Computer/gw/board_tech_available_titans_all',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

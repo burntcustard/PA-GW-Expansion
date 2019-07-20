@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of advanced vehicles (Leveler, Storm, Sheller, Vanguard) from the Advanced Vehicle Factory, built via any vehicle fabricator.';
-        },
-        summarize: function(params) {
-            return 'Advanced Vehicle Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_vehicle'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of advanced vehicles (Leveler, Storm, Sheller, Vanguard) from the Advanced Vehicle Factory, built via any vehicle fabricator.',
+        summarize: 'Advanced Vehicle Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
+        audio: '/VO/Computer/gw/board_tech_available_vehicle',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

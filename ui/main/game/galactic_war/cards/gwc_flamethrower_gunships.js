@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Replaces the Kestrel gunship with the flamethrower-wiedling Fire Raptor. Built by advanced Air Factories.';
-        },
-        summarize: function(params) {
-            return 'Fire Raptor Gunship';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Replaces the Kestrel gunship with the flamethrower-wiedling Fire Raptor. Built by advanced Air Factories.',
+        summarize: 'Fire Raptor Gunship',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_combat_air.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

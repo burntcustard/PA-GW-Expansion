@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of the Ragnarok Titan, built via any advanced fabricator.';
-        },
-        summarize: function(params) {
-            return 'Ragnarok Doomsday Titan';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_structure.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_titans_all'
-            }
-        },
+        type: 'units',
+        describe: 'Enables construction of the Ragnarok Titan, built via any advanced fabricator.',
+        summarize: 'Ragnarok Doomsday Titan',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_structure.png',
+        audio: '/VO/Computer/gw/board_tech_available_titans_all',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

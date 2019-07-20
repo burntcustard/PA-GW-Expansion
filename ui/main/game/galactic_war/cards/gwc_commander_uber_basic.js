@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'commanderSecondary'; },
-        describe: function(params) {
-            return 'Gives the commander a powerful Uber Cannon, activated via alternative fire.';
-        },
-        summarize: function(params) {
-            return 'Uber Cannon';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'commanderSecondary',
+        describe: 'Gives the commander a powerful Uber Cannon, activated via alternative fire.',
+        summarize: 'Uber Cannon',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

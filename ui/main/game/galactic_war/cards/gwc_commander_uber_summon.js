@@ -2,20 +2,10 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderSecondary'; },
-        describe: function(params) {
-            return 'Lets the commander summon a single support commander per game';
-        },
-        summarize: function(params) {
-            return 'Summon Support Commander';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        describe: 'Lets the commander summon a single support commander per game',
+        summarize: 'Summon Support Commander',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

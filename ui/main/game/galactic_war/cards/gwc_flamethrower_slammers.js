@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Replaces the Slammer Assault Bot with the flamethrower-wiedling _____. Built by advanced Bot Factories.';
-        },
-        summarize: function(params) {
-            return 'Flamethrower Slammer';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_bot'
-            }
-        },
+        type:'upgrades',
+        describe: 'Replaces the Slammer Assault Bot with the flamethrower-wiedling _____. Built by advanced Bot Factories.',
+        summarize: 'Flamethrower Slammer',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
+        audio: '/VO/Computer/gw/board_tech_available_bot',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

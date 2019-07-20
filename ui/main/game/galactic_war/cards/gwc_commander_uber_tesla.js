@@ -2,20 +2,10 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderSecondary'; },
-        describe: function(params) {
-            return 'A powerful Uber Tesla Gun';
-        },
-        summarize: function(params) {
-            return 'Uber Tesla Gun';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        describe: 'A powerful Uber Tesla Gun',
+        summarize: 'Uber Tesla Gun',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

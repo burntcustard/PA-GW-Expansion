@@ -7,7 +7,7 @@ define([
     GWFactions
 ) {
     return {
-        type: function() { return 'units'; },
+        type: 'units',
         describe: function(params) {
             var minion = params.minion;
             var result = [];

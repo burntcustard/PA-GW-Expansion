@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'commanderPassive'; },
-        describe: function(params) {
-            return 'Commander Servo Tech upgrades the armor and increases movement speed of the commander.<br><br>+50% max health, +25% movement speed';
-        },
-        summarize: function(params) {
-            return 'Commander Servo Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_commander_armor.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_armor'
-            }
-        },
+        type: 'commanderPassive',
+        describe: 'Commander Servo Tech upgrades the armor and increases movement speed of the commander.<br><br>+50% max health, +25% movement speed',
+        summarize: 'Commander Servo Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_commander_armor.png',
+        audio: '/VO/Computer/gw/board_tech_available_armor',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Increases the range of flamethrowers by 25%';
-        },
-        summarize: function(params) {
-            return 'Flamethrower range +25%';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Increases the range of flamethrowers by 25%',
+        summarize: 'Flamethrower range +25%',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length

@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>+20% speed, +20% RoF, -20% damage';
-        },
-        summarize: function(params) {
-            return 'Light Laser Tank';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_vehicle'
-            }
-        },
+        type: 'upgrades',
+        describe: 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>+20% speed, +20% RoF, -20% damage',
+        summarize: 'Light Laser Tank',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
+        audio: '/VO/Computer/gw/board_tech_available_vehicle',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
@@ -43,7 +33,7 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Tank: More maneuverable/lower damage variANT. +20% speed, +20% RoF, -20% damage'
+                    value: 'Tank: More maneuverable/lower damage variANT. ＋20% speed, ＋20% RoF, －20% damage'
                 },
                 {
                     // 10 to 12 move speed

@@ -1,21 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables building of the Icarus solar drone from basic air factories.<br><br>Icarus are mobile solar energy generators that can become formidable tesla gunships with suitable upgrade tech.';
-        },
-        summarize: function(params) {
-            return 'Icarus Solar Drone';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_air_engine.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_air'
-            }
-        },
+        type: 'units',
+        describe: 'Enables building of the Icarus solar drone from basic air factories.',
+        summarize: 'Icarus Solar Drone',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_air_engine.png',
+        audio: '/VO/Computer/gw/board_tech_available_air',
         getContext: function(galaxy) {
             return {
                 totalSize: galaxy.stars().length
