@@ -5,7 +5,6 @@ define(['require'], function(require) {
         self.mods = ko.observableArray();
         self.maxCards = ko.observable(0);
         self.maxCardsOfType = ko.observable({});
-        self.currentCardsOfType = ko.observable({});
         self.cards = ko.observableArray();
         self.cards.subscribe(function() {
             self.applyCards();
@@ -34,14 +33,6 @@ define(['require'], function(require) {
                 units: 18,
                 upgrades: 6
             });
-            self.currentCardsOfType({
-                commanderPrimary: 0,
-                commanderSecondary: 0,
-                commanderPassive: 0,
-                units: 0,
-                upgrades: 0
-            });
-
             self.applyCards = function() {};
             self.cards(config.cards || []);
             self.cardsOfType = config.cardsOfType || {
@@ -242,19 +233,26 @@ define(['require'], function(require) {
         },
 
         handIsFullOfType: function(type) {
+            // Card we're checking for doesn't have a type, silently return false
+            if (!type || type === 'undefined') {
+                return false
+            }
+
             var self = this;
-            var current = self.currentCardsOfType()[type];
+            var current = self.cardsOfType[type].length;
             var max = self.maxCardsOfType()[type];
+
             return current >= max;
         },
 
-        handIsFullOfAnyType: function() {
-            var self = this;
-            var fullOf = _.find(self.currentCardsOfType(), function(currNumOfType, index) {
-                return carrNumOfType >= self.maxCardsOfType()[index];
-            });
-            return fullOf;
-        },
+        // Unused and using no-longer-existing currentCardsOfType object
+        // handIsFullOfAnyType: function() {
+        //     var self = this;
+        //     var fullOf = _.find(self.currentCardsOfType(), function(currNumOfType, index) {
+        //         return carrNumOfType >= self.maxCardsOfType()[index];
+        //     });
+        //     return fullOf;
+        // },
 
         // Get a tag value.  When called during card processing, an empty
         // context will be replaced with the current card.

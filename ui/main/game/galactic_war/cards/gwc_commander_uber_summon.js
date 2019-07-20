@@ -27,7 +27,7 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_commander_uber_summon')) {
                 chance = (dist >= 2) ? 40:0;
             }
-            return { chance: chance };
+            return { chance: 999 };
         },
         buff: function(inventory, params) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';

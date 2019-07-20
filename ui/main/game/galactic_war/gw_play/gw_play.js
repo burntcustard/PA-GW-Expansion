@@ -1440,40 +1440,32 @@ requireGW([
             self.hoverOffset(left.toString() + 'px');
             self.hoverCard(card);
         };
+
         self.discardHoverCard = function(card) {
             var discard = self.hoverCard();
             if (!discard)
                 return;
             self.hoverCard(undefined);
 
-            console.log("Trying to discard a card!");
-            console.log("Current inventory.cards(): ");
-            console.log(game.inventory().cards());
+            _.forEach(self.cardsOfTypeArray(), function(cardType, index) {
+                var discardTypeIndex = cardType.cards.indexOf(discard);
 
-            var discardIndex = self.cards().indexOf(discard);
-            var discardOfTypeIndex = self.cardsOfType.indexOf(discard);
-            if (discardIndex >= 0) {
-                var removed = game.inventory().cards.splice(discardIndex, 1)[0];
-                console.log("The removed card:");
-                console.log(removed);
-                game.inventory().cardsOfType()[removed.type].splice(discardOfTypeIndex, 1);
-                game.inventory().currentCardsOfType()[removed.type]--;
+                if (discardTypeIndex >= 0) {
+                    var removed = game.inventory().cardsOfType[cardType.type()].splice(discardTypeIndex, 1)[0];
+                    var discardMainIndex = game.inventory().cards.indexOf(removed);
+                    game.inventory().cards.splice(discardMainIndex, 1);
 
-                self.driveAccessInProgress(true);
-                game.inventory().applyCards(function() {
-                    GW.manifest.saveGame(game).then(function () {
-                        self.driveAccessInProgress(false);
-                        api.audio.playSound('/VO/Computer/gw/board_tech_deleted');
+                    self.driveAccessInProgress(true);
+                    game.inventory().applyCards(function() {
+                        GW.manifest.saveGame(game).then(function () {
+                            self.driveAccessInProgress(false);
+                            api.audio.playSound('/VO/Computer/gw/board_tech_deleted');
+                        });
                     });
-                });
-            }
-            var discardOfType = self.cardsOfType().indexOf(discard);
-            if (discardOfTypeIndex) {
-
-            }
-            console.log("New inventory.cards(): ");
-            console.log(game.inventory().cards());
+                }
+            });
         };
+
         var updateCards = function() {
             //console.log("Something happened and we're trying to update (visible?) cards/slots");
             var inventory = game.inventory();
