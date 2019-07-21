@@ -12,7 +12,7 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_health_vehicles')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory, params) {
             var units = [

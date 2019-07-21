@@ -17,18 +17,19 @@ define(['shared/gw_common'], function(GW) {
         buff: function(inventory, params) {
             var unit = '/pa/units/land/tank_light_laser/tank_light_laser.json';
             var weap =  '/pa/units/land/tank_light_laser/tank_light_laser_tool_weapon.json';
-            inventory.addMods([
+            var ammo =  '/pa/units/land/tank_light_laser/tank_light_laser_ammo.json';
+            var mods = [
                 {
                     file: unit,
                     path: 'display_name',
                     op: 'replace',
-                    value: 'Light Laser Ant'
+                    value: 'Laser Ant'
                 },
                 {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Light Tank - Faster, lower damage variANT. ＋20% speed ＋20% RoF －20% damage.'
+                    value: 'Light Tank - Fast, low damage variANT. ＋⁠20% speed ＋⁠20% RoF －⁠30% damage.'
                 },
                 {
                     // 10 to 12 move speed
@@ -54,13 +55,102 @@ define(['shared/gw_common'], function(GW) {
                     value: 1.2
                 },
                 {
-                    // Give it the anchor anti-orbital ammo (65 rather than 82 damage)
-                    file: weap,
-                    path: 'ammo_id',
+                    file: ammo,
+                    path: 'base_spec',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'ammo_type',
                     op: 'replace',
-                    value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital.json'
+                    value: 'AMMO_Beam'
+                },
+                {
+                    file: ammo,
+                    path: 'audio_loop',
+                    op: 'replace',
+                    value: '/SE/Impacts/laser_blast'
+                },
+                {
+                    file: ammo,
+                    path: 'collision_audio',
+                    op: 'replace',
+                    value: '/SE/Impacts/laser_blast'
+                },
+                {
+                    file: ammo,
+                    path: 'model',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'fx_trail',
+                    op: 'delete'
+                },
+                {
+                    file: ammo,
+                    path: 'damage',
+                    op: 'replace',
+                    value: '65'
+                },
+                {
+                    file: ammo,
+                    path: 'initial_velocity',
+                    op: 'replace',
+                    value: 500
+                },
+                {
+                    file: ammo,
+                    path: 'max_velocity',
+                    op: 'replace',
+                    value: 500
+                },
+                {
+                    file: ammo,
+                    path: 'collision_check',
+                    op: 'replace',
+                    value: 'target'
+                },
+                {
+                    file: ammo,
+                    path: 'fx_beam_spec',
+                    op: 'replace',
+                    value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital_beam.pfx',
+                },
+                {
+                    file: ammo,
+                    path: 'fx_collision_spec',
+                    op: 'replace',
+                    value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital_beam_hit.pfx',
                 }
-            ]);
+            ];
+            if (inventory.hasCard('gwc_laser_damage')) {
+                mods.push(
+                    {
+                        file: unit,
+                        path: 'description',
+                        op: 'add',
+                        value: ' Overcharged Capacitors: ＋⁠30% damage.'
+                    },
+                    {
+                        file: ammo,
+                        path: 'damage',
+                        op: 'replace',
+                        value: '84' // Should be 84.5 but we're rounding for nice UI
+                    }
+                );
+            } else {
+                mods.push(
+                    {
+                        file: ammo,
+                        path: 'damage',
+                        op: 'replace',
+                        value: '65'
+                    }
+                );
+            }
+            console.log(mods);
+            inventory.addMods(mods);
         }
     };
 });

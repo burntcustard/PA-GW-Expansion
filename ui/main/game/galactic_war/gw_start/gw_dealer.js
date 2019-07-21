@@ -36,6 +36,7 @@ define([
         'gwc_hover_upgrade',
         'gwc_icarus_gunships',
         'gwc_jumpy_booms',
+        'gwc_laser_damage',
         'gwc_laser_tanks_t1',
         'gwc_minion',
         'gwc_overcharged_tesla'
