@@ -6,11 +6,6 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Commander Regen Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_commander_armor.png',
         audio: '/VO/Computer/gw/board_tech_available_armor',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -39,7 +34,7 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'build_metal_cost',
                     op: 'replace',
-                    value: 5
+                    value: 5000
                 }
             ]);
         }

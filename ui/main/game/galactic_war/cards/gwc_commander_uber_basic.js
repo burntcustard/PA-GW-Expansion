@@ -6,11 +6,6 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Uber Cannon',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context) {
             var chance = 0;
             var dist = system.distance();

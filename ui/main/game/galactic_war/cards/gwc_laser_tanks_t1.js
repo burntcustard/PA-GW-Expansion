@@ -2,22 +2,17 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>+20% speed, +20% RoF, -20% damage',
+        describe: 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>＋20% speed, ＋20% RoF, ＋20% damage',
         summarize: 'Light Laser Tank',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
         audio: '/VO/Computer/gw/board_tech_available_vehicle',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_enable_laser_tanks_t1')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: chance };
+            return { chance: 999 };
         },
         buff: function(inventory, params) {
             var unit = '/pa/units/land/tank_light_laser/tank_light_laser.json';
@@ -27,13 +22,13 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'display_name',
                     op: 'replace',
-                    value: 'Light Laser Tank'
+                    value: 'Light Laser Ant'
                 },
                 {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Tank: More maneuverable/lower damage variANT. ＋20% speed, ＋20% RoF, －20% damage'
+                    value: 'Light Tank - Faster, lower damage variANT. ＋20% speed ＋20% RoF －20% damage.'
                 },
                 {
                     // 10 to 12 move speed
@@ -59,7 +54,7 @@ define(['shared/gw_common'], function(GW) {
                     value: 1.2
                 },
                 {
-                    // Give it the anchor anti-orbital ammo (65 damage)
+                    // Give it the anchor anti-orbital ammo (65 rather than 82 damage)
                     file: weap,
                     path: 'ammo_id',
                     op: 'replace',

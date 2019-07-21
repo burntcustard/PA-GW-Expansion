@@ -6,11 +6,6 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Hi-Tech Heavy Grav Tracks',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -58,7 +53,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' ＋' + i + '0% Move Speed.'
+                        value: ' Hi-Tech Grav Tracks: ＋' + i + '0% speed.'
                     }
                 ]);
                 i++;

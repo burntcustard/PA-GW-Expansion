@@ -51,6 +51,11 @@ globals.CardViewModel = function (params) {
             self.iconPlaceholder(!self.icon() && (self.summary() || self.desc()));
             self.audio(_.isFunction(card.audio) ? card.audio(data) : { found: card.audio });
             self.visible(!(card.visible === false) || !!(card.visible && card.visible(data)));
+            // self.getContext(_.isFunction(card.getContext) ? card.getContext : function(galaxy) {
+            //     return {
+            //         totalSize: galaxy.stars().length
+            //     };
+            // });
             self.type(_.isFunction(card.type) ? card.type() : card.type);
             if (self.type()) {
                 self.viewType(self.cardTypeNames[self.type()] || 'Error: undefined or invalid tech type');

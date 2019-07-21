@@ -6,18 +6,13 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Vehicle Armor Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle_armor.png',
         audio: '/VO/Computer/gw/board_tech_available_armor',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_health_vehicles')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: chance };
+            return { chance: 999 };
         },
         buff: function(inventory, params) {
             var units = [
@@ -46,7 +41,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' ＋30% Health.'
+                        value: ' Armor Tech: ＋30% health.'
                     }
                 ]);
             });

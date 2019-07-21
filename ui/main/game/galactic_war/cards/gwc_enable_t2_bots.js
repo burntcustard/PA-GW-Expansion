@@ -6,11 +6,6 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Advanced Bot Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
         audio: '/VO/Computer/gw/board_tech_available_bot',
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();

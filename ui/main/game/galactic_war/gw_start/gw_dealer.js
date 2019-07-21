@@ -142,8 +142,13 @@ define([
                 var remainingAIDeck = aiDeck.slice(0);
 
                 _.forEach(allCards, function(card) {
-                    if (card.getContext && !cardContexts[card.id])
-                        cardContexts[card.id] = card.getContext(galaxy, inventory);
+                    if (!cardContexts[card.id]) {
+                        if (card.getContext) {
+                            cardContexts[card.id] = card.getContext(galaxy, inventory);
+                        } else {
+                            cardContexts[preCard] = { totalSize: galaxy.stars().length };
+                        }
+                    }
                 });
 
                 var CARDS_PER_NORMAL_SYSTEM = 3;
@@ -173,8 +178,13 @@ define([
                             predealtCard = true;
 
                             var extra = extraCards[preCard];
-                            if (extra && extra.getContext && !cardContexts[preCard])
-                                cardContexts[preCard] = extra.getContext(galaxy, inventory);
+                            if (extra && extra.getContext && !cardContexts[preCard]) {
+                                if (extra.getContext) {
+                                    cardContexts[preCard] = extra.getContext(galaxy, inventory);
+                                } else {
+                                    cardContexts[preCard] = { totalSize: galaxy.stars().length };
+                                }
+                            }
                             var context = cardContexts[preCard];
                             var deal = extra && extra.deal(system, context);
                             if (deal && _.isObject(deal)) {
@@ -313,7 +323,11 @@ define([
                 var card = _.find(allCards, { id: params.id });
 
                 // Simulate a deal
+                //console.log("simulate a deal");
+                //console.log("card.getContext:");
+                //console.log(card.getContext);
                 var context = card.getContext && card.getContext(params.galaxy, params.inventory);
+                //console.log(context);
 
                 var deal = (card.deal && card.deal(params.star, context));
 
@@ -379,15 +393,21 @@ define([
             var count = params.count;
             var star = params.star;
             var galaxy = params.galaxy;
-
             var start = _.now();
-
             var result = $.Deferred();
+
             loaded.then(function () {
 
                 _.forEach(allCards, function (card) {
-                    if (card.getContext && !cardContexts[card.id])
-                        cardContexts[card.id] = card.getContext(galaxy, inventory);
+                    if (!cardContexts[card.id]) {
+                        if (card.getContext) {
+                            //console.log("card.getContext exists so doing the default stuff");
+                            cardContexts[card.id] = card.getContext(galaxy, inventory);
+                        } else {
+                            //console.log("card.getContext doesn't exist so trying to use default");
+                            cardContexts[card.id] = { totalSize: galaxy.stars().length };
+                        }
+                    }
                 });
 
                 var list = [];
