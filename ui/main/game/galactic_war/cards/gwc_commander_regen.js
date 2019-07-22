@@ -20,30 +20,52 @@ define(['shared/gw_common'], function(GW) {
               '/pa/units/commanders/base_commander/base_commander.json'
             ];
             _.forEach(units, function(unit) {
-                var id = (inventory.mods().length + mods.length).toString();
-                var regenWeap = unit + '.' + params.id + '.build_arm.' + id;
+                var id = (inventory.mods().length).toString();
+                var regenWeap = unit + '.' + params.id + '.tool_weapon_torpedo.' + id;
                 inventory.addMods([
                     {
                         file: unit,
-                        path: 'tools.0.spec_id',
+                        path: 'tools.4.spec_id', // The torpedo weap (?)
                         op: 'clone',
                         value: regenWeap
                     },
+                    // Weapon mods to turn the torpedo launcher into a pew pew weapon
                     {
-                        file: newBuildArm,
-                        path: 'construction_demand.energy',
-                        op: 'multiply',
-                        value: .1
+                        file: regenWeap,
+                        path: 'ammo_id',
+                        op: 'replace',
+                        value: [
+                            {
+                                'layer': 'WL_AnyLand',
+                                'id': '/pa/units/land/assault_bot_adv/assault_bot_adv_ammo.json'
+                            }
+                        ]
                     },
                     {
+                        file: regenWeap,
+                        path: 'rate_of_fire',
+                        op: 'replace',
+                        value: 8
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'target_layers',
+                        op: 'replace',
+                        value: [
+                            'WL_LandHorizontal',
+                            'WL_WaterSurface'
+                        ]
+                    },
+                    // Give the new weapon to the commander
+                    {
                         file: unit,
-                        path: 'tools.0.spec_id',
+                        path: 'tools.4.spec_id',
                         op: 'replace',
                         value: regenWeap
                     },
                     {
                         file: unit,
-                        path: 'tools.0.spec_id',
+                        path: 'tools.4.spec_id',
                         op: 'tag',
                         value: ''
                     }
