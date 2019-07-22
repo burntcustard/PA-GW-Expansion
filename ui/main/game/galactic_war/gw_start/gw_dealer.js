@@ -5,7 +5,7 @@ define([
 ) {
     var deck = [
         'gwc_bomber_capacity',
-        //'gwc_commander_regen', // Disabled due to passive_health_regen not working
+        'gwc_commander_regen', // Disabled due to passive_health_regen not working
         'gwc_commander_servo',
         'gwc_commander_uber_dox',
         'gwc_commander_uber_summon',

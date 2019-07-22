@@ -12,31 +12,43 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_commander_regen')) {
                 chance = (dist <= 5) ? 40:0;
             }
-            return { chance: chance };
+            return { chance: 999 };
         },
         buff: function(inventory, params) {
-            var unit = '/pa/units/commanders/base_commander/base_commander.json';
-            inventory.addMods([
-                {
-                    file: unit,
-                    path: 'passive_health_regen',
-                    op: 'replace',
-                    value: 41.66
-                },
-                {
-                    file: unit,
-                    path: 'wreckage_health_frac',
-                    op: 'replace',
-                    value: 0
-                },
-                {
-                    // Cheaper to repair. Default = 25000
-                    file: unit,
-                    path: 'build_metal_cost',
-                    op: 'replace',
-                    value: 5000
-                }
-            ]);
+            // Based off gwc_storage_1.js
+            var units = [
+              '/pa/units/commanders/base_commander/base_commander.json'
+            ];
+            _.forEach(units, function(unit) {
+                var id = (inventory.mods().length + mods.length).toString();
+                var regenWeap = unit + '.' + params.id + '.build_arm.' + id;
+                inventory.addMods([
+                    {
+                        file: unit,
+                        path: 'tools.0.spec_id',
+                        op: 'clone',
+                        value: regenWeap
+                    },
+                    {
+                        file: newBuildArm,
+                        path: 'construction_demand.energy',
+                        op: 'multiply',
+                        value: .1
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.0.spec_id',
+                        op: 'replace',
+                        value: regenWeap
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.0.spec_id',
+                        op: 'tag',
+                        value: ''
+                    }
+                ]);
+            });
         }
     };
 });
