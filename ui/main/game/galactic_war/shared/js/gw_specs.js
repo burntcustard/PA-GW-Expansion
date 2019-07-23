@@ -227,9 +227,9 @@ define([], function() {
                 },
                 push: function(attribute, value) {
                     console.log('Trying to push value:');
-                    console.log(value);
+                    console.log(JSON.stringify(value));
                     console.log('To the attribute:');
-                    console.log(attribute);
+                    console.log(JSON.stringify(attribute));
                     if (!_.isArray(attribute)) {
                         console.log('Attribute isn\'t an array?...');
                         attribute = (attribute === undefined) ? [] : [attribute];
@@ -242,7 +242,7 @@ define([], function() {
                         attribute.push(value);
                     }
                     console.log('Ended up with attribute:');
-                    console.log(attribute);
+                    console.log(JSON.stringify(attribute));
                     return attribute;
                 },
                 pull: function(attribute, value) {

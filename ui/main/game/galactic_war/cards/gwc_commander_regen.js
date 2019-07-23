@@ -79,9 +79,9 @@ define(['shared/gw_common'], function(GW) {
                     // Could try with and without this, for the push and the replace tests?
                     {
                         file: unit,
-                        path: 'tools.4.spec_id',
+                        path: 'tools.5.spec_id',
                         op: 'tag',
-                        value: ''
+                        value: regenWeap
                     }
                 ]);
             });
