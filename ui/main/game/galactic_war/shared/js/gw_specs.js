@@ -210,28 +210,49 @@ define([], function() {
                 return result;
             };
             var ops = {
-                multiply: function(attribute, value) { return (attribute !== undefined) ? (attribute * value) : value; },
-                add: function(attribute, value) { return (attribute !== undefined) ? (attribute + value) : value; },
-                sub: function(attribute, value) { return (attribute !== undefined) ? (attribute - value) : value; },
-                replace: function(attribute, value) { return value; },
-                merge: function (attribute, value) { return _.extend({}, attribute, value); },
+                multiply: function(attribute, value) {
+                    return (attribute !== undefined) ? (attribute * value) : value;
+                },
+                add: function(attribute, value) {
+                    return (attribute !== undefined) ? (attribute + value) : value;
+                },
+                sub: function(attribute, value) {
+                    return (attribute !== undefined) ? (attribute - value) : value;
+                },
+                replace: function(attribute, value) {
+                    return value;
+                },
+                merge: function (attribute, value) {
+                    return _.extend({}, attribute, value);
+                },
                 push: function(attribute, value) {
-                    if (!_.isArray(attribute))
+                    console.log('Trying to push value:');
+                    console.log(value);
+                    console.log('To the attribute:');
+                    console.log(attribute);
+                    if (!_.isArray(attribute)) {
+                        console.log('Attribute isn\'t an array?...');
                         attribute = (attribute === undefined) ? [] : [attribute];
-                    if (_.isArray(value))
+                        console.log('Now it is, see:');
+                        console.log(attribute);
+                    }
+                    if (_.isArray(value)) {
                         attribute = attribute.concat(value);
-                    else
+                    } else {
                         attribute.push(value);
+                    }
+                    console.log('Ended up with attribute:');
+                    console.log(attribute);
                     return attribute;
                 },
                 pull: function(attribute, value) {
                     if (!_.isArray(attribute)) {
                         console.error('Failed to pull ' + value + ' from non-array attribute');
-                    }
-                    if (_.isArray(value))
+                    } else if (_.isArray(value)) {
                         _.pullAll(attribute, value);
-                    else
+                    } else {
                         _.pull(attribute, value);
+                    }
                     return attribute;
                 },
                 splice: function(attribute, value) {
@@ -243,7 +264,9 @@ define([], function() {
                     }
                     return attribute;
                 },
-                eval: function(attribute, value) { return new Function('attribute', value)(attribute); },
+                eval: function(attribute, value) {
+                    return new Function('attribute', value)(attribute);
+                },
                 clone: function(attribute, value) {
                     console.log('Trying to clone a thing');
                     console.log('attribute: ' + attribute);
@@ -255,7 +278,9 @@ define([], function() {
                     console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
                     console.log(specs[value + specTag]);
                 },
-                tag: function(attribute, value) { return attribute + specTag; },
+                tag: function(attribute, value) {
+                    return attribute + specTag;
+                },
                 delete: function(attribute, value, file, path) {
                     try {
                         delete specs[file + '.player'][path];

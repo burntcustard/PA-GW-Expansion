@@ -59,10 +59,24 @@ define(['shared/gw_common'], function(GW) {
                     // Give the new weapon to the commander
                     {
                         file: unit,
-                        path: 'tools.4.spec_id',
-                        op: 'replace',
-                        value: regenWeap
+                        path: 'tools',
+                        op: 'push',
+                        value: {
+                          'spec_id': regenWeap,
+                          'aim_bone': 'bone_turret',
+                          'muzzle_bone': 'socket_rightMuzzle',
+                          'primary_weapon': false,
+                          'show_range': false
+                        }
                     },
+                    // {
+                    //     file: unit,
+                    //     path: 'tools.4.spec_id',
+                    //     op: 'replace',
+                    //     value: regenWeap
+                    // },
+                    //
+                    // Could try with and without this, for the push and the replace tests?
                     {
                         file: unit,
                         path: 'tools.4.spec_id',
