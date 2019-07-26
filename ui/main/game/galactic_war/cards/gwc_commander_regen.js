@@ -21,25 +21,20 @@ define(['shared/gw_common'], function(GW) {
             ];
             _.forEach(units, function(unit) {
                 var id = (inventory.mods().length).toString();
-                var regenWeap = unit + '.' + params.id + '.tool_weapon_torpedo.' + id;
+                var regenWeap = unit + '.' + params.id + '.tool_aa_weapon.' + id;
                 inventory.addMods([
                     {
                         file: unit,
-                        path: 'tools.4.spec_id', // The torpedo weap (?)
+                        path: 'tools.3.spec_id', // The aa weap (?)
                         op: 'clone',
                         value: regenWeap
                     },
-                    // Weapon mods to turn the torpedo launcher into a pew pew weapon
+                    // Mods to turn torpedo launcher into a pew pew weapon
                     {
                         file: regenWeap,
                         path: 'ammo_id',
                         op: 'replace',
-                        value: [
-                            {
-                                'layer': 'WL_AnyLand',
-                                'id': '/pa/units/land/assault_bot_adv/assault_bot_adv_ammo.json'
-                            }
-                        ]
+                        value: '/pa/units/land/assault_bot_adv/assault_bot_adv_ammo.json'
                     },
                     {
                         file: regenWeap,
@@ -71,17 +66,17 @@ define(['shared/gw_common'], function(GW) {
                     },
                     // {
                     //     file: unit,
-                    //     path: 'tools.4.spec_id',
+                    //     path: 'tools.5.spec_id',
                     //     op: 'replace',
                     //     value: regenWeap
                     // },
                     //
-                    // Could try with and without this, for the push and the replace tests?
+                    // Could try w/ + w/o for the push and the replace tests?
                     {
                         file: unit,
                         path: 'tools.5.spec_id',
                         op: 'tag',
-                        value: regenWeap
+                        value: ''
                     }
                 ]);
             });

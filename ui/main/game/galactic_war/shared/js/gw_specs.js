@@ -71,23 +71,58 @@ define([], function() {
         return moreWork;
     }
 
-    function flattenBaseSpecs(spec, specs, tag) {
-        if (!spec.hasOwnProperty('base_spec'))
-            return spec;
-
-        var base = specs[spec.base_spec];
-        if (!base) {
-            base = specs[spec.base_spec + tag];
-            if (!base)
-                return spec;
+    function flattenBaseSpecs(spec, specs, tag, debug) {
+        if (debug) {
+            console.log("Running dodgy flattenBaseSpecs");
+            console.log("spec:");
+            console.log(JSON.stringify(spec));
+            console.log("specs:");
+            if (JSON.stringify(specs).length < 100) {
+              console.log(JSON.stringify(specs));
+            } else {
+              console.log("-- removed because too long --")
+            }
+            console.log("tag:");
+            console.log(tag);
         }
 
+        if (!spec.hasOwnProperty('base_spec')) {
+            if (debug) console.log("No base_spec prop so just returning spec");
+            return spec;
+        }
+
+        if (debug) console.log("there is a base_spec prop! So...");
+        var base = specs[spec.base_spec];
+        if (debug) console.log("base:");
+        if (debug) console.log(JSON.stringify(base));
+        if (!base) {
+            if (debug) console.log("There's no base?")
+            base = specs[spec.base_spec + tag];
+            if (debug) console.log("Base is now:");
+            if (debug) console.log(JSON.stringify(base));
+            if (!base) {
+                if (debug) console.log("There STILL is no base? just returning spec");
+                return spec;
+            }
+        }
+
+        if (debug) console.log("We've got quite far... cloning spec for some reason");
         spec = _.cloneDeep(spec);
+        if (debug) console.log("Spec is now:");
+        if (debug) console.log(JSON.stringify(spec));
+        if (debug) console.log("deleting base spec");
         delete spec.base_spec;
 
-        base = flattenBaseSpecs(base, specs, tag);
-
-        return _.merge({}, base, spec);
+        if (debug) console.log("Flattening base specs again? Like on the inside?");
+        base = flattenBaseSpecs(base, specs, tag, debug);
+        if (debug) console.log("base:");
+        if (debug) console.log(JSON.stringify(base));
+        if (debug) console.log("spec:");
+        if (debug) console.log(JSON.stringify(spec));
+        var merged = _.merge({}, base, spec);
+        if (debug) console.log("Merged thing we' returning:");
+        if (debug) console.log(JSON.stringify(merged));
+        return merged;
     }
 
     return {
@@ -196,8 +231,8 @@ define([], function() {
          * Important Note:
          * Base specs will be flattened on any specs that get mod'ed.
          */
-        modSpecs: function(specs, mods, specTag) {
-            var load = function(specId) {
+        modSpecs: function(specs, mods, specTag, debug) {
+            var load = function(specId, debug) {
                 taggedId = specId;
                 if (!specs.hasOwnProperty(taggedId)) {
                     var taggedId = specId + specTag;
@@ -205,8 +240,9 @@ define([], function() {
                         return;
                 }
                 var result = specs[taggedId];
-                if (result)
-                    specs[taggedId] = result = flattenBaseSpecs(result, specs, specTag);
+                if (result) {
+                    specs[taggedId] = result = flattenBaseSpecs(result, specs, specTag, debug);
+                }
                 return result;
             };
             var ops = {
@@ -271,12 +307,15 @@ define([], function() {
                     console.log('Trying to clone a thing');
                     console.log('attribute: ' + attribute);
                     console.log('value: ' + value);
-                    var loaded = load(attribute);
-                    if (loaded)
+                    var loaded = load(attribute, true);
+                    console.log('Loaded attribute:');
+                    console.log(JSON.stringify(loaded));
+                    if (loaded) {
                         loaded = _.cloneDeep(loaded);
+                    }
                     specs[value + specTag] = loaded || attribute;
                     console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
-                    console.log(specs[value + specTag]);
+                    console.log(JSON.stringify(specs[value + specTag]));
                 },
                 tag: function(attribute, value) {
                     return attribute + specTag;
@@ -293,10 +332,10 @@ define([], function() {
             };
             var applyMod = function(mod) {
                 console.log("Trying to apply:");
-                console.log(mod);
+                console.log(JSON.stringify(mod));
                 var spec = load(mod.file);
-                //console.log("Spec:");
-                //console.log(spec);
+                console.log("Spec:");
+                console.log(JSON.stringify(spec));
                 if (!spec)
                     return api.debug.log('Warning: File not found in mod', mod);
                 if (!ops.hasOwnProperty(mod.op))
