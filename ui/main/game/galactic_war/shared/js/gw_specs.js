@@ -316,7 +316,7 @@ define([], function() {
                     specs[value + specTag] = loaded || attribute;
                     console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
                     console.log(JSON.stringify(specs[value + specTag]));
-                    return attribute // <-- Don't mess up thing being cloned(?)
+                    return attribute; // <-- Don't mess up thing being cloned(?)
                 },
                 // Tag value doesn't do anything??
                 tag: function(attribute, value) {
