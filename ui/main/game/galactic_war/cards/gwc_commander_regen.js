@@ -34,18 +34,18 @@ define(['shared/gw_common'], function(GW) {
                         value: regenWeap
                     },
                     // Make sure the old weapon doesn't vanish
-                    {
-                        file: unit,
-                        path: 'tools.3.spec_id',
-                        op: 'replace',
-                        value: '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json'
-                    },
-                    {
-                        file: unit,
-                        path: 'tools.3.spec_id',
-                        op: 'tag',
-                        value: ''
-                    },
+                    // {
+                    //     file: unit,
+                    //     path: 'tools.3.spec_id',
+                    //     op: 'replace',
+                    //     value: '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json'
+                    // },
+                    // {
+                    //     file: unit,
+                    //     path: 'tools.3.spec_id',
+                    //     op: 'tag',
+                    //     value: ''
+                    // },
                     // Mods to turn aa weapon into a pew pew weapon
                     {
                         file: regenWeap,
@@ -81,14 +81,6 @@ define(['shared/gw_common'], function(GW) {
                           'show_range': false
                         }
                     },
-                    // {
-                    //     file: unit,
-                    //     path: 'tools.3.spec_id',
-                    //     op: 'replace',
-                    //     value: regenWeap
-                    // },
-                    //
-                    // Could try w/ + w/o for the push and the replace tests?
                     {
                         file: unit,
                         path: 'tools.last.spec_id',
