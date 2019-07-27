@@ -33,6 +33,19 @@ define(['shared/gw_common'], function(GW) {
                         op: 'clone',
                         value: regenWeap
                     },
+                    // Make sure the old weapon doesn't vanish
+                    {
+                        file: unit,
+                        path: 'tools.3.spec_id',
+                        op: 'replace',
+                        value: '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json'
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.3.spec_id',
+                        op: 'tag',
+                        value: ''
+                    },
                     // Mods to turn aa weapon into a pew pew weapon
                     {
                         file: regenWeap,
