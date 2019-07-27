@@ -317,7 +317,10 @@ define([], function() {
                     console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
                     console.log(JSON.stringify(specs[value + specTag]));
                 },
+                // Tag value doesn't do anything??
                 tag: function(attribute, value) {
+                    console.log("Tagging a thing, it's now:");
+                    console.log(JSON.stringify(attribute + specTag));
                     return attribute + specTag;
                 },
                 delete: function(attribute, value, file, path) {
@@ -345,18 +348,24 @@ define([], function() {
                 var path = originalPath.reverse();
 
                 var reportError = function(error, path) {
-                    console.error(error, spec[level], 'spec', spec, 'mod', mod, 'path', originalPath.slice(0, -path.length).join('.'));
+                    if (path && path.length) {
+                        console.error(error, spec[level], 'spec', spec, 'mod', mod, 'path', originalPath.slice(0, -path.length).join('.'));
+                    } else {
+                        console.error(error, spec[level], 'spec', spec, 'mod', mod, 'path', '???');
+                    }
                     return undefined;
                 };
 
                 var cookStep = function(step) {
                     if (_.isArray(spec)) {
-                        if (step === '+') {
+                        if (step === 'last') {
+                            step = spec.length - 1;
+                        } else if (step === '+') {
                             step = spec.length;
                             spec.push({});
-                        }
-                        else
+                        } else {
                             step = Number(step);
+                        }
                     }
                     else if (path.length && !spec.hasOwnProperty(step)) {
                         spec[step] = {};
@@ -366,7 +375,7 @@ define([], function() {
 
                 while (path.length > 1) {
                     var level = path.pop();
-                    cookStep(level);
+                    level = cookStep(level);
 
                     if (typeof spec[level] === 'string') {
                         var newSpec = load(spec[level]);

@@ -15,13 +15,17 @@ define(['shared/gw_common'], function(GW) {
             return { chance: 999 };
         },
         buff: function(inventory, params) {
-            // Based off gwc_storage_1.js
+            // gwc_storage_1.js helped, a little
+            //
+            // With no tag, nothing happens.
+            // with tag, no commander spawns(!?)
+            // Just replacing AA instead of pushing works though hmm
             var units = [
               '/pa/units/commanders/base_commander/base_commander.json'
             ];
             _.forEach(units, function(unit) {
                 var id = (inventory.mods().length).toString();
-                var regenWeap = unit + '.' + params.id + '.tool_aa_weapon.' + id;
+                var regenWeap = unit + '.regen_weapon.' + id;
                 inventory.addMods([
                     {
                         file: unit,
@@ -29,7 +33,7 @@ define(['shared/gw_common'], function(GW) {
                         op: 'clone',
                         value: regenWeap
                     },
-                    // Mods to turn torpedo launcher into a pew pew weapon
+                    // Mods to turn aa weapon into a pew pew weapon
                     {
                         file: regenWeap,
                         path: 'ammo_id',
@@ -66,7 +70,7 @@ define(['shared/gw_common'], function(GW) {
                     },
                     // {
                     //     file: unit,
-                    //     path: 'tools.5.spec_id',
+                    //     path: 'tools.3.spec_id',
                     //     op: 'replace',
                     //     value: regenWeap
                     // },
@@ -74,7 +78,7 @@ define(['shared/gw_common'], function(GW) {
                     // Could try w/ + w/o for the push and the replace tests?
                     {
                         file: unit,
-                        path: 'tools.5.spec_id',
+                        path: 'tools.last.spec_id',
                         op: 'tag',
                         value: ''
                     }
