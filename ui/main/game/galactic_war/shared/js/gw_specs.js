@@ -2,8 +2,11 @@ define([], function() {
 
     function tagSpec(specId, tag, spec) {
         var moreWork = [];
-        if (typeof spec !== 'object')
+
+        if (typeof spec !== 'object') {
             return moreWork;
+        }
+        
         var applyTag = function(obj, key) {
             if (obj.hasOwnProperty(key)) {
                 if (typeof obj[key] === 'string') {
@@ -37,6 +40,7 @@ define([], function() {
                 }
             }
         };
+
         // Units
         applyTag(spec, 'base_spec'); // Thing that it inherits from e.g. Dox inherit from base_bot
         if (spec.tools) {
@@ -49,6 +53,7 @@ define([], function() {
         if (spec.factory && _.isString(spec.factory.initial_build_spec)) {
             applyTag(spec.factory, 'initial_build_spec');
         }
+
         // Tools
         if (spec.ammo_id) {
             if (_.isString(spec.ammo_id)) {
@@ -60,6 +65,7 @@ define([], function() {
                 });
             }
         }
+
         // Effects
         if (spec.events && spec.events.fired && _.isString(spec.events.fired.effect_spec)) {
             applyTag(spec.events.fired, 'effect_spec');
@@ -99,8 +105,9 @@ define([], function() {
         // Returns a map of the form:
         //      {'spec_id.tag': { base_spec: 'base_spec_id.tag', ... }}
         genUnitSpecs: function(units, tag) {
-            if (!tag)
+            if (!tag) {
                 return;
+            }
             var result = $.Deferred();
             var results = {};
             var work = units.slice(0);
@@ -109,18 +116,16 @@ define([], function() {
                 var pending = 0;
                 var fetch = function(item) {
                     if (!item) {
-                        console.log("Missing item when loading spec");
+                        //console.log("Missing item when loading spec");
                         _.delay(step);
                     } else {
                         $.ajax({
                             url: 'coui:/' + item,
                             success: function(data) {
-                                try
-                                {
+                                try {
                                     data = JSON.parse(data);
                                 }
-                                catch (e)
-                                {
+                                catch (e) {
                                 }
                                 var newWork = tagSpec(item, tag, data);
                                 work = work.concat(newWork);
@@ -131,22 +136,23 @@ define([], function() {
                             },
                             complete: function() {
                                 --pending;
-                                if (!pending)
+                                if (!pending) {
                                     _.delay(step);
+                                }
                             }
                         });
                     }
                 };
-                while (work.length)
-                {
+                while (work.length) {
                     item = work.pop();
                     if (results.hasOwnProperty(item + tag))
                         continue;
                     ++pending;
                     fetch(item);
                 }
-                if (!pending)
+                if (!pending) {
                     _.delay(finish);
+                }
             };
             var finish = _.once(function() {
                 results['/pa/units/unit_list.json' + tag] = {
@@ -199,8 +205,8 @@ define([], function() {
          */
         modSpecs: function(specs, mods, specTag, debug) {
             var load = function(specId, debug) {
-                console.log("Trying to load() specId:");
-                console.log(JSON.stringify(specId));
+                // console.log("Trying to load() specId:");
+                // console.log(JSON.stringify(specId));
                 taggedId = specId;
 
                 if (taggedId.indexOf(' ') > 0) {
@@ -213,13 +219,13 @@ define([], function() {
                 }
 
                 if (!specs.hasOwnProperty(taggedId)) {
-                    console.log("specs doesn't have prop of:");
-                    console.log(taggedId);
+                    //console.log("specs doesn't have prop of:");
+                    //console.log(taggedId);
                     var taggedId = specId + specTag;
-                    console.log("So we're trying with the specTag added:");
-                    console.log(taggedId);
+                    //console.log("So we're trying with the specTag added:");
+                    //console.log(taggedId);
                     if (!specs.hasOwnProperty(taggedId)) {
-                        console.log("Nope stuff nothin' :(");
+                        //console.log("Nope stuff nothin' :(");
                         return;
                     }
                 }
@@ -234,8 +240,6 @@ define([], function() {
                     return (attribute !== undefined) ? (attribute * value) : value;
                 },
                 add: function(attribute, value) {
-                    console.log("Doing an 'add' mod, ending up with:");
-                    console.log(JSON.stringify(attribute + value));
                     return (attribute !== undefined) ? (attribute + value) : value;
                 },
                 sub: function(attribute, value) {
@@ -281,23 +285,23 @@ define([], function() {
                     return new Function('attribute', value)(attribute);
                 },
                 clone: function(attribute, value) {
-                    console.log("--- Cloning a thing ---");
+                    // console.log("--- Cloning a thing ---");
                     var loaded = load(attribute, true);
-                    console.log("loaded");
-                    console.log(JSON.stringify(loaded));
+                    // console.log("loaded");
+                    // console.log(JSON.stringify(loaded));
                     if (loaded) {
-                        console.log("loaded == true");
+                        // console.log("loaded == true");
                         loaded = _.cloneDeep(loaded);
-                        console.log("loaded is now:");
-                        console.log(JSON.stringify(loaded));
+                        // console.log("loaded is now:");
+                        // console.log(JSON.stringify(loaded));
                     }
                     specs[value + specTag] = loaded || attribute;
-                    console.log("value + specTag:");
-                    console.log(JSON.stringify(value + specTag));
-                    console.log("specs[value + specTag]:");
-                    console.log(JSON.stringify(specs[value + specTag]));
-                    console.log("attribute is being returned as:");
-                    console.log(JSON.stringify(attribute));
+                    // console.log("value + specTag:");
+                    // console.log(JSON.stringify(value + specTag));
+                    // console.log("specs[value + specTag]:");
+                    // console.log(JSON.stringify(specs[value + specTag]));
+                    // console.log("attribute is being returned as:");
+                    // console.log(JSON.stringify(attribute));
                     return attribute; // Don't accidentally remove thing being cloned!
                 },
                 // Tag value doesn't do anything??
@@ -315,14 +319,15 @@ define([], function() {
                 }
             };
             var applyMod = function(mod) {
-                console.log("Applying mod:");
                 console.log(JSON.stringify(mod));
                 var spec = load(mod.file);
 
-                if (!spec)
+                if (!spec) {
                     return api.debug.log('Warning: File not found in mod', mod);
-                if (!ops.hasOwnProperty(mod.op))
+                }
+                if (!ops.hasOwnProperty(mod.op)) {
                     return console.error('Invalid operation in mod', mod);
+                }
 
                 var originalPath = (mod.path || '').split('.');
                 var path = originalPath.reverse();
@@ -363,20 +368,21 @@ define([], function() {
                             return reportError('Undefined mod spec encountered,');
                         }
                         spec = newSpec;
-                    }
-                    else if (typeof spec[level] === 'object')
+                    } else if (typeof spec[level] === 'object') {
                         spec = spec[level];
-                    else
+                    } else {
                         return reportError('Invalid attribute encountered,');
+                    }
                 }
 
                 if (path.length && path[0]) {
                     var leaf = cookStep(path[0]);
                     spec[leaf] = ops[mod.op](spec[leaf], mod.value, mod.file, mod.path);
-                }
-                else
+                } else {
                     ops[mod.op](spec, mod.value, mod.file, mod.path);
+                }
             };
+            console.log("Applying mods:");
             _.forEach(mods, applyMod);
         }
     }
