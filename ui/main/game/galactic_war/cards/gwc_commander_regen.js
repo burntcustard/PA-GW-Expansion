@@ -24,8 +24,40 @@ define(['shared/gw_common'], function(GW) {
               '/pa/units/commanders/base_commander/base_commander.json'
             ];
             _.forEach(units, function(unit) {
-                var id = (inventory.mods().length).toString();
-                var regenWeap = unit + '.regen_weapon.' + id;
+                var regenWeap = unit + '.regen_weapon';
+                var regenWeapStats = {
+                    'ammo_source': 'time',
+                    'ammo_capacity': 0,
+                    'ammo_demand': 0,
+                    'ammo_per_shot': 0,
+                    'start_fully_charged': false,
+                    'rate_of_fire': 1,
+                    'max_range': 0,
+                    'yaw_rate': 0,
+                    'pitch_rate': 0,
+                    'yaw_range': 0,
+                    'pitch_range': 0,
+                    'firing_arc_yaw': 360,
+                    'firing_arc_pitch': 360,
+                    'fire_delay': 0,
+                    'auto_fire_when_charged': true
+                };
+                var mods = [
+                    {
+                        file: unit,
+                        path: 'tools.3.spec_id', // The aa weap (?)
+                        op: 'clone',
+                        value: regenWeap
+                    }
+                ];
+                for (var prop in regenWeapStats) {
+                    mods.push({
+                        file: regenWeap,
+                        path: prop,
+                        op: 'replace',
+                        value: regenWeapStats[prop]
+                    });
+                }
                 inventory.addMods([
                     {
                         file: unit,
@@ -33,20 +65,81 @@ define(['shared/gw_common'], function(GW) {
                         op: 'clone',
                         value: regenWeap
                     },
-                    // Make sure the old weapon doesn't vanish
-                    // {
-                    //     file: unit,
-                    //     path: 'tools.3.spec_id',
-                    //     op: 'replace',
-                    //     value: '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json'
-                    // },
-                    // {
-                    //     file: unit,
-                    //     path: 'tools.3.spec_id',
-                    //     op: 'tag',
-                    //     value: ''
-                    // },
-                    // Mods to turn aa weapon into a pew pew weapon
+                    // Mods to turn aa weapon into regen weapon
+
+                    {
+                        file: regenWeap,
+                        path: 'ammo_source',
+                        op: 'replace',
+                        value: 'time'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'ammo_capacity',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'ammo_demand',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'ammo_per_shot',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'start_fully_charged',
+                        op: 'replace',
+                        value: 'false'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'rate_of_fire',
+                        op: 'replace',
+                        value: '1'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'max_range',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'yaw_rate',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: 'pitch_rate',
+                        op: 'replace',
+                        value: '0'
+                    },
+                    {
+                        file: regenWeap,
+                        path: '',
+                        op: 'replace',
+                        value: ''
+                    },
+                    {
+                        file: regenWeap,
+                        path: '',
+                        op: 'replace',
+                        value: ''
+                    },
+                    {
+                        file: regenWeap,
+                        path: '',
+                        op: 'replace',
+                        value: ''
+                    },
+                      //
                     {
                         file: regenWeap,
                         path: 'ammo_id',
