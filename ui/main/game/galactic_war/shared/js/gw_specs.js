@@ -21,8 +21,8 @@ define([], function() {
                             }
                         });
                         obj[key] = substrs.join(' ');
-                        console.log("New tagged spec:");
-                        console.log(obj[key]);
+                        //console.log("New tagged spec:");
+                        //console.log(obj[key]);
 
                     } else {
                       moreWork.push(obj[key]);
@@ -72,57 +72,24 @@ define([], function() {
     }
 
     function flattenBaseSpecs(spec, specs, tag, debug) {
-        if (debug) {
-            console.log("Running dodgy flattenBaseSpecs");
-            console.log("spec:");
-            console.log(JSON.stringify(spec));
-            console.log("specs:");
-            if (JSON.stringify(specs).length < 100) {
-              console.log(JSON.stringify(specs));
-            } else {
-              console.log("-- removed because too long --")
-            }
-            console.log("tag:");
-            console.log(tag);
-        }
-
         if (!spec.hasOwnProperty('base_spec')) {
-            if (debug) console.log("No base_spec prop so just returning spec");
             return spec;
         }
 
-        if (debug) console.log("there is a base_spec prop! So...");
         var base = specs[spec.base_spec];
-        if (debug) console.log("base:");
-        if (debug) console.log(JSON.stringify(base));
+
         if (!base) {
-            if (debug) console.log("There's no base?")
             base = specs[spec.base_spec + tag];
-            if (debug) console.log("Base is now:");
-            if (debug) console.log(JSON.stringify(base));
             if (!base) {
-                if (debug) console.log("There STILL is no base? just returning spec");
                 return spec;
             }
         }
 
-        if (debug) console.log("We've got quite far... cloning spec for some reason");
         spec = _.cloneDeep(spec);
-        if (debug) console.log("Spec is now:");
-        if (debug) console.log(JSON.stringify(spec));
-        if (debug) console.log("deleting base spec");
         delete spec.base_spec;
-
-        if (debug) console.log("Flattening base specs again? Like on the inside?");
         base = flattenBaseSpecs(base, specs, tag, debug);
-        if (debug) console.log("base:");
-        if (debug) console.log(JSON.stringify(base));
-        if (debug) console.log("spec:");
-        if (debug) console.log(JSON.stringify(spec));
-        var merged = _.merge({}, base, spec);
-        if (debug) console.log("Merged thing we' returning:");
-        if (debug) console.log(JSON.stringify(merged));
-        return merged;
+
+        return _.merge({}, base, spec);
     }
 
     return {
@@ -141,7 +108,6 @@ define([], function() {
                 var item;
                 var pending = 0;
                 var fetch = function(item) {
-                    //console.log("Item: " + item);
                     if (!item) {
                         console.log("Missing item when loading spec");
                         _.delay(step);
@@ -262,23 +228,14 @@ define([], function() {
                     return _.extend({}, attribute, value);
                 },
                 push: function(attribute, value) {
-                    console.log('Trying to push value:');
-                    console.log(JSON.stringify(value));
-                    console.log('To the attribute:');
-                    console.log(JSON.stringify(attribute));
                     if (!_.isArray(attribute)) {
-                        console.log('Attribute isn\'t an array?...');
                         attribute = (attribute === undefined) ? [] : [attribute];
-                        console.log('Now it is, see:');
-                        console.log(attribute);
                     }
                     if (_.isArray(value)) {
                         attribute = attribute.concat(value);
                     } else {
                         attribute.push(value);
                     }
-                    console.log('Ended up with attribute:');
-                    console.log(JSON.stringify(attribute));
                     return attribute;
                 },
                 pull: function(attribute, value) {
@@ -304,24 +261,15 @@ define([], function() {
                     return new Function('attribute', value)(attribute);
                 },
                 clone: function(attribute, value) {
-                    console.log('Trying to clone a thing');
-                    console.log('attribute: ' + attribute);
-                    console.log('value: ' + value);
                     var loaded = load(attribute, true);
-                    console.log('Loaded attribute:');
-                    console.log(JSON.stringify(loaded));
                     if (loaded) {
                         loaded = _.cloneDeep(loaded);
                     }
                     specs[value + specTag] = loaded || attribute;
-                    console.log('!!!!!!!!!Cloned a thing:!!!!!!!!');
-                    console.log(JSON.stringify(specs[value + specTag]));
-                    return attribute; // <-- Don't mess up thing being cloned(?)
+                    return attribute; // Don't accidentally remove thing being cloned!
                 },
                 // Tag value doesn't do anything??
                 tag: function(attribute, value) {
-                    console.log("Tagging a thing, it's now:");
-                    console.log(JSON.stringify(attribute + specTag));
                     return attribute + specTag;
                 },
                 delete: function(attribute, value, file, path) {
@@ -335,11 +283,10 @@ define([], function() {
                 }
             };
             var applyMod = function(mod) {
-                console.log("Trying to apply:");
+                console.log("Applying mod:");
                 console.log(JSON.stringify(mod));
                 var spec = load(mod.file);
-                console.log("Spec:");
-                console.log(JSON.stringify(spec));
+
                 if (!spec)
                     return api.debug.log('Warning: File not found in mod', mod);
                 if (!ops.hasOwnProperty(mod.op))

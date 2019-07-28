@@ -124,6 +124,7 @@ define(['shared/gw_common'], function(GW) {
                     value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital_beam_hit.pfx',
                 }
             ];
+            
             if (inventory.hasCard('gwc_laser_damage')) {
                 mods.push(
                     {
@@ -149,7 +150,7 @@ define(['shared/gw_common'], function(GW) {
                     }
                 );
             }
-            console.log(mods);
+
             inventory.addMods(mods);
         }
     };

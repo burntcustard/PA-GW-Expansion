@@ -165,15 +165,12 @@ requireGW([
             require(['pages/gw_start/gw_dealer'], function(GWDealer) {
                 GWDealer.allCards().then(function(cards) {
                     var card = _.find(cards, {id: self.giveCardId()});
-                    console.log("bleep (giveCard)");
                     GWDealer.dealCard({
                         id: card.id,
                         galaxy: game.galaxy(),
                         inventory: game.inventory(),
                         star: star
                     }).then(function(product) {
-                        console.log("Adding this card to the inventory???: ");
-                        console.log(product);
                         game.inventory().cards.push(product);
                     });
                 });
@@ -1484,7 +1481,6 @@ requireGW([
                     model.params(card);
             });
 
-            console.log("Doing the new crazy updateCards for all the separate type lists");
             //var cardModelsOfType = self.cardsOfType();
             _.forEach(['commanderPrimary',
                        'commanderSecondary',

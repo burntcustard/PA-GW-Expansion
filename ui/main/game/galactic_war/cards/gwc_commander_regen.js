@@ -37,11 +37,13 @@ define(['shared/gw_common'], function(GW) {
                   'initial_radius': 1.0
                 },
                 'splash_damages_allies': true,
+                'splash_damage': 1,
                 'splash_radius': 1,
+                'full_damage_splash_radius': 1,
                 'armor_damage_map': {
                   'AT_Air': 0,
                   'AT_Bot': 0,
-                  'AT_Commander': -41.7,
+                  'AT_Commander': -41,
                   'AT_Naval': 0,
                   'AT_None': 0,
                   'AT_Orbital': 0,
