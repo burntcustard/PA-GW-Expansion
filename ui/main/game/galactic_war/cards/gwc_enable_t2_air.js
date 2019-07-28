@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             inventory.addUnits([
                 '/pa/units/air/air_factory_adv/air_factory_adv.json'
             ]);

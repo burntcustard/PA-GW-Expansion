@@ -17,7 +17,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
 
             var units = [
                 '/pa/units/land/bot_tesla/bot_tesla.json',

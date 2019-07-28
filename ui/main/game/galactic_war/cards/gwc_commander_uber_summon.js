@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';

@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             inventory.addUnits([
                 '/pa/units/land/land_barrier/land_barrier.json',
                 '/pa/units/land/laser_defense/laser_defense.json',

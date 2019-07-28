@@ -15,7 +15,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var unit = '/pa/units/land/assault_bot_adv/assault_bot_adv.json';
             inventory.addMods([
                 {

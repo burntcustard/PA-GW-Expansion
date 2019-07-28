@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var unit = '/pa/units/air/solar_drone/solar_drone.json';
             inventory.addUnits([unit]);
             inventory.addMods([

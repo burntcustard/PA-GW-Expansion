@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var units = [
                 '/pa/units/land/laser_defense/laser_defense.json',
                 '/pa/units/land/laser_defense_adv/laser_defense_adv.json',

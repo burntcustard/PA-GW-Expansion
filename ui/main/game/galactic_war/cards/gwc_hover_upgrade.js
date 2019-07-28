@@ -15,7 +15,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var units = [
                 '/pa/units/land/tank_hover/tank_hover.json',      // 14 -> 15 speed
                 '/pa/units/land/hover_ship/hover_ship.json',      // 11 -> 13 speed

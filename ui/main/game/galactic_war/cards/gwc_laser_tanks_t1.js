@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var unit = '/pa/units/land/tank_light_laser/tank_light_laser.json';
             var weap =  '/pa/units/land/tank_light_laser/tank_light_laser_tool_weapon.json';
             var ammo =  '/pa/units/land/tank_light_laser/tank_light_laser_ammo.json';
@@ -124,7 +124,7 @@ define(['shared/gw_common'], function(GW) {
                     value: '/pa/units/orbital/defense_satellite/defense_satellite_ammo_orbital_beam_hit.pfx',
                 }
             ];
-            
+
             if (inventory.hasCard('gwc_laser_damage')) {
                 mods.push(
                     {

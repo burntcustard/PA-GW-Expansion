@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var unit = '/pa/units/commanders/base_commander/base_commander.json';
             inventory.addMods([
                 {

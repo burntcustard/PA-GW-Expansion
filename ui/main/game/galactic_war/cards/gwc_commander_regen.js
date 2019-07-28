@@ -14,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: 999 };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var mods = [];
 
             // Clone the base bot ammo into a 'regen_ammo' copy
