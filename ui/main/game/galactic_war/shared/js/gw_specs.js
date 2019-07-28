@@ -305,13 +305,13 @@ define([], function() {
                     return attribute + specTag;
                 },
                 delete: function(attribute, value, file, path) {
-                    try {
-                        delete specs[file + '.player'][path];
-                    }
-                    catch(error) {
+                    if (specs[file + specTag]) {
+                        delete spec[file + specTag];
+                    } else if (spec[file]) {
+                        delete spec[file];
+                    } else {
                         console.error('Failed to remove ' + attribute + ' from ' + path);
                     }
-
                 }
             };
             var applyMod = function(mod) {
