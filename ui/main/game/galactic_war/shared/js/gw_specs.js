@@ -216,6 +216,8 @@ define([], function() {
                     return (attribute !== undefined) ? (attribute * value) : value;
                 },
                 add: function(attribute, value) {
+                    console.log("Doing an 'add' mod, ending up with:");
+                    console.log(JSON.stringify(attribute + value));
                     return (attribute !== undefined) ? (attribute + value) : value;
                 },
                 sub: function(attribute, value) {
@@ -261,11 +263,21 @@ define([], function() {
                     return new Function('attribute', value)(attribute);
                 },
                 clone: function(attribute, value) {
+                    console.log("--- Cloning a thing ---");
                     var loaded = load(attribute, true);
+                    console.log("loaded");
+                    console.log(JSON.stringify(loaded));
                     if (loaded) {
+                        console.log("loaded == true");
                         loaded = _.cloneDeep(loaded);
+                        console.log("loaded is now:");
+                        console.log(JSON.stringify(loaded));
                     }
                     specs[value + specTag] = loaded || attribute;
+                    console.log("specs[value + specTag]:");
+                    console.log(JSON.stringify(specs[value + specTag]));
+                    console.log("attribute is being returned as:");
+                    console.log(JSON.stringify(attribute));
                     return attribute; // Don't accidentally remove thing being cloned!
                 },
                 // Tag value doesn't do anything??

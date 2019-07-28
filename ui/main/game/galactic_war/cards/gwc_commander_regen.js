@@ -182,7 +182,7 @@ define(['shared/gw_common'], function(GW) {
                         value: [
                             'WL_WaterSurface',
                             'WL_Underwater',
-                            'WL_Seafloo'
+                            'WL_Seafloor'
                         ]
                     },
                     {

@@ -15,6 +15,20 @@ define(['shared/gw_common'], function(GW) {
             return { chance: 999 };
         },
         buff: function(inventory) {
+            var mods = [];
+
+            // Clone the tank_armour effect into a 'flameEffect' copy
+            var tank = '/pa/units/land/tank_armor/tank_armor.json';
+            var flameEffect = tank + '.flame_effect';
+            inventory.addMods([
+                {
+                    file: tank,
+                    path: 'events.fired.effect_spec',
+                    op: 'clone',
+                    value: flameEffect
+                }
+            ]);
+
             var comms = [
                 '/pa/units/commanders/base_commander/base_commander.json',
                 '/pa/units/commanders/quad_zancrowe/quad_zancrowe.json',
@@ -94,8 +108,19 @@ define(['shared/gw_common'], function(GW) {
                         op: 'replace',
                         value: {
                             'audio_cue': '/SE/Weapons/veh/tank_flame',
-                            'effect_spec': '/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_rightMuzzle'
+                            'effect_spec': flameEffect
                         }
+                    },
+                    {
+                        file: unit,
+                        path: 'events.fired.effect_spec',
+                        op: 'tag'
+                    },
+                    {
+                        file: unit,
+                        path: 'events.fired.effect_spec',
+                        op: 'add',
+                        value: ' socket_rightMuzzle'
                     }
                 ]);
             });
