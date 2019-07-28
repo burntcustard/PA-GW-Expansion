@@ -199,11 +199,29 @@ define([], function() {
          */
         modSpecs: function(specs, mods, specTag, debug) {
             var load = function(specId, debug) {
+                console.log("Trying to load() specId:");
+                console.log(JSON.stringify(specId));
                 taggedId = specId;
+
+                if (taggedId.indexOf(' ') > 0) {
+                    var substrs = taggedId.split(' ');
+                    _.forEach(substrs, function(substr, i) {
+                        if (substr.indexOf('/pa/') === 0) {
+                            taggedId = substr;
+                        }
+                    });
+                }
+
                 if (!specs.hasOwnProperty(taggedId)) {
+                    console.log("specs doesn't have prop of:");
+                    console.log(taggedId);
                     var taggedId = specId + specTag;
-                    if (!specs.hasOwnProperty(taggedId))
+                    console.log("So we're trying with the specTag added:");
+                    console.log(taggedId);
+                    if (!specs.hasOwnProperty(taggedId)) {
+                        console.log("Nope stuff nothin' :(");
                         return;
+                    }
                 }
                 var result = specs[taggedId];
                 if (result) {
@@ -274,6 +292,8 @@ define([], function() {
                         console.log(JSON.stringify(loaded));
                     }
                     specs[value + specTag] = loaded || attribute;
+                    console.log("value + specTag:");
+                    console.log(JSON.stringify(value + specTag));
                     console.log("specs[value + specTag]:");
                     console.log(JSON.stringify(specs[value + specTag]));
                     console.log("attribute is being returned as:");

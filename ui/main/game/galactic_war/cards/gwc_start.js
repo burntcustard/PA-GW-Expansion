@@ -57,7 +57,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
                 '/pa/units/land/tank_light_laser/tank_light_laser.json',
                 '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
-                //'/pa/units/land/tank_armor/tank_armor.json',
+                '/pa/units/land/tank_armor/tank_armor.json',
                 //'/pa/units/land/tank_hover/tank_hover.json',
                 '/pa/units/land/land_scout/land_scout.json',
                 // T2 Vehicles
