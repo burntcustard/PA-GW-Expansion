@@ -16,16 +16,75 @@ define(['shared/gw_common'], function(GW) {
         },
         buff: function(inventory, params) {
             // gwc_storage_1.js helped, a little
-            //
-            // With no tag, nothing happens.
-            // with tag, no commander spawns(!?)
-            // Just replacing AA instead of pushing works though hmm
+
+            var ammoMods = [];
+
+            // Clone the base bot ammo into a 'regen_ammo' copy
+            var oldWeap = '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json';
+            var regenAmmo = oldWeap + '.regen_ammo';
+            ammoMods.push(
+                {
+                    file: oldWeap,
+                    path: 'ammo_id',
+                    op: 'clone',
+                    value: regenAmmo
+                }
+            );
+
+            // Convert the ammo into regen ammo
+            var regenAmmoStats = {
+                'ammo_type': 'PBAOE',
+                'damage': 1,
+                'damage_volume': {
+                  'initial_radius': 1.0
+                },
+                'splash_damages_allies': true,
+                'splash_radius': 1,
+                'armor_damage_map': {
+                  'AT_Air': 0,
+                  'AT_Bot': 0,
+                  'AT_Commander': -60,
+                  'AT_Naval': 0,
+                  'AT_None': 0,
+                  'AT_Orbital': 0,
+                  'AT_Structure': 0,
+                  'AT_Vehicle': 0
+                }
+            };
+            for (var prop in regenAmmoStats) {
+                ammoMods.push({
+                    file: regenAmmo,
+                    path: prop,
+                    op: 'replace',
+                    value: regenAmmoStats[prop]
+                });
+            }
+
+            inventory.addMods(ammoMods);
+
+            var mods = [];
+
             var units = [
-              '/pa/units/commanders/base_commander/base_commander.json'
+                '/pa/units/commanders/base_commander/base_commander.json'
             ];
+
             _.forEach(units, function(unit) {
                 var regenWeap = unit + '.regen_weapon';
+
+                // Clone the commanders AA weapon into a 'regen_weapon' copy
+
+                mods.push(
+                    {
+                        file: unit,
+                        path: 'tools.3.spec_id', // The aa weap (hopefully?)
+                        op: 'clone',
+                        value: regenWeap
+                    }
+                );
+
+                // Convert the new weapon into a regen weapon
                 var regenWeapStats = {
+                    'ammo_id': regenAmmo,
                     'ammo_source': 'time',
                     'ammo_capacity': 0,
                     'ammo_demand': 0,
@@ -42,14 +101,6 @@ define(['shared/gw_common'], function(GW) {
                     'fire_delay': 0,
                     'auto_fire_when_charged': true
                 };
-                var mods = [
-                    {
-                        file: unit,
-                        path: 'tools.3.spec_id', // The aa weap (?)
-                        op: 'clone',
-                        value: regenWeap
-                    }
-                ];
                 for (var prop in regenWeapStats) {
                     mods.push({
                         file: regenWeap,
@@ -58,110 +109,27 @@ define(['shared/gw_common'], function(GW) {
                         value: regenWeapStats[prop]
                     });
                 }
-                inventory.addMods([
-                    {
-                        file: unit,
-                        path: 'tools.3.spec_id', // The aa weap (?)
-                        op: 'clone',
-                        value: regenWeap
-                    },
-                    // Mods to turn aa weapon into regen weapon
 
-                    {
-                        file: regenWeap,
-                        path: 'ammo_source',
-                        op: 'replace',
-                        value: 'time'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'ammo_capacity',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'ammo_demand',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'ammo_per_shot',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'start_fully_charged',
-                        op: 'replace',
-                        value: 'false'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'rate_of_fire',
-                        op: 'replace',
-                        value: '1'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'max_range',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'yaw_rate',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'pitch_rate',
-                        op: 'replace',
-                        value: '0'
-                    },
-                    {
-                        file: regenWeap,
-                        path: '',
-                        op: 'replace',
-                        value: ''
-                    },
-                    {
-                        file: regenWeap,
-                        path: '',
-                        op: 'replace',
-                        value: ''
-                    },
-                    {
-                        file: regenWeap,
-                        path: '',
-                        op: 'replace',
-                        value: ''
-                    },
-                      //
-                    {
-                        file: regenWeap,
-                        path: 'ammo_id',
-                        op: 'replace',
-                        value: '/pa/units/land/assault_bot_adv/assault_bot_adv_ammo.json'
-                    },
-                    {
-                        file: regenWeap,
-                        path: 'rate_of_fire',
-                        op: 'replace',
-                        value: 8
-                    },
+                mods.push(
                     {
                         file: regenWeap,
                         path: 'target_layers',
                         op: 'replace',
                         value: [
-                            'WL_LandHorizontal',
-                            'WL_WaterSurface'
+                            'WL_WaterSurface',
+                            'WL_Underwater',
+                            'WL_Seafloo'
                         ]
                     },
-                    // Give the new weapon to the commander
+                    {
+                        file: regenWeap,
+                        path: 'ammo_id',
+                        op: 'tag'
+                    }
+                );
+
+                // Give the new weapon to the commander
+                mods.push(
                     {
                         file: unit,
                         path: 'tools',
@@ -179,9 +147,31 @@ define(['shared/gw_common'], function(GW) {
                         path: 'tools.last.spec_id',
                         op: 'tag',
                         value: ''
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.last.aim_bone',
+                        op: 'replace',
+                        value: 'bone_root'
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.last.fire_event',
+                        op: 'replace',
+                        value: 'fired3'
+                    },
+                    {
+                        file: unit,
+                        path: 'tools.last.record_index',
+                        op: 'replace',
+                        value: -1
                     }
-                ]);
+                );
+
             });
+
+            // Actually do all the things mentioned before
+            inventory.addMods(mods);
         }
     };
 });
