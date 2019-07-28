@@ -30,7 +30,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Tesla: ＋40% damage.'
+                        value: ' Overcharged Tesla: ＋40% damage, ＋100% energy consumption.'
                     }
                 ]);
             });

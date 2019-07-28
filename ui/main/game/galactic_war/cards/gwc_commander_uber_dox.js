@@ -18,6 +18,7 @@ define(['shared/gw_common'], function(GW) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';
+
             inventory.addMods([
                 {
                     // Re-add secondary fire
@@ -36,7 +37,7 @@ define(['shared/gw_common'], function(GW) {
                     file: weap,
                     path: 'ammo_demand',
                     op: 'replace',
-                    value: 2
+                    value: 3
                 },
                 {
                     file: weap,
@@ -48,7 +49,7 @@ define(['shared/gw_common'], function(GW) {
                     file: weap,
                     path: 'ammo_per_shot',
                     op: 'replace',
-                    value: 60
+                    value: 45
                 },
                 {
                     file: weap,

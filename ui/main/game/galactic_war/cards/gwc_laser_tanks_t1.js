@@ -43,8 +43,8 @@ define(['shared/gw_common'], function(GW) {
                     path: 'events.fired',
                     op: 'replace',
                     value: {
-                        "audio_cue":"/SE/Weapons/orb/defense_satellite_fire_in_orbit",
-                        "effect_spec":"/pa/effects/specs/tank_muzzle_flash.pfx socket_muzzle"
+                        'audio_cue':'/SE/Weapons/orb/defense_satellite_fire_in_orbit',
+                        'effect_spec':'/pa/effects/specs/tank_muzzle_flash.pfx socket_muzzle'
                     }
                 },
                 {
