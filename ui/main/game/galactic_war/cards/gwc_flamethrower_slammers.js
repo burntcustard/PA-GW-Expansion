@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type:'upgrades',
-        describe: 'Replaces the Slammer Assault Bot with the flamethrower-wiedling _____. Built by advanced Bot Factories.',
+        describe: 'Upgrades the Slammer Assault Bot to the more heavily armored, flamethrower-wiedling Pyro Slammer. Built by advanced Bot Factories.',
         summarize: 'Flamethrower Slammer',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
         audio: '/VO/Computer/gw/board_tech_available_bot',
@@ -16,19 +16,133 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory) {
+            // Clone the tank_armour effect into a 'flameEffect' copy
+            var tank = '/pa/units/land/tank_armor/tank_armor.json';
+            var flameEffect = tank + '.flame_effect';
+            inventory.addMods([
+                {
+                    file: tank,
+                    path: 'events.fired.effect_spec',
+                    op: 'clone',
+                    value: flameEffect
+                },
+                {
+                    // Remove the original flames effect
+                    file: flameEffect,
+                    path: 'emitters',
+                    op: 'splice',
+                    value: 1
+                },
+                {
+                    // Add in longer flames effect
+                    file: flameEffect,
+                    path: 'emitters',
+                    op: 'push',
+                    value: {
+                        "bLoop": false,
+                        "drag": 0.92,
+                        "emissionBursts": 1,
+                        "emissionRate": 70,
+                        "emitterLifetime": 0.6,
+                        "endDistance": 3200,
+                        "gravity": 25,
+                        "lifetime": 1,
+                        "sizeRangeY": 1.5,
+                        "sizeX": 2,
+                        "sizeY": 3.5,
+                        "spec": {
+                            "baseTexture": "/pa/effects/textures/particles/flamethrower.papa",
+                            "blue": {
+                                "keys": [
+                                    [
+                                        0,
+                                        2
+                                    ],
+                                    [
+                                        0.2,
+                                        0.2
+                                    ],
+                                    [
+                                        0.65,
+                                        0.01
+                                    ]
+                                ]
+                            },
+                            "dataChannelFormat": "PositionColorAndAlignVector",
+                            "facing": "velocity",
+                            "green": {
+                                "keys": [
+                                    [
+                                        0,
+                                        2
+                                    ],
+                                    [
+                                        0.2,
+                                        0.6
+                                    ],
+                                    [
+                                        0.65,
+                                        0.05
+                                    ]
+                                ]
+                            },
+                            "red": {
+                                "keys": [
+                                    [
+                                        0,
+                                        2
+                                    ],
+                                    [
+                                        0.2,
+                                        2
+                                    ],
+                                    [
+                                        0.65,
+                                        1.5
+                                    ]
+                                ]
+                            },
+                            "shader": "particle_transparent",
+                            "size": {
+                                "keys": [
+                                    [
+                                        0,
+                                        0.75
+                                    ],
+                                    [
+                                        0.5,
+                                        1.25
+                                    ],
+                                    [
+                                        1,
+                                        0
+                                    ]
+                                ]
+                            }
+                        },
+                        "useWorldSpace": true,
+                        "velocity": 85,
+                        "velocityRange": 30,
+                        "velocityRangeX": 0.07,
+                        "velocityRangeZ": 0.07,
+                        "velocityY": -1
+                    }
+                }
+            ]);
+
             var unit = '/pa/units/land/assault_bot_adv/assault_bot_adv.json';
             inventory.addMods([
                 {
                     file: unit,
                     path: 'display_name',
                     op: 'replace',
-                    value: 'Flamethrower Slammer'
+                    value: 'Pyro Slammer'
                 },
                 {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Advanced Assault Bot- Devastating short range anti-ground.'
+                    value: 'Assault Bot - Devastating short range anti-ground.'
                 },
                 {
                     // 400 -> 600 HP
@@ -38,20 +152,18 @@ define(['shared/gw_common'], function(GW) {
                     value: 1.5
                 },
                 {
-                    // 500 -> 550 build cost
-                    file: unit,
-                    path: 'build_metal_cost',
-                    op: 'multiply',
-                    value: 1.1
-                },
-                {
                     file: unit,
                     path: 'events.fired',
                     op: 'replace',
                     value: {
                         "audio_cue":"/SE/Weapons/veh/tank_flame",
-                        "effect_spec":"/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_rightMuzzle /pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx socket_leftMuzzle"
+                        "effect_spec": flameEffect + ' socket_rightMuzzle ' + flameEffect + ' socket_leftMuzzle'
                     }
+                },
+                {
+                    file: unit,
+                    path: 'events.fired.effect_spec',
+                    op: 'tag'
                 },
                 {
                     file: unit,

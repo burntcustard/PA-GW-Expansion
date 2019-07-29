@@ -6,7 +6,7 @@ define([], function() {
         if (typeof spec !== 'object') {
             return moreWork;
         }
-        
+
         var applyTag = function(obj, key) {
             if (obj.hasOwnProperty(key)) {
                 if (typeof obj[key] === 'string') {
@@ -306,7 +306,19 @@ define([], function() {
                 },
                 // Tag value doesn't do anything??
                 tag: function(attribute, value) {
-                    return attribute + specTag;
+                    if (attribute.indexOf(' ') > 0) {
+                        console.log("Doing advanced tagging")
+                        var substrs = attribute.split(' ');
+                        _.forEach(substrs, function(substr, i) {
+                            if (substr.indexOf('/pa/') === 0) {
+                                substrs[i] = substr + specTag;
+                            }
+                        });
+                        console.log("Returning: " + substrs.join(' '));
+                        return substrs.join(' ');
+                    } else {
+                        return attribute + specTag;
+                    }
                 },
                 delete: function(attribute, value, file, path) {
                     if (specs[file + specTag]) {

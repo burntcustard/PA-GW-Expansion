@@ -15,8 +15,6 @@ define(['shared/gw_common'], function(GW) {
             return { chance: 999 };
         },
         buff: function(inventory) {
-            var mods = [];
-
             // Clone the tank_armour effect into a 'flameEffect' copy
             var tank = '/pa/units/land/tank_armor/tank_armor.json';
             var flameEffect = tank + '.flame_effect';
@@ -210,19 +208,13 @@ define(['shared/gw_common'], function(GW) {
                         op: 'replace',
                         value: {
                             'audio_cue': '/SE/Weapons/veh/tank_flame',
-                            'effect_spec': flameEffect
+                            'effect_spec': flameEffect + ' socket_rightMuzzle'
                         }
                     },
                     {
                         file: unit,
                         path: 'events.fired.effect_spec',
                         op: 'tag'
-                    },
-                    {
-                        file: unit,
-                        path: 'events.fired.effect_spec',
-                        op: 'add',
-                        value: ' socket_rightMuzzle'
                     }
                 ]);
             });
