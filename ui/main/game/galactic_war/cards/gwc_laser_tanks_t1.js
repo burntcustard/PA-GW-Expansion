@@ -12,7 +12,7 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_enable_laser_tanks_t1')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory) {
             var unit = '/pa/units/land/tank_light_laser/tank_light_laser.json';

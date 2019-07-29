@@ -339,17 +339,9 @@ define([], function() {
                             console.error('Failed to remove ' + attribute + ' from ' + path);
                         }
                     } else {
-                        console.log("specs[file]");
-                        console.log(JSON.stringify(specs[file]));
-                        console.log("specs[file + specTag]");
-                        console.log(JSON.stringify(specs[file + specTag]));
                         if (specs[file + specTag]) {
-                            console.log("specs[file][path]");
-                            console.log(JSON.stringify(specs[file + specTag][path]));
                             delete specs[file + specTag][path];
                         } else if (specs[file]) {
-                            console.log("specs[file + specTag][path]");
-                            console.log(JSON.stringify(specs[file + specTag][path]));
                             delete specs[file][path];
                         } else {
                             console.error('Failed to remove ' + attribute + ' from ' + path);
