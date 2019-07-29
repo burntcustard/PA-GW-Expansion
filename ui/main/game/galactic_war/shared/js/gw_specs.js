@@ -321,15 +321,6 @@ define([], function() {
                     }
                 },
                 delete: function(attribute, value, file, path) {
-                    console.log("Trying to delete a thing");
-                    console.log("attribute:");
-                    console.log(JSON.stringify(attribute));
-                    console.log("value:");
-                    console.log(JSON.stringify(value));
-                    console.log("file:");
-                    console.log(JSON.stringify(file));
-                    console.log("path:");
-                    console.log(JSON.stringify(path));
                     if (value === 'all') {
                         if (specs[file + specTag]) {
                             delete specs[file + specTag];
