@@ -321,13 +321,41 @@ define([], function() {
                     }
                 },
                 delete: function(attribute, value, file, path) {
-                    if (specs[file + specTag]) {
-                        delete specs[file + specTag];
-                    } else if (specs[file]) {
-                        delete specs[file];
+                    console.log("Trying to delete a thing");
+                    console.log("attribute:");
+                    console.log(JSON.stringify(attribute));
+                    console.log("value:");
+                    console.log(JSON.stringify(value));
+                    console.log("file:");
+                    console.log(JSON.stringify(file));
+                    console.log("path:");
+                    console.log(JSON.stringify(path));
+                    if (value === 'all') {
+                        if (specs[file + specTag]) {
+                            delete specs[file + specTag];
+                        } else if (specs[file]) {
+                            delete specs[file];
+                        } else {
+                            console.error('Failed to remove ' + attribute + ' from ' + path);
+                        }
                     } else {
-                        console.error('Failed to remove ' + attribute + ' from ' + path);
+                        console.log("specs[file]");
+                        console.log(JSON.stringify(specs[file]));
+                        console.log("specs[file + specTag]");
+                        console.log(JSON.stringify(specs[file + specTag]));
+                        if (specs[file + specTag]) {
+                            console.log("specs[file][path]");
+                            console.log(JSON.stringify(specs[file + specTag][path]));
+                            delete specs[file + specTag][path];
+                        } else if (specs[file]) {
+                            console.log("specs[file + specTag][path]");
+                            console.log(JSON.stringify(specs[file + specTag][path]));
+                            delete specs[file][path];
+                        } else {
+                            console.error('Failed to remove ' + attribute + ' from ' + path);
+                        }
                     }
+
                 }
             };
             var applyMod = function(mod) {
