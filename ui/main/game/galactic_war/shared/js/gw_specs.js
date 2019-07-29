@@ -322,9 +322,9 @@ define([], function() {
                 },
                 delete: function(attribute, value, file, path) {
                     if (specs[file + specTag]) {
-                        delete spec[file + specTag];
-                    } else if (spec[file]) {
-                        delete spec[file];
+                        delete specs[file + specTag];
+                    } else if (specs[file]) {
+                        delete specs[file];
                     } else {
                         console.error('Failed to remove ' + attribute + ' from ' + path);
                     }
