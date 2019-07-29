@@ -12,7 +12,7 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_commander_servo')) {
                 chance = (dist <= 5) ? 40:0;
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory) {
             var unit = '/pa/units/commanders/base_commander/base_commander.json';

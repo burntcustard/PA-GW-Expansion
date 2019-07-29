@@ -41,7 +41,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Armor Tech: ＋30% health.'
+                        value: ' Armor Tech: ＋⁠30% health.'
                     }
                 ]);
             });

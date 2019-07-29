@@ -27,7 +27,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Capacitors: +30% damage.'
+                        value: ' Overcharged Capacitors: ＋⁠30% damage.'
                     }
                 ]);
             });

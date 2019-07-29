@@ -9,10 +9,11 @@ define(['shared/gw_common'], function(GW) {
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_commander_flamethrower')) {
+            if (!inventory.hasCard('gwc_commander_flamethrower') &&
+                inventory.hasCard('gwc_enable_infernos')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory) {
             // Clone the tank_armour effect into a 'flameEffect' copy
@@ -237,14 +238,28 @@ define(['shared/gw_common'], function(GW) {
                         path: 'rate_of_fire',
                         op: 'replace',
                         value: 4
-                    },
-                    {
-                        file: weap,
-                        path: 'max_range',
-                        op: 'replace',
-                        value: '30' // Inferno flamethrowers are 20
                     }
                 ]);
+
+                if (inventory.hasCard('gwc_flamethrower_range')) {
+                    inventory.addMods([
+                        {
+                            file: weap,
+                            path: 'max_range',
+                            op: 'replace',
+                            value: '42' // 30 * 1.4 = 42
+                        }
+                    ]);
+                } else {
+                    inventory.addMods([
+                        {
+                            file: weap,
+                            path: 'max_range',
+                            op: 'replace',
+                            value: '30' // Inferno flamethrowers are 20
+                        }
+                    ]);
+                }
             });
         }
     };

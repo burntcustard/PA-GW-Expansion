@@ -15,20 +15,28 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory) {
+            var mods = [];
+
             var facs = [
                 '/pa/units/land/bot_factory/bot_factory.json',
                 '/pa/units/land/bot_factory_adv/bot_factory_adv.json'
             ];
             _.forEach(facs, function(unit) {
-                inventory.addMods([
+                mods.push(
                     {
                         // 3s -> 2.1s
                         file: unit,
                         path: 'factory_cooldown_time',
                         op: 'multiply',
                         value: .7
+                    },
+                    {
+                        file: unit,
+                        path: 'description',
+                        op: 'add',
+                        value: ' Bot Mass Production Tech: All units －⁠20% cost, －⁠30% roll off time.'
                     }
-                ]);
+                );
             });
 
             var bots = [
@@ -53,7 +61,7 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/land/titan_bot/titan_bot.json'
             ];
             _.forEach(bots, function(unit) {
-                inventory.addMods([
+                mods.push(
                     {
                         file: unit,
                         path: 'build_metal_cost',
@@ -64,10 +72,12 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Bot Production Tech: －⁠20% cost.'
+                        value: ' Bot Mass Production Tech: －⁠20% cost.'
                     }
-                ]);
+                );
             });
+
+            inventory.addMods(mods);
         }
     };
 });

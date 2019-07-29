@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: "Increase the damage and the energy consumption of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon",
+        describe: "Increase the damage (＋⁠40%) and the energy consumption (＋⁠100%) of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon",
         summarize: 'Overcharged Tesla Weapons',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: '/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -18,6 +18,7 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
         },
         buff: function(inventory) {
+            var mods = [];
 
             var units = [
                 '/pa/units/land/bot_tesla/bot_tesla.json',
@@ -25,14 +26,14 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/air/titan_air/titan_air.json'
             ];
             _.forEach(units, function(unit) {
-                inventory.addMods([
+                mods.push(
                     {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Tesla: ＋40% damage, ＋100% energy consumption.'
+                        value: ' Overcharged Tesla: ＋⁠40% damage, ＋⁠100% energy consumption.'
                     }
-                ]);
+                );
             });
 
             var weaps = [
@@ -41,7 +42,7 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/air/titan_air/titan_air_tool_weapon.json'
             ];
             _.forEach(weaps, function(weap) {
-                inventory.addMods([
+                mods.push(
                     {
                         file: weap,
                         path: 'ammo_capacity',
@@ -60,7 +61,7 @@ define(['shared/gw_common'], function(GW) {
                         op: 'multiply',
                         value: 2
                     }
-                ]);
+                );
             });
 
             var ammos = [
@@ -69,16 +70,17 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus ammo damage 1600 -> 2100
             ];
             _.forEach(ammos, function(ammo) {
-                inventory.addMods([
+                mods.push(
                     {
                         file: ammo,
                         path: 'damage',
                         op: 'multiply',
                         value: 1.4
                     }
-                ]);
+                );
             });
 
+            inventory.addMods(mods);
         }
     };
 });

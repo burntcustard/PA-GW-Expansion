@@ -10,6 +10,7 @@ define(['shared/gw_common'], function(GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_gunships') &&
+                inventory.hasCard('gwc_enable_infernos') &&
                 inventory.hasCard('gwc_enable_t2_air')) {
                 chance = (dist >= 4) ? 40:0;
             }

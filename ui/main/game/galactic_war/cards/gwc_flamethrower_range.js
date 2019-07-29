@@ -2,8 +2,8 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Increases the range of flamethrowers by 25%',
-        summarize: 'Flamethrower range +25%',
+        describe: 'Increases the range of flamethrowers by ＋⁠40%',
+        summarize: 'Flamethrower Range Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         deal: function(system, context, inventory) {
@@ -25,7 +25,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' +25% range.'
+                        value: ' Flamethrower Tech: ＋⁠40% range.'
                     }
                 ]);
             });
@@ -36,22 +36,15 @@ define(['shared/gw_common'], function(GW) {
             _.forEach(weaps, function(weap) {
                 inventory.addMods([
                     {
-                    // Range 20 -> 25
-                    file: weap,
-                    path: 'max_range',
-                    op: 'multiply',
-                    value: 1.25
-                }//,
-                //{
-                    // // Make the gunships circle around enemies at slightly longer distance.
-                    // // May cause issues with non-flamethrower gunships...
-                    // file: '/pa/units/air/gunship/gunship.json',
-                    // path: 'navigation.aggressive_distance',
-                    // op: 'multiply',
-                    // value: 1.2
-                //}
+                        // Range 20 -> 28
+                        file: weap,
+                        path: 'max_range',
+                        op: 'multiply',
+                        value: 1.4
+                    }
                 ]);
             });
+
             var effects = [
                 '/pa/units/land/tank_armor/tank_armor_muzzle_flame.pfx'
             ];

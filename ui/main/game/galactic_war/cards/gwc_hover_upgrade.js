@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Increases the speed and maneuverability of Drifters (+10%), Kaiju (+20%), and the Ares Titan (+30%).',
+        describe: 'Increases the speed and maneuverability of Drifters (＋⁠10%), Kaiju (＋⁠20%), and the Ares Titan (＋⁠30%).',
         summarize: 'Hi-Tech Heavy Grav Tracks',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -53,7 +53,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Hi-Tech Grav Tracks: ＋' + i + '0% speed.'
+                        value: ' Hi-Tech Grav Tracks: ＋⁠' + i + '0% speed.'
                     }
                 ]);
                 i++;

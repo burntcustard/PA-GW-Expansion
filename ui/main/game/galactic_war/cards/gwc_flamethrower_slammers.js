@@ -10,16 +10,19 @@ define(['shared/gw_common'], function(GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_flamethrower_slammers') &&
+                inventory.hasCard('gwc_enable_infernos') &&
                 inventory.hasCard('gwc_enable_t2_bots')) {
                 chance = (dist >= 4) ? 40:0;
             }
             return { chance: chance };
         },
         buff: function(inventory) {
+            var mods = [];
+
             // Clone the tank_armour effect into a 'flameEffect' copy
             var tank = '/pa/units/land/tank_armor/tank_armor.json';
             var flameEffect = tank + '.flame_effect';
-            inventory.addMods([
+            mods.push(
                 {
                     file: tank,
                     path: 'events.fired.effect_spec',
@@ -128,10 +131,11 @@ define(['shared/gw_common'], function(GW) {
                         "velocityY": -1
                     }
                 }
-            ]);
+            );
 
             var unit = '/pa/units/land/assault_bot_adv/assault_bot_adv.json';
-            inventory.addMods([
+            var weap = '/pa/units/land/assault_bot_adv/assault_bot_adv_tool_weapon.json';
+            mods.push(
                 {
                     file: unit,
                     path: 'display_name',
@@ -175,12 +179,40 @@ define(['shared/gw_common'], function(GW) {
                     }
                 },
                 {
-                    file: unit,
-                    path: 'tools.0.spec_id',
+                    file: weap,
+                    path: 'ammo_id.id',
                     op: 'replace',
-                    value: '/pa/units/land/tank_armor/tank_armor_tool_weapon.json'
+                    value: '/pa/units/land/tank_armor/tank_armor_ammo.json'
                 }
-            ]);
+            );
+
+            if (inventory.hasCard('gwc_flamethrower_range')) {
+                mods.push(
+                    {
+                        file: unit,
+                        path: 'description',
+                        op: 'add',
+                        value: ' Flamethrower Tech: ＋⁠40% range.'
+                    },
+                    {
+                        file: weap,
+                        path: 'max_range',
+                        op: 'replace',
+                        value: '42' // 30 * 1.4 = 42
+                    }
+                );
+            } else {
+                mods.push(
+                    {
+                        file: weap,
+                        path: 'max_range',
+                        op: 'replace',
+                        value: '30' // Inferno flamethrowers are 20
+                    }
+                );
+            }
+
+            inventory.addMods(mods);
         }
     };
 });
