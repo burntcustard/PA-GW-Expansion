@@ -216,13 +216,7 @@ define([
                 self.busy = busy.promise();
 
                 console.log("Adding this card to the inventory:");
-                console.log(addCard);
-
-                // if (inventory.currentCardsOfType()[addCard.type] >= 0) {
-                //     inventory.currentCardsOfType()[addCard.type] += 1;
-                // }
-
-                //console.log("There are now " + inventory.cardsOfType[addCard.type].length + " / " + inventory.maxCardsOfType()[addCard.type] + " " + addCard.type + " cards in inventory ");
+                console.log(JSON.stringify(addCard));
 
                 inventory.cards.push(addCard);
                 inventory.applyCards(function() {
@@ -230,12 +224,7 @@ define([
                     result.resolve(true);
                 });
 
-                console.log("addCard.type: " + addCard.type);
                 inventory.cardsOfType[addCard.type].push(addCard);
-
-                console.log("Cards of type '" + addCard.type + "':");
-                console.log(inventory.cardsOfType[addCard.type]);
-
             }
             else {
                 result.resolve(true);

@@ -840,7 +840,10 @@ requireGW([
 
         self.cheats = cheats;
 
-        cheats.noFog(self.creditsMode());
+        //cheats.noFog(self.creditsMode());
+        cheats.noFog = ko.computed(function() {
+            return true;
+        });
 
         // Tracked for knowing where we've been for pages that can be accessed in more than one way
         self.lastSceneUrl = ko.observable().extend({ session: 'last_scene_url' });
