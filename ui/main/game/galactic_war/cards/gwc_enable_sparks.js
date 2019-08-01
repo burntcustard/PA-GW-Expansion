@@ -12,7 +12,7 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_enable_sparks')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: chance };
+            return { chance: 999 };
         },
         buff: function(inventory) {
             inventory.addUnits([
