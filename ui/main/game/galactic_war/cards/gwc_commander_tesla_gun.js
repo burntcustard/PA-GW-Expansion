@@ -161,10 +161,7 @@ define(['shared/gw_common'], function(GW) {
                 'model': {
                     'filename': ''
                 },
-                'damage': 160,
-                'splash_damage': 50,
                 'splash_radius': 10,
-                'full_damage_splash_radius': 3, // Slightly bigger than the sparks 2
                 'initial_velocity': 180,
                 'max_velocity': 180,
                 'lifetime': 2, // Is longer range then the spark so needs to stay alive longer
@@ -199,6 +196,50 @@ define(['shared/gw_common'], function(GW) {
                         }
                     )
                 });
+
+                if (inventory.hasCard('gwc_overcharged_tesla')) {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: 'damage',
+                            op: 'replace',
+                            value: 224
+                        },
+                        {
+                            file: ammo,
+                            path: 'splash_damage',
+                            op: 'replace',
+                            value: 70
+                        },
+                        {
+                            file: ammo,
+                            path: 'full_damage_splash_radius',
+                            op: 'replace',
+                            value: 5 // Boosted a bit more than the 1.4x for the comm
+                        }
+                    );
+                } else {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: 'damage',
+                            op: 'replace',
+                            value: 160
+                        },
+                        {
+                            file: ammo,
+                            path: 'splash_damage',
+                            op: 'replace',
+                            value: 50
+                        },
+                        {
+                            file: ammo,
+                            path: 'full_damage_splash_radius',
+                            op: 'replace',
+                            value: 3 // Slightly bigger than the sparks 2
+                        }
+                    );
+                }
             });
 
             inventory.addMods(mods);

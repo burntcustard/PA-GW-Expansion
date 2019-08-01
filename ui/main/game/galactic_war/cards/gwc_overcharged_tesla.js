@@ -76,6 +76,18 @@ define(['shared/gw_common'], function(GW) {
                         path: 'damage',
                         op: 'multiply',
                         value: 1.4
+                    },
+                    {
+                        file: ammo,
+                        path: 'splash_damage',
+                        op: 'multiply',
+                        value: 1.4
+                    },
+                    {
+                        file: ammo,
+                        path: 'full_damage_splash_radius',
+                        op: 'multiply',
+                        value: 1.4
                     }
                 );
             });
