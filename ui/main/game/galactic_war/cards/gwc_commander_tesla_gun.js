@@ -99,12 +99,6 @@ define(['shared/gw_common'], function(GW) {
                     },
                     {
                         file: unit,
-                        path: 'tools.1.record_index',
-                        op: 'replace',
-                        value: '1'
-                    },
-                    {
-                        file: unit,
                         path: 'events.fired1',
                         op: 'replace',
                         value: {
@@ -144,51 +138,9 @@ define(['shared/gw_common'], function(GW) {
                 mods.push(
                     {
                         file: weap,
-                        path: 'ammo_id',
-                        op: 'replace',
-                        value: '/pa/units/land/bot_tesla/bot_tesla_ammo.json'
-                    },
-                    {
-                        file: weap,
-                        path: 'ammo_source',
-                        op: 'replace',
-                        value: 'energy'
-                    },
-                    {
-                        file: weap,
                         path: 'rate_of_fire',
                         op: 'replace',
                         value: 1
-                    },
-                    {
-                        file: weap,
-                        path: 'ammo_capacity',
-                        op: 'replace',
-                        value: 400
-                    },
-                    {
-                        file: weap,
-                        path: 'ammo_demand',
-                        op: 'replace',
-                        value: 400
-                    },
-                    {
-                        file: weap,
-                        path: 'ammo_per_shot',
-                        op: 'replace',
-                        value: 400
-                    },
-                    {
-                        file: weap,
-                        path: 'carpet_fire',
-                        op: 'replace',
-                        value: true
-                    },
-                    {
-                        file: weap,
-                        path: 'carpet_wait_for_full_ammo',
-                        op: 'replace',
-                        value: true
                     }
                 );
 
@@ -197,7 +149,56 @@ define(['shared/gw_common'], function(GW) {
                 } else {
                     // or don't
                 }
+            });
 
+            var ammos = [
+                '/pa/units/commanders/base_commander/base_commander_ammo_bullet.json',
+                '/pa/units/commanders/base_commander/base_commander_ammo_laser.json',
+                '/pa/units/commanders/base_commander/base_commander_ammo_missile.json'
+            ];
+            var teslaAmmoProps = {
+                'flight_type': 'Direct',
+                'model': {
+                    'filename': ''
+                },
+                'damage': 160,
+                'splash_damage': 50,
+                'splash_radius': 10,
+                'full_damage_splash_radius': 3, // Slightly bigger than the sparks 2
+                'initial_velocity': 180,
+                'max_velocity': 180,
+                'lifetime': 2, // Is longer range then the spark so needs to stay alive longer
+                'fx_trail': {
+                    'filename': '/pa/effects/specs/tesla_proj_trail.pfx'
+                },
+                'events': {
+                    'spawned' : {
+                        'audio_cue': '/SE/Weapons/bot/spark_fire'
+                    },
+                    'died': {
+                        'audio_cue': '/SE/Impacts/bot_spark_impact',
+                        'effect_spec': '/pa/effects/specs/tesla_hit.pfx'
+                    }
+                },
+                'physics': {
+                    'type': 'Projectile',
+                    'radius': 1,
+                    'gravity_scalar': 8,
+                    'add_to_spatial_db': false,
+                    'allow_underground': true
+                }
+            };
+            _.forEach(ammos, function(ammo) {
+                _.forEach(teslaAmmoProps, function(value, prop) {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: prop,
+                            op: 'replace',
+                            value: value
+                        }
+                    )
+                });
             });
 
             inventory.addMods(mods);

@@ -6,7 +6,7 @@ define(['shared/gw_common'], function(GW) {
         summarize: 'Uber Cannon',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
-        deal: function(system, context) {
+        deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_commander_uber_basic')) {

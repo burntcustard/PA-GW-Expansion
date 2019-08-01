@@ -12,17 +12,9 @@ define(['shared/gw_common'], function(GW) {
             if (!inventory.hasCard('gwc_commander_regen')) {
                 chance = (dist <= 5) ? 40:0;
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory, params) {
-
-            // Figure out the commander we're using:
-            console.log("################");
-            console.log("# Finding vars #");
-            console.log("################");
-            console.log("GW");
-            console.log(JSON.stringify(GW));
-
             var mods = [];
 
             // Clone the base bot ammo into a 'regen_ammo' copy

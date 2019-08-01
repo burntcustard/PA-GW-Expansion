@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderSecondary'; },
-        describe: 'A powerful Uber Tesla Gun',
+        describe: 'A powerful Uber Tesla Cannon',
         summarize: 'Uber Tesla Gun',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',

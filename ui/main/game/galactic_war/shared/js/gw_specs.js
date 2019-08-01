@@ -404,6 +404,9 @@ define([], function() {
                 } else {
                     ops[mod.op](spec, mod.value, mod.file, mod.path);
                 }
+
+                // console.log("Ended up with spec:");
+                // console.log(JSON.stringify(spec));
             };
             console.log("Applying mods:");
             _.forEach(mods, applyMod);
