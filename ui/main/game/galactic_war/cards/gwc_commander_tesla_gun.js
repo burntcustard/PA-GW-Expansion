@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'commanderPrimary',
-        describe: 'Gives the commander a Tesla Gun, similar to the Spark weapon.',
+        describe: 'Gives the commander a Tesla Gun, similar to the Spark weapon. Uses the commanders internal generator for power, rather than consuming power on reload.',
         summarize: 'Commander Tesla Gun',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -164,7 +164,6 @@ define(['shared/gw_common'], function(GW) {
                 'splash_radius': 10,
                 'initial_velocity': 180,
                 'max_velocity': 180,
-                'lifetime': 2, // Is longer range then the spark so needs to stay alive longer
                 'fx_trail': {
                     'filename': '/pa/effects/specs/tesla_proj_trail.pfx'
                 },
@@ -176,13 +175,6 @@ define(['shared/gw_common'], function(GW) {
                         'audio_cue': '/SE/Impacts/bot_spark_impact',
                         'effect_spec': '/pa/effects/specs/tesla_hit.pfx'
                     }
-                },
-                'physics': {
-                    'type': 'Projectile',
-                    'radius': 1,
-                    'gravity_scalar': 8,
-                    'add_to_spatial_db': false,
-                    'allow_underground': true
                 }
             };
             _.forEach(ammos, function(ammo) {
