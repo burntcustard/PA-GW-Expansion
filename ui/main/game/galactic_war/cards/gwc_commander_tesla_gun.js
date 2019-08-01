@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'commanderPrimary',
-        describe: 'Gives the commander a Tesla Gun, similar to the Spark weapon. Uses the commanders internal generator for power, rather than consuming power on reload.',
+        describe: 'Gives the commander a Tesla Gun, similar to the Spark weapon, but with longer range. Uses the commanders internal generator for power, rather than consuming power on reload.',
         summarize: 'Commander Tesla Gun',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -13,7 +13,7 @@ define(['shared/gw_common'], function(GW) {
                 inventory.hasCard('gwc_enable_sparks')) {
                 chance = (dist <= 5 ? 40 : 0);
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory) {
             var mods = [];
@@ -143,12 +143,6 @@ define(['shared/gw_common'], function(GW) {
                         value: 1
                     }
                 );
-
-                if (inventory.hasCard('gwc_overcharged_tesla')) {
-                    // apply tesla overcharge to this card somehow?
-                } else {
-                    // or don't
-                }
             });
 
             var ammos = [
@@ -157,7 +151,6 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/commanders/base_commander/base_commander_ammo_missile.json'
             ];
             var teslaAmmoProps = {
-                'flight_type': 'Direct',
                 'model': {
                     'filename': ''
                 },
@@ -207,7 +200,7 @@ define(['shared/gw_common'], function(GW) {
                             file: ammo,
                             path: 'full_damage_splash_radius',
                             op: 'replace',
-                            value: 5 // Boosted a bit more than the 1.4x for the comm
+                            value: 6
                         }
                     );
                 } else {
@@ -228,7 +221,7 @@ define(['shared/gw_common'], function(GW) {
                             file: ammo,
                             path: 'full_damage_splash_radius',
                             op: 'replace',
-                            value: 3 // Slightly bigger than the sparks 2
+                            value: 4 // Slightly bigger than the sparks 2
                         }
                     );
                 }

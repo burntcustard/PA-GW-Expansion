@@ -15,7 +15,7 @@ define(['shared/gw_common'], function(GW) {
                  inventory.hasCard('gwc_enable_icarus'))) {
                 chance = (dist <= 5) ? 40:0;
             }
-            return { chance: 999 };
+            return { chance: chance };
         },
         buff: function(inventory) {
             var mods = [];
