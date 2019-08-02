@@ -272,8 +272,9 @@ $(document).ready(function () {
         };
 
         self.updateCommander = function() {
-            if (self.newGame())
+            if (self.newGame()) {
                 self.newGame().inventory().setTag('global', 'commander', self.selectedCommander());
+            }
         }
 
         self.makeGameBusy = ko.observable(false);
@@ -391,6 +392,8 @@ $(document).ready(function () {
                                 ai: ai,
                                 star: star
                             });
+                            //console.log("AI info:");
+                            //console.log(JSON.stringify(ai));
                         });
                     },
                     boss: function (star, ai) {

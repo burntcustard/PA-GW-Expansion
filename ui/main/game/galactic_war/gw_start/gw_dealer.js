@@ -5,11 +5,15 @@ define([
 ) {
     var deck = [
         'gwc_bomber_capacity',
-        //'gwc_commander_regen', // Disabled due to passive_health_regen not working
+        'gwc_commander_flamethrower',
+        'gwc_commander_regen',
         'gwc_commander_servo',
+        'gwc_commander_tesla_gun',
+        'gwc_commander_uber_basic',
         'gwc_commander_uber_dox',
         'gwc_commander_uber_summon',
         'gwc_commander_uber_tesla',
+        'gwc_cost_bots',
         'gwc_enable_booms',
         'gwc_enable_defenses_t1',
         'gwc_enable_defenses_t2',
@@ -36,6 +40,7 @@ define([
         'gwc_hover_upgrade',
         'gwc_icarus_gunships',
         'gwc_jumpy_booms',
+        'gwc_laser_damage',
         'gwc_laser_tanks_t1',
         'gwc_minion',
         'gwc_overcharged_tesla'
@@ -142,8 +147,13 @@ define([
                 var remainingAIDeck = aiDeck.slice(0);
 
                 _.forEach(allCards, function(card) {
-                    if (card.getContext && !cardContexts[card.id])
-                        cardContexts[card.id] = card.getContext(galaxy, inventory);
+                    if (!cardContexts[card.id]) {
+                        if (card.getContext) {
+                            cardContexts[card.id] = card.getContext(galaxy, inventory);
+                        } else {
+                            cardContexts[preCard] = { totalSize: galaxy.stars().length };
+                        }
+                    }
                 });
 
                 var CARDS_PER_NORMAL_SYSTEM = 3;
@@ -173,8 +183,13 @@ define([
                             predealtCard = true;
 
                             var extra = extraCards[preCard];
-                            if (extra && extra.getContext && !cardContexts[preCard])
-                                cardContexts[preCard] = extra.getContext(galaxy, inventory);
+                            if (extra && extra.getContext && !cardContexts[preCard]) {
+                                if (extra.getContext) {
+                                    cardContexts[preCard] = extra.getContext(galaxy, inventory);
+                                } else {
+                                    cardContexts[preCard] = { totalSize: galaxy.stars().length };
+                                }
+                            }
                             var context = cardContexts[preCard];
                             var deal = extra && extra.deal(system, context);
                             if (deal && _.isObject(deal)) {
@@ -313,7 +328,11 @@ define([
                 var card = _.find(allCards, { id: params.id });
 
                 // Simulate a deal
+                //console.log("simulate a deal");
+                //console.log("card.getContext:");
+                //console.log(card.getContext);
                 var context = card.getContext && card.getContext(params.galaxy, params.inventory);
+                //console.log(context);
 
                 var deal = (card.deal && card.deal(params.star, context));
 
@@ -327,7 +346,7 @@ define([
                 if (cardParams && _.isObject(cardParams))
                     _.extend(product, cardParams);
 
-                var tempType = (card.type && card.type()) || 'noTypeSad';
+                var tempType = _.isFunction(card.type) ? card.type() : card.type || 'none';
                 _.extend(product, { type: tempType });
 
                 card.keep && card.keep(deal, context);
@@ -379,15 +398,21 @@ define([
             var count = params.count;
             var star = params.star;
             var galaxy = params.galaxy;
-
             var start = _.now();
-
             var result = $.Deferred();
+
             loaded.then(function () {
 
                 _.forEach(allCards, function (card) {
-                    if (card.getContext && !cardContexts[card.id])
-                        cardContexts[card.id] = card.getContext(galaxy, inventory);
+                    if (!cardContexts[card.id]) {
+                        if (card.getContext) {
+                            //console.log("card.getContext exists so doing the default stuff");
+                            cardContexts[card.id] = card.getContext(galaxy, inventory);
+                        } else {
+                            //console.log("card.getContext doesn't exist so trying to use default");
+                            cardContexts[card.id] = { totalSize: galaxy.stars().length };
+                        }
+                    }
                 });
 
                 var list = [];
@@ -406,7 +431,7 @@ define([
 
                         var result = card.deal && card.deal(star, context, inventory);
 
-                        var tempType = (card.type && card.type()) || 'noTypeSad';
+                        var tempType = _.isFunction(card.type) ? card.type() : card.type || 'noType';
                         _.extend(result, { type: tempType });
 
                         if (match)

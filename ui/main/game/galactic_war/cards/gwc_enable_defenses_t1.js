@@ -1,26 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables building of the double laser defense tower, walls, and short range artillery by basic fabricators.';
-        },
-        summarize: function(params) {
-            return 'Defensive Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_turret.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_artillery'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        type: 'units',
+        describe: 'Enables building of the double laser defense tower, walls, and short range artillery by basic fabricators.',
+        summarize: 'Defensive Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_turret.png',
+        audio: '/VO/Computer/gw/board_tech_available_artillery',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -29,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             inventory.addUnits([
                 '/pa/units/land/land_barrier/land_barrier.json',
                 '/pa/units/land/laser_defense/laser_defense.json',

@@ -114,7 +114,6 @@ requireGW([
             require(['pages/gw_start/gw_dealer'], function(GWDealer) {
                 GWDealer.allCards().then(function(cards) {
                     _.forEach(cards, function(card) {
-                        console.log("bloop (testCards)");
                         if (card.id.startsWith('gwc_start')) {
                             api.debug.log('Skipping start card', card.id);
                         }
@@ -150,8 +149,6 @@ requireGW([
                                 }
                                 else {
                                     api.debug.log(' ', product.id, '%', deal && deal.chance, product);
-                                    console.log("Adding this card to the inventory(?): ");
-                                    console.log(product);
                                     game.inventory().cards.push(product)
                                     game.inventory().cards.pop();
                                 }
@@ -168,15 +165,12 @@ requireGW([
             require(['pages/gw_start/gw_dealer'], function(GWDealer) {
                 GWDealer.allCards().then(function(cards) {
                     var card = _.find(cards, {id: self.giveCardId()});
-                    console.log("bleep (giveCard)");
                     GWDealer.dealCard({
                         id: card.id,
                         galaxy: game.galaxy(),
                         inventory: game.inventory(),
                         star: star
                     }).then(function(product) {
-                        console.log("Adding this card to the inventory???: ");
-                        console.log(product);
                         game.inventory().cards.push(product);
                     });
                 });
@@ -846,7 +840,10 @@ requireGW([
 
         self.cheats = cheats;
 
-        cheats.noFog(self.creditsMode());
+        //cheats.noFog(self.creditsMode());
+        cheats.noFog = ko.computed(function() {
+            return true;
+        });
 
         // Tracked for knowing where we've been for pages that can be accessed in more than one way
         self.lastSceneUrl = ko.observable().extend({ session: 'last_scene_url' });
@@ -1487,7 +1484,6 @@ requireGW([
                     model.params(card);
             });
 
-            console.log("Doing the new crazy updateCards for all the separate type lists");
             //var cardModelsOfType = self.cardsOfType();
             _.forEach(['commanderPrimary',
                        'commanderSecondary',
@@ -1585,7 +1581,7 @@ requireGW([
                 var duplicate = inventory.hasCard(element) && element.visible();
                 var fit = inventory.canFitCard(element);
                 var loadout = element.isLoadout();
-                var type = (element.type && element.type()) || 'ERROR: Card has no type'
+                var type = _.isFunction(element.type) ? element.type() : element.type || 'ERROR: Card has no type'
                 return {
                     'duplicate': duplicate,
                     'can_fit': fit,
@@ -1608,20 +1604,12 @@ requireGW([
 
             var result =  _.any(self.currentSystemCardListConditions(), function (element) {
                 if (!element.can_fit) {
-                    console.log("Looking at ");
-                    console.log(element);
-                    console.log("Can't fit any more + " + element.type + " cards!");
+                    //console.log("Looking at ");
+                    //console.log(element);
+                    //console.log("Can't fit any more + " + element.type + " cards!");
                     return element.type;
                 }
             });
-
-            // var list = _.map(self.currentSystemCardList(), function (element) {
-            //     var result =  { test: true };
-            //     return result;
-            // });
-
-            console.log("Result of showDataBankFullWarning: ");
-            console.log(result);
 
             self.showDataBankFullWarning(result);
         });

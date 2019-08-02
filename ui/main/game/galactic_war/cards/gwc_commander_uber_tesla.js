@@ -2,25 +2,10 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: function() { return 'commanderSecondary'; },
-        describe: function(params) {
-            return 'A powerful Uber Tesla Gun';
-        },
-        summarize: function(params) {
-            return 'Uber Tesla Gun';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        describe: 'A powerful Uber Tesla Cannon',
+        summarize: 'Uber Tesla Gun',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -29,7 +14,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';
@@ -52,9 +37,9 @@ define(['shared/gw_common'], function(GW) {
                     path: 'events.died',
                     op: 'replace',
                     value: {
-                        "audio_cue": "/SE/Impacts/bot_spark_impact",
-                        "effect_spec": "/pa/units/air/titan_air/titan_air_ammo_beam_hit.pfx",
-                        "effect_scale": 0.7
+                        'audio_cue': '/SE/Impacts/bot_spark_impact',
+                        'effect_spec': '/pa/units/air/titan_air/titan_air_ammo_beam_hit.pfx',
+                        'effect_scale': 0.7
                     }
                 },
                 {
@@ -82,36 +67,36 @@ define(['shared/gw_common'], function(GW) {
                     op: 'replace',
                     value: [
                         {
-                            "emissionBursts": 1,
-                            "endDistance": 1400,
-                            "killOnDeactivate": true,
-                            "lifetime": 127,
-                            "maxParticles": 1,
-                            "offsetY": 1.5,
-                            "sizeX": 2,
-                            "sizeY": 4,
-                            "sort": "NoSort",
-                            "spec": {
-                                "alpha": 1,
-                                "baseTexture": "/pa/effects/textures/particles/gradient_tail.papa",
-                                "blue": 2,
-                                "facing": "EmitterX",
-                                "green": 0.4,
-                                "label": "LASER CORE",
-                                "red": 0.2,
-                                "shader": "particle_add_soft"
+                            'emissionBursts': 1,
+                            'endDistance': 1400,
+                            'killOnDeactivate': true,
+                            'lifetime': 127,
+                            'maxParticles': 1,
+                            'offsetY': 1.5,
+                            'sizeX': 2,
+                            'sizeY': 4,
+                            'sort': 'NoSort',
+                            'spec': {
+                                'alpha': 1,
+                                'baseTexture': '/pa/effects/textures/particles/gradient_tail.papa',
+                                'blue': 2,
+                                'facing': 'EmitterX',
+                                'green': 0.4,
+                                'label': 'LASER CORE',
+                                'red': 0.2,
+                                'shader': 'particle_add_soft'
                             }
                         },
                         {
-                            "emissionRate": 10,
-                            "endDistance": 1400,
-                            "killOnDeactivate": true,
-                            "lifetime": 0.1,
-                            "sizeX": 5,
-                            "sizeY": 4,
-                            "sort": "NoSort",
-                            "spec": {
-                                "alpha": [
+                            'emissionRate': 10,
+                            'endDistance': 1400,
+                            'killOnDeactivate': true,
+                            'lifetime': 0.1,
+                            'sizeX': 5,
+                            'sizeY': 4,
+                            'sort': 'NoSort',
+                            'spec': {
+                                'alpha': [
                                     [
                                         0,
                                         1
@@ -121,8 +106,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "baseTexture": "/pa/effects/textures/particles/softdot.papa",
-                                "blue": [
+                                'baseTexture': '/pa/effects/textures/particles/softdot.papa',
+                                'blue': [
                                     [
                                         0,
                                         2
@@ -132,11 +117,11 @@ define(['shared/gw_common'], function(GW) {
                                         1
                                     ]
                                 ],
-                                "green": 0.2,
-                                "label": "GLOW",
-                                "red": 0.1,
-                                "shader": "particle_add",
-                                "sizeX": [
+                                'green': 0.2,
+                                'label': 'GLOW',
+                                'red': 0.1,
+                                'shader': 'particle_add',
+                                'sizeX': [
                                     [
                                         0,
                                         1
@@ -146,7 +131,7 @@ define(['shared/gw_common'], function(GW) {
                                         2
                                     ]
                                 ],
-                                "sizeY": [
+                                'sizeY': [
                                     [
                                         0,
                                         1
@@ -159,16 +144,16 @@ define(['shared/gw_common'], function(GW) {
                             }
                         },
                         {
-                            "emissionBursts": 5,
-                            "emissionRate": 10,
-                            "endDistance": 1400,
-                            "killOnDeactivate": true,
-                            "lifetime": 0.4,
-                            "rotationRate": 10,
-                            "rotationRateRange": 5,
-                            "sort": "NoSort",
-                            "spec": {
-                                "alpha": [
+                            'emissionBursts': 5,
+                            'emissionRate': 10,
+                            'endDistance': 1400,
+                            'killOnDeactivate': true,
+                            'lifetime': 0.4,
+                            'rotationRate': 10,
+                            'rotationRateRange': 5,
+                            'sort': 'NoSort',
+                            'spec': {
+                                'alpha': [
                                     [
                                         0,
                                         0.7
@@ -182,10 +167,10 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "baseTexture": "/pa/effects/textures/particles/softdot.papa",
-                                "blue": 1,
-                                "cameraPush": 2,
-                                "green": [
+                                'baseTexture': '/pa/effects/textures/particles/softdot.papa',
+                                'blue': 1,
+                                'cameraPush': 2,
+                                'green': [
                                     [
                                         0,
                                         0.5
@@ -199,8 +184,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "label": "ROTATING OVALS 01",
-                                "red": [
+                                'label': 'ROTATING OVALS 01',
+                                'red': [
                                     [
                                         0,
                                         0.3
@@ -214,8 +199,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "shader": "particle_add_soft",
-                                "sizeX": [
+                                'shader': 'particle_add_soft',
+                                'sizeX': [
                                     [
                                         0,
                                         1
@@ -229,7 +214,7 @@ define(['shared/gw_common'], function(GW) {
                                         1
                                     ]
                                 ],
-                                "sizeY": [
+                                'sizeY': [
                                     [
                                         0,
                                         1.5
@@ -244,21 +229,21 @@ define(['shared/gw_common'], function(GW) {
                                     ]
                                 ]
                             },
-                            "velocity": 13,
-                            "velocityRange": 3,
-                            "velocityY": 1
+                            'velocity': 13,
+                            'velocityRange': 3,
+                            'velocityY': 1
                         },
                         {
-                            "emissionBursts": 5,
-                            "emissionRate": 10,
-                            "endDistance": 1400,
-                            "killOnDeactivate": true,
-                            "lifetime": 0.4,
-                            "rotationRate": -10,
-                            "rotationRateRange": 5,
-                            "sort": "NoSort",
-                            "spec": {
-                                "alpha": [
+                            'emissionBursts': 5,
+                            'emissionRate': 10,
+                            'endDistance': 1400,
+                            'killOnDeactivate': true,
+                            'lifetime': 0.4,
+                            'rotationRate': -10,
+                            'rotationRateRange': 5,
+                            'sort': 'NoSort',
+                            'spec': {
+                                'alpha': [
                                     [
                                         0,
                                         0.7
@@ -272,10 +257,10 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "baseTexture": "/pa/effects/textures/particles/softdot.papa",
-                                "blue": 1,
-                                "cameraPush": 2,
-                                "green": [
+                                'baseTexture': '/pa/effects/textures/particles/softdot.papa',
+                                'blue': 1,
+                                'cameraPush': 2,
+                                'green': [
                                     [
                                         0,
                                         0.5
@@ -289,8 +274,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "label": "ROTATING OVALS 02",
-                                "red": [
+                                'label': 'ROTATING OVALS 02',
+                                'red': [
                                     [
                                         0,
                                         0.3
@@ -304,8 +289,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "shader": "particle_add_soft",
-                                "sizeX": [
+                                'shader': 'particle_add_soft',
+                                'sizeX': [
                                     [
                                         0,
                                         1
@@ -319,7 +304,7 @@ define(['shared/gw_common'], function(GW) {
                                         1
                                     ]
                                 ],
-                                "sizeY": [
+                                'sizeY': [
                                     [
                                         0,
                                         1.5
@@ -334,35 +319,35 @@ define(['shared/gw_common'], function(GW) {
                                     ]
                                 ]
                             },
-                            "velocity": 13,
-                            "velocityRange": 3,
-                            "velocityY": 1
+                            'velocity': 13,
+                            'velocityRange': 3,
+                            'velocityY': 1
                         },
                         {
-                            "delay": 0,
-                            "emissionBursts": 1,
-                            "endDistance": 3000,
-                            "killOnDeactivate": true,
-                            "maxParticles": 1,
-                            "sizeX": 10,
-                            "spec": {
-                                "blue": 0.8,
-                                "green": 0.1,
-                                "label": "LIGHT",
-                                "red": 0.1,
-                                "shape": "pointlight"
+                            'delay': 0,
+                            'emissionBursts': 1,
+                            'endDistance': 3000,
+                            'killOnDeactivate': true,
+                            'maxParticles': 1,
+                            'sizeX': 10,
+                            'spec': {
+                                'blue': 0.8,
+                                'green': 0.1,
+                                'label': 'LIGHT',
+                                'red': 0.1,
+                                'shape': 'pointlight'
                             }
                         },
                         {
-                            "bLoop": false,
-                            "emissionBursts": 1,
-                            "endDistance": 4000,
-                            "lifetime": 0.25,
-                            "maxParticles": 1,
-                            "rotationRange": 3.1516,
-                            "sizeX": 20,
-                            "spec": {
-                                "alpha": [
+                            'bLoop': false,
+                            'emissionBursts': 1,
+                            'endDistance': 4000,
+                            'lifetime': 0.25,
+                            'maxParticles': 1,
+                            'rotationRange': 3.1516,
+                            'sizeX': 20,
+                            'spec': {
+                                'alpha': [
                                     [
                                         0,
                                         1
@@ -372,9 +357,9 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "baseTexture": "/pa/effects/textures/particles/soft_flare.papa",
-                                "cameraPush": 0.15,
-                                "rgb": [
+                                'baseTexture': '/pa/effects/textures/particles/soft_flare.papa',
+                                'cameraPush': 0.15,
+                                'rgb': [
                                     2,
                                     [
                                         130,
@@ -382,8 +367,8 @@ define(['shared/gw_common'], function(GW) {
                                         255
                                     ]
                                 ],
-                                "shader": "particle_add_soft",
-                                "sizeX": [
+                                'shader': 'particle_add_soft',
+                                'sizeX': [
                                     [
                                         0,
                                         0.8
@@ -396,16 +381,16 @@ define(['shared/gw_common'], function(GW) {
                             }
                         },
                         {
-                            "bLoop": false,
-                            "emissionBursts": 1,
-                            "emissionRate": 10,
-                            "emitterLifetime": 0.25,
-                            "endDistance": 5000,
-                            "lifetime": 0.2,
-                            "lifetimeRange": 0.05,
-                            "rotationRange": 3.14,
-                            "sizeRandomFlip": true,
-                            "sizeX": [
+                            'bLoop': false,
+                            'emissionBursts': 1,
+                            'emissionRate': 10,
+                            'emitterLifetime': 0.25,
+                            'endDistance': 5000,
+                            'lifetime': 0.2,
+                            'lifetimeRange': 0.05,
+                            'rotationRange': 3.14,
+                            'sizeRandomFlip': true,
+                            'sizeX': [
                                 [
                                     0.2,
                                     10
@@ -415,8 +400,8 @@ define(['shared/gw_common'], function(GW) {
                                     5
                                 ]
                             ],
-                            "spec": {
-                                "alpha": [
+                            'spec': {
+                                'alpha': [
                                     [
                                         0,
                                         0
@@ -430,8 +415,8 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "baseTexture": "/pa/effects/textures/particles/fire_puff.papa",
-                                "rgb": [
+                                'baseTexture': '/pa/effects/textures/particles/fire_puff.papa',
+                                'rgb': [
                                     5,
                                     [
                                         84,
@@ -439,8 +424,8 @@ define(['shared/gw_common'], function(GW) {
                                         255
                                     ]
                                 ],
-                                "shader": "particle_clip",
-                                "sizeX": [
+                                'shader': 'particle_clip',
+                                'sizeX': [
                                     [
                                         0,
                                         0.5
@@ -453,13 +438,13 @@ define(['shared/gw_common'], function(GW) {
                             }
                         },
                         {
-                            "bLoop": false,
-                            "emissionBursts": 1,
-                            "endDistance": 4000,
-                            "lifetime": 0.5,
-                            "sizeX": 10,
-                            "spec": {
-                                "alpha": [
+                            'bLoop': false,
+                            'emissionBursts': 1,
+                            'endDistance': 4000,
+                            'lifetime': 0.5,
+                            'sizeX': 10,
+                            'spec': {
+                                'alpha': [
                                     [
                                         0.2,
                                         50
@@ -473,7 +458,7 @@ define(['shared/gw_common'], function(GW) {
                                         0
                                     ]
                                 ],
-                                "rgb": [
+                                'rgb': [
                                     1,
                                     [
                                         80,
@@ -481,7 +466,7 @@ define(['shared/gw_common'], function(GW) {
                                         255
                                     ]
                                 ],
-                                "shape": "pointlight"
+                                'shape': 'pointlight'
                             }
                         }
                     ]

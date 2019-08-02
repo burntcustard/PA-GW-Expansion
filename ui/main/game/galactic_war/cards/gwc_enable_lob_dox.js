@@ -1,26 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables building of the Lob Bot Launcher by basic fabricators.';
-        },
-        summarize: function(params) {
-            return 'Dox Bot Launcher Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_bot'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        type: 'units',
+        describe: 'Enables building of the Lob Bot Launcher by basic fabricators.',
+        summarize: 'Dox Bot Launcher Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_artillery.png',
+        audio: '/VO/Computer/gw/board_tech_available_bot',
         deal: function (system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -30,9 +15,9 @@ define(['shared/gw_common'], function(GW) {
             return { chance: chance };
 
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             inventory.addUnits([
-                '/pa/units/land/artillery_long/artillery_unit_launcher.json'
+                '/pa/units/land/artillery_unit_launcher/artillery_unit_launcher.json'
             ]);
             inventory.addMods([
                 {

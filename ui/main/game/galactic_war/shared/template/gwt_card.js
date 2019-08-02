@@ -45,13 +45,18 @@ globals.CardViewModel = function (params) {
             self.visible(true);
         }
         else {
-            self.desc(card.describe && card.describe(data));
-            self.summary(card.summarize && card.summarize(data));
-            self.icon(card.icon && card.icon(data));
+            self.desc(_.isFunction(card.describe) ? card.describe(data) : card.describe);
+            self.summary(_.isFunction(card.summarize) ? card.summarize(data) : card.summarize);
+            self.icon(_.isFunction(card.icon) ? card.icon(data) : card.icon);
             self.iconPlaceholder(!self.icon() && (self.summary() || self.desc()));
-            self.audio(card.audio && card.audio(data));
+            self.audio(_.isFunction(card.audio) ? card.audio(data) : { found: card.audio });
             self.visible(!(card.visible === false) || !!(card.visible && card.visible(data)));
-            self.type(card.type && card.type());
+            // self.getContext(_.isFunction(card.getContext) ? card.getContext : function(galaxy) {
+            //     return {
+            //         totalSize: galaxy.stars().length
+            //     };
+            // });
+            self.type(_.isFunction(card.type) ? card.type() : card.type);
             if (self.type()) {
                 self.viewType(self.cardTypeNames[self.type()] || 'Error: undefined or invalid tech type');
             }

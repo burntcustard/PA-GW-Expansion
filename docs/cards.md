@@ -1,50 +1,49 @@
 # Galactic War Card Creation
-What makes up a Galactic War Card in the Galactic War Expansion mod (GWE)?
+What's in a Galactic War Card in the Galactic War Expansion mod (GWE)?
+
+
+Inside a Galactic War Card (gwc_), there are a specific set of properties, ideally following the order and format they're listed in here.
+
 
 ## type (new in GWE)
-A card in this mod has a type which determines what slot in the Galactic War inventory it takes up. The order of these in the card files should follow the order they're listed in here, and the format (whitespace etc.) for consistency.
+A card in this mod has a **type** which determines what slot in the Galactic War inventory it takes up.
 ```
-type: function() { return 'upgrades'; },
+type: 'units',
 ```
 The available types are:  
 `commanderPrimary` `commanderSecondary` `commanderPassive` `units` `upgrades`
 
+
 ## describe
 A description of the card.
 ```
-describe: function(params) {
-    return 'Enables building of the Inferno Heavy Flamethrower Tank from basic vehicle factories.';
-},
+describe: 'Enables building of the Inferno Heavy Flamethrower Tank from basic vehicle factories.',
 ```
+
 
 ## summarize
 The title of the card. Can use a `<br>` tag to force a line break.
 ```
-summarize: function(params) {
-    return 'Inferno Heavy<br>Flamethrower Tank';
-},
+summarize: 'Inferno Heavy<br>Flamethrower Tank',
 ```
+
 
 ## icon
 A file path to an icon for the card.
 ```
-icon: function(params) {
-    return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png';
-},
+icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
 ```
+
 
 ## audio
 A file path to an audio clip that plays when the card is placed in the player's inventory.
 ```
-audio: function(parms) {
-    return {
-        found: '/VO/Computer/gw/board_tech_available_vehicle'
-    }
-},
+audio: '/VO/Computer/gw/board_tech_available_vehicle',
 ```
 
+
 ## getContext
-Extra parameters for the card. See `gwc_minion.js` for an example of more than just the basic `totalSize: galaxy.stars().length`, which most cards have.   
+Included in vanilla GW cards, _but does not need to be in GWE cards, unless weird stuff is going on (like in `gwc_minion.js`)_, as it has a fallback value of:
 ```
 getContext: function(galaxy) {
     return {
@@ -52,13 +51,13 @@ getContext: function(galaxy) {
     };
 },
 ```
-_burntcustard is wanting to set this as the default value so that it doesn't have to be in every single card, but hasn't figured out how yet..._
+
 
 ## deal
 A function which determines when the card appears in the star map.
 In this example:
  * The card (flamethrower range) won't appear if it's  already in the players inventory.
- * The card won't appear unless the player already has the enable infernos card.
+ * The card won't appear unless the player already has the 'enable infernos' card.
  * The card will only appear when the player is between 3 and 5 (inclusive) moves away from the GW start star.
  * The `40` is the chance, in relation to all the other valid cards, that this one gets chosen.
 
@@ -79,7 +78,7 @@ deal: function(system, context, inventory) {
 
 What the card actually does!
 
-Units can be added or removed from the player's inventory with `inventory.addUnits([])` and `inventory.removeUnits([])`. - _Note that those must be are arrays of units!_
+Units can be added or removed from the player's inventory with `inventory.addUnits([])` and `inventory.removeUnits([])`. - _Note that those **must** be arrays of units!_
 ```
 buff: function(inventory, params) {
     inventory.addUnits([
@@ -134,20 +133,30 @@ op: 'multiply',
 value: 0.8
 ```
 
+
 ### add / sub _(modified in GWE)_
 Add or subtract from a value. Allows numerical addition, as well as string concatenation (e.g. to add to a units description).
 ```
 file: unit,
 path: 'description',
 op: 'add',
-value: ' +25% range.'
+value: ' Flamethrower Tech: ＋⁠40% range.'
 ```
 
+
 ### replace
-Replace the value of an individual property. - _Prefer to use add, sub, and multiply when possible, so that in the event of game rebalances, percentage based card descriptions remain accurate._
+Replace the value of an individual property. - _Prefer to use `add`, `sub`, and `multiply` when possible, so that in the event of game rebalances, percentage based card descriptions remain accurate._
+```
+file: weap,
+path: 'max_range',
+op: 'replace',
+value: '30'
+```
+
 
 ### merge (currently unused)
-Uses [lodash .extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
+Uses [lodash _.extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
+
 
 ### push
 Add a property or an array of properties. Can be used to e.g. add order options to units:
@@ -158,6 +167,7 @@ op: 'push',
 value: 'ORDER_FireSecondaryWeapon'
 ```
 
+
 ### pull _(new in GWE)_
 Remove a particular value from an array. Can be used to e.g. remove order options from units:
 ```
@@ -166,6 +176,7 @@ path: 'command_caps',
 op: 'pull',
 value: 'ORDER_FireSecondaryWeapon'
 ```
+
 
 ### splice _(new in GWE)_
 Remove a value at a specified index from an array. E.g. to remove part of an effect:
@@ -176,8 +187,14 @@ op: 'splice',
 value: 1
 ```
 
-### eval, clone, tag (currently unused)
-Advanced ops that literally no one has figured out how to use constructively. Some explanation can be found in `/media/ui/main/game/galactic_war/cards/gwc_storage_1.js`
+
+### eval (currently unused)
+Theoretically lets you run some JS function on value.
+
+
+### clone, tag _(modified in GWE)_
+Advanced ops that let you re-use and/or create new specs. An example can be found in `/media/ui/main/game/galactic_war/cards/gwc_commander_regen.js`
+
 
 ### delete _(new in GWE)_
 Remove a property and it's value. - _Use this instead of attempting to `'replace'` with empty strings or 0 (which can cause errors)._

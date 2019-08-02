@@ -1,26 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return 'Increases the speed and maneuverability of Drifters (+10%), Kaiju (+20%), and the Ares Titan (+30%).';
-        },
-        summarize: function(params) {
-            return 'Hi-Tech Heavy Grav Tracks';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png';
-        },
-        audio: function(parms) {
-            return {
-                found: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        type: 'upgrades',
+        describe: 'Increases the speed and maneuverability of Drifters (＋⁠10%), Kaiju (＋⁠20%), and the Ares Titan (＋⁠30%).',
+        summarize: 'Hi-Tech Heavy Grav Tracks',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -30,7 +15,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var units = [
                 '/pa/units/land/tank_hover/tank_hover.json',      // 14 -> 15 speed
                 '/pa/units/land/hover_ship/hover_ship.json',      // 11 -> 13 speed
@@ -68,7 +53,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' +' + i + '0% Move Speed.'
+                        value: ' Hi-Tech Grav Tracks: ＋⁠' + i + '0% speed.'
                     }
                 ]);
                 i++;

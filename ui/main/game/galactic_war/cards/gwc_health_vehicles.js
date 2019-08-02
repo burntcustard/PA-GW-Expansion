@@ -1,26 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'upgrades'; },
-        describe: function(params) {
-            return '!LOC:Vehicle Armor Tech increases health of all vehicles by 30%';
-        },
-        summarize: function(params) {
-            return '!LOC:Vehicle Armor Tech';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle_armor.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_armor'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        type: 'upgrades',
+        describe: 'Increases health of all vehicles by 30%',
+        summarize: 'Vehicle Armor Tech',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle_armor.png',
+        audio: '/VO/Computer/gw/board_tech_available_armor',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -28,9 +13,8 @@ define(['shared/gw_common'], function(GW) {
                 chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
-
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var units = [
                 '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
                 '/pa/units/land/tank_light_laser/tank_light_laser.json',
@@ -57,7 +41,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' +30% HP.'
+                        value: ' Armor Tech: ＋⁠30% health.'
                     }
                 ]);
             });

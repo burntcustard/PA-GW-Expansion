@@ -1,67 +1,24 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: 'commanderPassive',
-        describe: 'The commander automatically repairs itself 125 health every 3 seconds, and the cost to repair it with fabricators is halved.',
-        summarize: 'Commander Regen Tech',
-        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_commander_armor.png',
-        audio: '/VO/Computer/gw/board_tech_available_armor',
+        type: 'commanderPrimary',
+        describe: 'Gives the commander a Tesla Gun, similar to the Spark weapon, but with longer range. Uses the commanders internal generator for power, rather than consuming power on reload.',
+        summarize: 'Commander Tesla Gun',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
+        audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_commander_regen')) {
-                chance = (dist <= 5) ? 40:0;
+            if (!inventory.hasCard('gwc_commander_tesla_gun') &&
+                inventory.hasCard('gwc_enable_sparks')) {
+                chance = (dist <= 5 ? 40 : 0);
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             var mods = [];
 
-            // Clone the base bot ammo into a 'regen_ammo' copy
-            var oldWeap = '/pa/units/commanders/base_commander/base_commander_tool_aa_weapon.json';
-            var regenAmmo = oldWeap + '.regen_ammo';
-            mods.push(
-                {
-                    file: oldWeap,
-                    path: 'ammo_id',
-                    op: 'clone',
-                    value: regenAmmo
-                }
-            );
-
-            // Convert the ammo into regen ammo
-            var regenAmmoStats = {
-                'ammo_type': 'PBAOE',
-                'damage': 1,
-                'damage_volume': {
-                  'initial_radius': 1.0
-                },
-                'splash_damages_allies': true,
-                'splash_damage': 1,
-                'splash_radius': 1,
-                'full_damage_splash_radius': 1,
-                'armor_damage_map': {
-                  'AT_Air': 0,
-                  'AT_Bot': 0,
-                  'AT_Commander': -41,
-                  'AT_Naval': 0,
-                  'AT_None': 0,
-                  'AT_Orbital': 0,
-                  'AT_Structure': 0,
-                  'AT_Vehicle': 0
-                }
-            };
-            for (var prop in regenAmmoStats) {
-                mods.push({
-                    file: regenAmmo,
-                    path: prop,
-                    op: 'replace',
-                    value: regenAmmoStats[prop]
-                });
-            }
-
-            // Note: Commanders that aren't loaded may give "file not found" errors
-            var units = [
+            var comms = [
                 '/pa/units/commanders/base_commander/base_commander.json',
                 '/pa/units/commanders/quad_zancrowe/quad_zancrowe.json',
                 '/pa/units/commanders/imperial_thechessknight/imperial_thechessknight.json',
@@ -132,116 +89,144 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/commanders/quad_xenosentryprime/quad_xenosentryprime.json',
                 '/pa/units/commanders/raptor_zaazzaa/raptor_zaazzaa.json'
             ];
-
-            _.forEach(units, function(unit) {
-                var regenWeap = unit + '.regen_weapon';
-
-                // Clone the commander AA weapon into a 'regen_weapon' copy
+            _.forEach(comms, function(unit) {
                 mods.push(
                     {
                         file: unit,
-                        path: 'tools.3.spec_id', // The aa weap (hopefully?)
-                        op: 'clone',
-                        value: regenWeap
-                    }
-                );
-
-                // Convert the new weapon into a regen weapon
-                var regenWeapStats = {
-                    'ammo_id': regenAmmo,
-                    'ammo_source': 'time',
-                    'ammo_capacity': 0,
-                    'ammo_demand': 0,
-                    'ammo_per_shot': 0,
-                    'start_fully_charged': false,
-                    'rate_of_fire': 1,
-                    'max_range': 0,
-                    'yaw_rate': 0,
-                    'pitch_rate': 0,
-                    'yaw_range': 0,
-                    'pitch_range': 0,
-                    'firing_arc_yaw': 360,
-                    'firing_arc_pitch': 360,
-                    'fire_delay': 0,
-                    'auto_fire_when_charged': true
-                };
-                for (var prop in regenWeapStats) {
-                    mods.push({
-                        file: regenWeap,
-                        path: prop,
+                        path: 'tools.1.fire_event',
                         op: 'replace',
-                        value: regenWeapStats[prop]
-                    });
-                }
-
-                mods.push(
-                    {
-                        file: regenWeap,
-                        path: 'target_layers',
-                        op: 'replace',
-                        value: [
-                            'WL_WaterSurface',
-                            'WL_Underwater',
-                            'WL_Seafloor'
-                        ]
+                        value: 'fired1'
                     },
                     {
-                        file: regenWeap,
-                        path: 'ammo_id',
-                        op: 'tag'
-                    }
-                );
-
-                // Give the new weapon to the commander
-                mods.push(
-                    {
                         file: unit,
-                        path: 'tools',
-                        op: 'push',
+                        path: 'events.fired1',
+                        op: 'replace',
                         value: {
-                          'spec_id': regenWeap,
-                          'aim_bone': 'bone_turret',
-                          'muzzle_bone': 'socket_rightMuzzle',
-                          'primary_weapon': false,
-                          'show_range': false
+                            'audio_cue': '/SE/Weapons/bot/spark_fire',
+                            'effect_spec': '/pa/effects/specs/tesla_muzzle_flash.pfx socket_rightMuzzle'
                         }
                     },
                     {
                         file: unit,
-                        path: 'tools.last.spec_id',
-                        op: 'tag',
-                        value: ''
-                    },
-                    {
-                        file: unit,
-                        path: 'tools.last.aim_bone',
+                        path: 'events.fired0',
                         op: 'replace',
-                        value: 'bone_root'
+                        value: {
+                            'effect_spec': '/pa/effects/specs/default_muzzle_flash.pfx socket_rightMuzzle'
+                        }
                     },
                     {
                         file: unit,
-                        path: 'tools.last.fire_event',
+                        path: 'tools.3.fire_event',
                         op: 'replace',
-                        value: 'fired3'
+                        value: 'fired0'
                     },
                     {
                         file: unit,
-                        path: 'tools.last.record_index',
+                        path: 'tools.4.fire_event',
                         op: 'replace',
-                        value: -1
-                    },
-                    // Cheaper commander repair 25000 -> 12500
-                    {
-                        file: unit,
-                        path: 'build_metal_cost',
-                        op: 'multiply',
-                        value: .5
+                        value: 'fired0'
                     }
                 );
-
             });
 
-            // Actually do all the things mentioned before
+            var weaps = [
+                '/pa/units/commanders/base_commander/base_commander_tool_bullet_weapon.json',
+                '/pa/units/commanders/base_commander/base_commander_tool_laser_weapon.json',
+                '/pa/units/commanders/base_commander/base_commander_tool_missile_weapon.json'
+            ];
+            _.forEach(weaps, function(weap) {
+                mods.push(
+                    {
+                        file: weap,
+                        path: 'rate_of_fire',
+                        op: 'replace',
+                        value: 1
+                    }
+                );
+            });
+
+            var ammos = [
+                '/pa/units/commanders/base_commander/base_commander_ammo_bullet.json',
+                '/pa/units/commanders/base_commander/base_commander_ammo_laser.json',
+                '/pa/units/commanders/base_commander/base_commander_ammo_missile.json'
+            ];
+            var teslaAmmoProps = {
+                'model': {
+                    'filename': ''
+                },
+                'splash_radius': 10,
+                'initial_velocity': 180,
+                'max_velocity': 180,
+                'fx_trail': {
+                    'filename': '/pa/effects/specs/tesla_proj_trail.pfx'
+                },
+                'events': {
+                    'spawned' : {
+                        'audio_cue': '/SE/Weapons/bot/spark_fire'
+                    },
+                    'died': {
+                        'audio_cue': '/SE/Impacts/bot_spark_impact',
+                        'effect_spec': '/pa/effects/specs/tesla_hit.pfx'
+                    }
+                }
+            };
+            _.forEach(ammos, function(ammo) {
+                _.forEach(teslaAmmoProps, function(value, prop) {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: prop,
+                            op: 'replace',
+                            value: value
+                        }
+                    )
+                });
+
+                if (inventory.hasCard('gwc_overcharged_tesla')) {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: 'damage',
+                            op: 'replace',
+                            value: 224
+                        },
+                        {
+                            file: ammo,
+                            path: 'splash_damage',
+                            op: 'replace',
+                            value: 70
+                        },
+                        {
+                            file: ammo,
+                            path: 'full_damage_splash_radius',
+                            op: 'replace',
+                            value: 6
+                        }
+                    );
+                } else {
+                    mods.push(
+                        {
+                            file: ammo,
+                            path: 'damage',
+                            op: 'replace',
+                            value: 160
+                        },
+                        {
+                            file: ammo,
+                            path: 'splash_damage',
+                            op: 'replace',
+                            value: 50
+                        },
+                        {
+                            file: ammo,
+                            path: 'full_damage_splash_radius',
+                            op: 'replace',
+                            value: 4 // Slightly bigger than the sparks 2
+                        }
+                    );
+                }
+            });
+
             inventory.addMods(mods);
         }
     };

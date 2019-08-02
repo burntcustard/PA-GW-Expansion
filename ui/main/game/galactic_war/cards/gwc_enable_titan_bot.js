@@ -1,26 +1,11 @@
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {
-        type: function() { return 'units'; },
-        describe: function(params) {
-            return 'Enables construction of the Atlas Titan, built via advanced bot fabricators.';
-        },
-        summarize: function(params) {
-            return 'Atlas Titan';
-        },
-        icon: function(params) {
-            return 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_enable_titans.png';
-        },
-        audio: function(parms) {
-            return {
-                found: '/VO/Computer/gw/board_tech_available_titans_all'
-            }
-        },
-        getContext: function(galaxy) {
-            return {
-                totalSize: galaxy.stars().length
-            };
-        },
+        type: 'units',
+        describe: 'Enables construction of the Atlas Titan, built via advanced bot fabricators.',
+        summarize: 'Atlas Titan',
+        icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_enable_titans.png',
+        audio: '/VO/Computer/gw/board_tech_available_titans_all',
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
@@ -30,7 +15,7 @@ define(['shared/gw_common'], function(GW) {
             }
             return { chance: chance };
         },
-        buff: function(inventory, params) {
+        buff: function(inventory) {
             inventory.addUnits([
                 '/pa/units/land/titan_bot/titan_bot.json'
             ]);
