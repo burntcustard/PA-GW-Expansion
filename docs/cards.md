@@ -134,6 +134,7 @@ op: 'multiply',
 value: 0.8
 ```
 
+
 ### add / sub _(modified in GWE)_
 Add or subtract from a value. Allows numerical addition, as well as string concatenation (e.g. to add to a units description).
 ```
@@ -143,11 +144,14 @@ op: 'add',
 value: ' +25% range.'
 ```
 
+
 ### replace
 Replace the value of an individual property. - _Prefer to use add, sub, and multiply when possible, so that in the event of game rebalances, percentage based card descriptions remain accurate._
 
+
 ### merge (currently unused)
-Uses [lodash .extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
+Uses [lodash _.extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
+
 
 ### push
 Add a property or an array of properties. Can be used to e.g. add order options to units:
@@ -158,6 +162,7 @@ op: 'push',
 value: 'ORDER_FireSecondaryWeapon'
 ```
 
+
 ### pull _(new in GWE)_
 Remove a particular value from an array. Can be used to e.g. remove order options from units:
 ```
@@ -166,6 +171,7 @@ path: 'command_caps',
 op: 'pull',
 value: 'ORDER_FireSecondaryWeapon'
 ```
+
 
 ### splice _(new in GWE)_
 Remove a value at a specified index from an array. E.g. to remove part of an effect:
@@ -176,8 +182,14 @@ op: 'splice',
 value: 1
 ```
 
-### eval, clone, tag (currently unused)
-Advanced ops that literally no one has figured out how to use constructively. Some explanation can be found in `/media/ui/main/game/galactic_war/cards/gwc_storage_1.js`
+
+### eval (currently unused)
+Theoretically lets you run some JS function on value.
+
+
+### clone, tag _(modified in GWE)_
+Advanced ops that let you re-use and/or create new specs. An example can be found in `/media/ui/main/game/galactic_war/cards/gwc_commander_regen.js`
+
 
 ### delete _(new in GWE)_
 Remove a property and it's value. - _Use this instead of attempting to `'replace'` with empty strings or 0 (which can cause errors)._
