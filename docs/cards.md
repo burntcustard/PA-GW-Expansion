@@ -1,8 +1,5 @@
 # Galactic War Card Creation
-What's in a Galactic War Card in the Galactic War Expansion mod (GWE)?
-
-
-Inside a Galactic War Card (gwc_), there are a specific set of properties, ideally following the order and format they're listed in here.
+Inside a Galactic War Card are a specific set of properties, ideally following the order and format they're listed in here.
 
 
 ## type (new in GWE)
@@ -124,7 +121,7 @@ _.forEach(weaps, function(weap) {
 The ops are in `/shared/js/gw_specs.js`, but are explained here in detail. Some of these are _new to GWE_ rather than from vanilla PA GW. __GWE also allows modding of effects.__
 
 
-### multiply
+### `multiply`
 Float used to multiply a value, can be < 1.0 to reduce it. E.g. to reduce a unit 80% move speed:
 ```
 file: unit,
@@ -134,7 +131,7 @@ value: 0.8
 ```
 
 
-### add / sub _(modified in GWE)_
+### `add` & `sub` _(modified in GWE)_
 Add or subtract from a value. Allows numerical addition, as well as string concatenation (e.g. to add to a units description).
 ```
 file: unit,
@@ -144,7 +141,7 @@ value: ' Flamethrower Tech: ＋⁠40% range.'
 ```
 
 
-### replace
+### `replace`
 Replace the value of an individual property. - _Prefer to use `add`, `sub`, and `multiply` when possible, so that in the event of game rebalances, percentage based card descriptions remain accurate._
 ```
 file: weap,
@@ -154,11 +151,11 @@ value: '30'
 ```
 
 
-### merge (currently unused)
+### `merge` _(unused)_
 Uses [lodash _.extend](https://lodash.com/docs/4.17.11#assignIn) to merge property objects.
 
 
-### push
+### `push`
 Add a property or an array of properties. Can be used to e.g. add order options to units:
 ```
 file: comm,
@@ -168,7 +165,7 @@ value: 'ORDER_FireSecondaryWeapon'
 ```
 
 
-### pull _(new in GWE)_
+### `pull` _(new in GWE)_
 Remove a particular value from an array. Can be used to e.g. remove order options from units:
 ```
 file: '/pa/units/commanders/base_commander/base_commander.json',
@@ -178,7 +175,7 @@ value: 'ORDER_FireSecondaryWeapon'
 ```
 
 
-### splice _(new in GWE)_
+### `splice` _(new in GWE)_
 Remove a value at a specified index from an array. E.g. to remove part of an effect:
 ```
 file: effect,
@@ -188,15 +185,15 @@ value: 1
 ```
 
 
-### eval (currently unused)
+### `eval` (unused)
 Theoretically lets you run some JS function on value.
 
 
-### clone, tag _(modified in GWE)_
+### `clone` & `tag` _(modified in GWE)_
 Advanced ops that let you re-use and/or create new specs. An example can be found in `/media/ui/main/game/galactic_war/cards/gwc_commander_regen.js`
 
 
-### delete _(new in GWE)_
+### `delete` _(new in GWE)_
 Remove a property and it's value. - _Use this instead of attempting to `'replace'` with empty strings or 0 (which can cause errors)._
 ```
 file: '/pa/units/land/bot_bomb/bot_bomb_ammo.json',
