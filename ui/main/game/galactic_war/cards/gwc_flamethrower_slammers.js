@@ -149,7 +149,7 @@ define(['shared/gw_common'], function(GW) {
                     value: 'Assault Bot - Devastating short range anti-ground.'
                 },
                 {
-                    // 400 -> 600 HP
+                    // 400 -> 600 HP // Still 1 shot by levellers, but not snipers
                     file: unit,
                     path: 'max_health',
                     op: 'multiply',
@@ -171,12 +171,9 @@ define(['shared/gw_common'], function(GW) {
                 },
                 {
                     file: unit,
-                    path: 'events.died',
+                    path: 'events.died.effect_scale',
                     op: 'replace',
-                    value: {
-                      "audio_cue":"/SE/Impacts/bomb_bot_plasma",
-                      "effect_spec":"/pa/units/land/bot_bomb/bot_bomb_ammo_explosion.pfx"
-                    }
+                    value: 1.2
                 },
                 {
                     file: weap,

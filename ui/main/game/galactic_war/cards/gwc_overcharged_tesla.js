@@ -65,9 +65,9 @@ define(['shared/gw_common'], function(GW) {
             });
 
             var ammos = [
-                '/pa/units/land/bot_tesla/bot_tesla_ammo.json',    // Spark ammo damage 160 -> 224
-                '/pa/units/air/solar_drone/solar_drone_ammo.json', // Icarus ammo damage 25 -> 35
-                '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus ammo damage 1600 -> 2100
+                '/pa/units/land/bot_tesla/bot_tesla_ammo.json',    // Spark damage 160 -> 224
+                '/pa/units/air/solar_drone/solar_drone_ammo.json', // Icarus damage 25 -> 35
+                '/pa/units/air/titan_air/titan_air_ammo.json'      // Zeus damage 1600 -> 2100
             ];
             _.forEach(ammos, function(ammo) {
                 mods.push(

@@ -263,12 +263,10 @@ define([], function() {
                     return attribute;
                 },
                 pull: function(attribute, value) {
-                    if (!_.isArray(attribute)) {
-                        console.error('Failed to pull ' + value + ' from non-array attribute');
-                    } else if (_.isArray(value)) {
+                    if (_.isArray(attribute)) {
                         _.pullAll(attribute, value);
                     } else {
-                        _.pull(attribute, value);
+                        console.error('Failed to pull ' + value + ' from non-array attribute');
                     }
                     return attribute;
                 },
