@@ -1,9 +1,11 @@
 define([
     'main/game/galactic_war/shared/js/systems/template-loader',
-    'shared/gw_factions'
+    'shared/gw_factions',
+    'shared/gw_inventory'
 ], function(
     activeStarSystemTemplates,
-    GWFactions
+    GWFactions,
+    GWInventory
 ) {
     return {
         getTeam: function(index) {
@@ -48,6 +50,30 @@ define([
 
         makeWorker: function(star, ai, team) {
             console.log("Making a worker");
+
+            ai.ownCards = ['gwc_commander_servo2'];
+
+            // New stuff trying to give cards to AI
+            ai.inventory = ko.observable(new GWInventory());
+
+            console.log("Made the ai have an inventory wohoo?");
+            console.log(JSON.stringify(ai.inventory()));
+
+            if (ai.ownCards && ai.ownCards[0]) {
+                console.log("Giving the cards to the AI inventory");
+                _.forEach(ai.ownCards, function(card) {
+                    console.log("Adding card: " + card);
+                    ai.inventory().cards.push(card);
+                });
+                console.log("Now the AI has these cards(?):");
+                console.log(JSON.stringify(ai.inventory().cards);
+                console.log("Applying all the AI cards(?)");
+                ai.inventory().applyCards();
+                console.log("AI mods:");
+                console.log(JSON.stringify(ai.inventory().mods));
+                console.log(JSON.stringify(ai.inventory().mods()));
+            }
+
             if (team.workers) {
                 _.assign(ai, _.sample(team.workers));
             } else if (team.remainingMinions) {
@@ -55,10 +81,10 @@ define([
                 _.assign(ai, minion);
                 _.remove(team.remainingMinions, function(minion) { return minion.name === ai.name; });
             }
-            if (team.ownCards) {
-                console.log("Team has own cards so trying to give them to the AI");
-                ai.ownCards = team.ownCards;
-            }
+            // if (team.ownCards) {
+            //     console.log("Team has own cards so trying to give them to the AI");
+            //     ai.ownCards = team.ownCards;
+            // }
             return $.when(ai);
         }
     };

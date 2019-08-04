@@ -264,7 +264,7 @@ define([], function() {
                 },
                 pull: function(attribute, value) {
                     if (_.isArray(attribute)) {
-                        _.pullAll(attribute, value);
+                        _.pull(attribute, value);
                     } else {
                         console.error('Failed to pull ' + value + ' from non-array attribute');
                     }

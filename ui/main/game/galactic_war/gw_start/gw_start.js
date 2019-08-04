@@ -392,8 +392,10 @@ $(document).ready(function () {
                                 ai: ai,
                                 star: star
                             });
-                            //console.log("AI info:");
-                            //console.log(JSON.stringify(ai));
+                            console.log("'spread' AI info:");
+                            console.log(JSON.stringify(ai));
+                            console.log("'spread' star info:");
+                            console.log(JSON.stringify(star));
                         });
                     },
                     boss: function (star, ai) {

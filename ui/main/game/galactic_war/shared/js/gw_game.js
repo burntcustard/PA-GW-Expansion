@@ -105,6 +105,29 @@ define([
                 busy.resolve(self);
             });
 
+            // Apply the AI cards?
+            var galaxy = self.galaxy();
+            var battleGround = galaxy.stars()[self.currentStar()];
+            var system = battleGround.system();
+            //console.log("'load' battleground:");
+            //console.log(JSON.stringify(battleGround));
+            //console.log("'load' system");
+            //console.log(JSON.stringify(system));
+            if (battleGround.ai & battleGround.ai !== undefined) {
+                console.log("battleGround.ai:");
+                console.log(JSON.stringify(battleGround.ai));
+                console.log("battleGround.ai.inventory");
+                console.log(battleGround.ai.inventory);
+                console.log("battleGround.ai.inventory()");
+                console.log(battleGround.ai.inventory());
+                // var ai = battleGround.ai();
+                // console.log("'load' ai:");
+                // console.log(JSON.stringify(ai));
+
+                // Do this or something like the busy thingy for the normal player inventory
+                //ai.inventory().applyCards();
+            }
+
             return self.busy;
         },
 

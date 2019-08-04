@@ -196,7 +196,7 @@ define(['shared/gw_common'], function(GW) {
                     op: 'pull',
                     value: 'WL_Seafloor'
                 }
-            ]);
+            );
 
 
             if (inventory.hasCard('gwc_flamethrower_range')) {
