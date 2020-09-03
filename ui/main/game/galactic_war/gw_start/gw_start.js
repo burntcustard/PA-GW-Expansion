@@ -212,7 +212,7 @@ $(document).ready(function () {
         };
         self.newGameName = ko.observable(defaultNewGameName());
         self.newGameSizeIndex = ko.observable(1).extend({ numeric: 0 });
-        self.newGameDifficultyIndex = ko.observable(0).extend({ numeric: 0});
+        self.newGameDifficultyIndex = ko.observable(1).extend({ numeric: 1});
         self.newGameHardcore = ko.observable(false);
 
         self.startCards = ko.observableArray();
@@ -221,10 +221,12 @@ $(document).ready(function () {
             return self.startCards()[self.activeStartCardIndex()];
         });
 
-        self.makeUnknown = function(cardData) {
+        self.makeUnknown = function(cardData)
+        {
             return new UnknownCardViewModel(cardData);
         };
-        self.makeKnown = function(cardData) {
+        self.makeKnown = function(cardData)
+        {
             var card = new CardViewModel(cardData);
             card.active = ko.computed(function() {
                 return self.activeStartCard() === card;
@@ -237,7 +239,9 @@ $(document).ready(function () {
             };
             return card;
         };
-        var getStartCards = function() {
+
+        self.getStartCards = function()
+        {
             var known = _.map(startCards, function(cardData, index) {
                 // Note: First card is built-in
                 if (index !== 0 && !GW.bank.hasStartCard(cardData))
@@ -252,7 +256,7 @@ $(document).ready(function () {
 
             return known.concat(unknown);
         };
-        self.startCards(getStartCards());
+        self.startCards(self.getStartCards());
         self.addStartCards = function(ids, isKnown /* = true */) {
             ids.map(function(id) {
               if (isKnown === false) {
@@ -272,13 +276,13 @@ $(document).ready(function () {
         };
 
         self.updateCommander = function() {
-            if (self.newGame()) {
+            if (self.newGame())
                 self.newGame().inventory().setTag('global', 'commander', self.selectedCommander());
-            }
         }
 
         self.makeGameBusy = ko.observable(false);
-        self.makeGame = function () {
+        self.makeGame = function ()
+        {
             self.newGame(undefined);
 
             var busyToken = {};
