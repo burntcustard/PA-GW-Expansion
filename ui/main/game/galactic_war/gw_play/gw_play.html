@@ -24,7 +24,7 @@
 
     <canvas id="galaxy-map" height="800" width="800" data-bind="attr: { height: galaxy.canvasHeight(), width: galaxy.canvasWidth(), visible: !hidingUI() }"></canvas>
 
-    <div id="game_menu" class="ignoremouse" data-bind="visible: showSideBar" style="display: none">
+    <div id="game_menu" class="ignoremouse" data-bind="visible: showSideBar, css: { show_social: showSocial }" style="display: none">
         <div class="div_game_menu">
             <div class="div_game_menu_cont">
                 <div class="div_game_menu_item" data-bind="click: menuSettings, click_sound: 'default', rollover_sound: 'default'">
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div id="footer" class="ignoremouse">
+    <div id="footer" class="ignoremouse" data-bind="css: { show_social: showSocial }">
         <!-- Note: we often add display none to prevent elements from appearing before the model has loaded;
              however, this is a loading icon, so it makes sense for it to appear early. -->
         <div class="div_drive_access" data-bind="visible: driveAccessInProgress() || launchingTutorialFight()">
@@ -125,7 +125,7 @@
         </div>
 
         <!-- TECH BANK: INVENTORY (SPLIT BY TYPE) -->
-        <div id="tech_bar_cont" style="margin: 0px auto; display: none;" data-bind="visible: !hidingUI()">
+        <div id="tech_bar_cont" style="display: none;" data-bind="visible: !hidingUI()">
 
             <div id="inventory" class="attendmouse wrap" data-bind="visible: cards().length" style="display: none">
                 <div class="tech_bar_types_cont" data-bind="foreach: cardsOfTypeArray">
@@ -161,7 +161,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- TECH BANK: INVENTORY -->
@@ -268,7 +267,7 @@
         </div>
     </div>
 
-    <div class="bottom-bar"></div>
+    <div class="bottom-bar" data-bind="css: { show_social: showSocial }"></div>
 
     <!--Testing-->
     <noloc>

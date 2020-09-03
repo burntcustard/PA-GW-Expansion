@@ -7,6 +7,11 @@ html, body {
     background: none;
 }
 
+.show_social
+{
+    margin-bottom: 35px;
+}
+
 .container {
     height: 100%;
     width: 100%;
@@ -92,7 +97,8 @@ html, body {
 }
 
     #system-detail .div_credits_title {
-        font-family: 'Sansation Bold';
+        font-family: "Sansation";
+        font-weight: bold;
         font-size: 18px;
         color: #88DBFF;
         text-shadow: 0px 0px 20px #88DBFF;
@@ -106,7 +112,8 @@ html, body {
 
     #system-detail .system-name,
     #system-detail .credits-category {
-        font-family: 'Sansation Bold';
+        font-family: "Sansation";
+        font-weight: bold;
         font-size: 28px;
         color: #88DBFF;
         text-shadow: 0px 0px 20px #88DBFF;
@@ -162,7 +169,9 @@ html, body {
         font-size: 20px;
         color: #FC0;
         font-weight: bold;
-        font-family: 'Sansation Bold';
+        font-weight: bold;
+        font-family: "Sansation";
+        font-weight: bold;
     }
 
     #system-card .warning-desc {
@@ -184,7 +193,8 @@ html, body {
     color: #88DBFF;
     text-shadow: 0px 0px 20px #88DBFF;
     font-size: 24px;
-    font-family: 'Sansation bold';
+    font-family: "Sansation";
+    font-weight: bold;
     background: rgba(11, 26, 31, 0.9);
     box-shadow: 0px 0px 100px #000;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -200,7 +210,7 @@ html, body {
     position: absolute;
     bottom: 30px;
     right: 122px;
-    z-index: 2;
+    z-index: 3;
 }
 
     #game_menu .center {
@@ -277,7 +287,8 @@ html, body {
     border: 1px solid transparent;
     border-bottom: 1px solid rgba(255,255,255,.05);
     position: relative;
-    font-family: 'Sansation Bold';
+    font-family: "Sansation";
+    font-weight: bold;
     font-size: 18px;
     color: #00b3ff;
     text-shadow: 0px 0px 20px #00b3ff;
@@ -352,7 +363,8 @@ html, body {
 .div_ingame_timer {
     height: 30px;
     width: 220px;
-    font-family: 'Sansation Bold';
+    font-family: "Sansation";
+    font-weight: bold;
     font-size: 14px;
     color: #00b3ff;
     text-shadow: 0px 0px 30px #00b3ff;
@@ -376,9 +388,9 @@ html, body {
     z-index: 2;
 }
 
-#tech_bar_cont {
+/* #tech_bar_cont {
     margin: 0px auto;
-}
+} */
 
 #inventory {
     height: auto;
@@ -525,7 +537,8 @@ html, body {
 }
 
     .card .col2 .summary, .div_card_summary {
-        font-family: 'Sansation Bold';
+        font-family: "Sansation";
+        font-weight: bold;
         font-size: 20px;
         color: #01ff4f;
         text-shadow: none;
@@ -542,7 +555,7 @@ html, body {
     .card .col2 .desc, .div_card_desc {
         max-height: 90px;
         max-width: 372px;
-        font-family: 'Sansation Regular TTF';
+        font-family: "Sansation";
         line-height: 1.4;
         padding-left: 4px;
         padding-right: 4px;
@@ -721,10 +734,11 @@ html, body {
     /* height: 26px; */
     /* width: 180px; */
     background: none;
-    font-size: 13px;
+    font-size: 14px;
     color: #00b3ff;
     text-shadow: 0px 0px 30px #00b3ff;
-    font-family: 'Sansation Bold';
+    font-family: "Sansation";
+    font-weight: bold;
     text-transform: uppercase;
     font-weight: normal;
     text-align: center;
@@ -732,7 +746,7 @@ html, body {
     border: none;
     display: block;
     position: relative;
-    padding-top: 3px;
+    padding-top: 7px;
 }
 
 .btn_slot {
@@ -805,7 +819,8 @@ html, body {
 .div_drive_access {
     color: #88DBFF;
     background: rgba(0,0,0,.5);
-    font-family: "Sansation Bold";
+    font-family: "Sansation";
+    font-weight: bold;
     padding: 2px 16px 2px 6px;
     position: absolute;
     right: 4px;
