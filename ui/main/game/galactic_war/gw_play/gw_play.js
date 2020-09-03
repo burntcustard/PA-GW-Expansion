@@ -22,7 +22,7 @@ requireGW([
     dealer
 ) {
     p = PopUp;
-    var exitGame = function() {
+    self.exitGame = function() {
         model.transitPrimaryMessage(loc('!LOC:Returning to Main Menu'));
         model.transitSecondaryMessage('');
         model.transitDestination('coui://ui/main/game/start/start.html');
@@ -867,12 +867,10 @@ requireGW([
 
         PopUp.mixin(self, $('.popup-container'));
 
-        self.exitGame = exitGame;
-
         self.abandonGame = function () {
             self.confirm(['!LOC:Are you sure you want to abandon this Galactic War?','<br/><br/>','!LOC:All progress and Tech will be lost.'], function() {
                 GW.manifest.removeGame(game)
-                    .then(exitGame);
+                    .then(self.exitGame);
             });
         };
 
@@ -1005,8 +1003,9 @@ requireGW([
             });
         });
 
-        var testGameState = function(options, def) {
-            var curState = game.turnState();
+        self.testGameState = function(options, def)
+        {
+            var curState = self.game().turnState();
             var result = options[curState];
             if (result === undefined)
                 result = def;
@@ -1016,17 +1015,26 @@ requireGW([
         }
 
         self.launchingFight = ko.observable(false);
-        self.fighting = ko.computed(function() {
-            return testGameState({fight: true}, false);
+
+        self.fighting = ko.computed(function()
+        {
+            return self.testGameState({fight: true}, false);
         });
-        self.canFight = ko.computed(function() {
+
+        self.canFight = ko.computed(function()
+        {
             if (self.player.moving())
                 return false;
-            var isBegin = game.turnState() === GW.Game.turnStates.begin;
+
+            var isBegin = self.game().turnState() === GW.Game.turnStates.begin;
+
             return (isBegin || self.fighting() && !self.launchingFight()) && !!self.currentStar().ai();
         });
 
-        var allowLoad = function () {
+        self.allowLoad = function ()
+        {
+            var game = self.game();
+
             var result = self.useLocalServer()
                 ? (self.useLocalServer() && game.replayName())
                 : (!self.useLocalServer() && game.replayLobbyId());
@@ -1034,58 +1042,90 @@ requireGW([
             return !!result && (!game.replayStar() || game.replayStar() === self.selection.star());
         };
 
-        self.displayFight = ko.computed(function() {
-            return self.canFight() && !allowLoad() && self.selection.star() === game.currentStar();
+        self.displayFight = ko.computed(function()
+        {
+            return self.canFight() && !self.allowLoad() && self.selection.star() === self.game().currentStar();
         });
-        self.displayLoadSave = ko.computed(function() {
-            return self.canFight() && allowLoad() && self.selection.star() === game.currentStar();
+
+        self.displayLoadSave = ko.computed(function()
+        {
+            return self.canFight() && self.allowLoad() && self.selection.star() === self.game().currentStar();
         });
-        self.canFight.subscribe(function(newValue) {
-            if (!newValue)
-                return;
-            self.selection.star(game.currentStar());
-        });
+
+        // self.canFight.subscribe(function(newValue)
+        // {
+        //     if (!newValue)
+        //         return;
+        //     self.selection.star(game.currentStar());
+        // });
+
         self.driveAccessInProgress = ko.observable(false);
 
         self.scanning = ko.observable(false);
-        self.exploring = ko.computed(function() {
-            return testGameState({explore: true}, false);
-        });
-        self.canExplore = ko.computed(function() {
-            if (self.player.moving() || self.scanning())
-                return false;
-            return testGameState({begin: function() { return !!self.currentStar().hasCard() && !self.currentStar().ai(); }}, false);
-        });
-        self.displayExplore = ko.computed(function() {
-            return self.canExplore() && self.selection.star() === game.currentStar();
-        });
-        self.canExplore.subscribe(function(newValue) {
-            if (!newValue)
-                return;
-            self.selection.star(game.currentStar());
+
+        self.exploring = ko.computed(function()
+        {
+            return self.testGameState({explore: true}, false);
         });
 
-        var canSelectOrMovePrefix = function() {
-            return testGameState({
-                begin: function() {
-                    return !self.canExplore() && !self.canFight();
+        self.canExplore = ko.computed(function()
+        {
+            if (self.player.moving() || self.scanning())
+                return false;
+
+            return self.testGameState({begin: function() { return !!self.currentStar().hasCard() && !self.currentStar().ai(); }}, false);
+        });
+
+        self.displayExplore = ko.computed(function()
+        {
+            return self.canExplore() && self.selection.star() === game.currentStar();
+        });
+
+        // self.canExplore.subscribe(function(newValue)
+        // {
+        //     if (!newValue)
+        //         return;
+        //     self.selection.star(game.currentStar());
+        // });
+
+        self.canSelectOrMovePrefix = function()
+        {
+            return self.testGameState(
+            {
+                begin: function()
+                {
+                    return !self.canExplore();
+                },
+                fight: function()
+                {
+                    return !self.canExplore();
                 },
                 end: true
             }, false);
         };
-        self.canSelect = function(star) {
+
+        self.canSelect = function(star)
+        {
+            var game = self.game();
+            var cheats = self.cheats;
+
             if (game.currentStar() === star)
                 return true;
-            if (!canSelectOrMovePrefix() && !cheats.noFog()) {
+
+            if (!self.canSelectOrMovePrefix() && !cheats.noFog())
                 return false;
-            }
-            return self.galaxy.systems()[star].connected() || cheats.noFog();
+
+            var galaxy = game.galaxy();
+
+            return galaxy.pathBetween(game.currentStar(), star, cheats.noFog());
         };
 
-        self.canMove = ko.computed(function() {
+        self.canMove = ko.computed(function()
+        {
             if (self.player.moving())
                 return false;
 
+            var game = self.game();
             var galaxy = game.galaxy();
             var from = game.currentStar();
             var to = self.selection.star();
@@ -1093,22 +1133,22 @@ requireGW([
             if ((to < 0) || (to > galaxy.stars().length))
                 return false;
 
-            if (!canSelectOrMovePrefix()) {
+            if (!self.canSelectOrMovePrefix())
                 return false;
-            }
+
             if (from === to)
                 return false;
 
-            if (!galaxy.pathBetween(from, to))
-                return false;
-
-            return true;
+            return galaxy.pathBetween(from, to, self.cheats.noFog());
         });
-        self.displayMove = ko.computed(function() {
+
+        self.displayMove = ko.computed(function()
+        {
             return self.canMove();
         });
 
-        self.moveStep = function(path) {
+        self.moveStep = function(path)
+        {
             var star = path[0];
             var system = self.galaxy.systems()[star];
             self.player.moveTo(star, function() {
@@ -1129,19 +1169,25 @@ requireGW([
             });
         };
 
-        self.move = function() {
+        self.move = function()
+        {
             var star = self.selection.star();
-            var path = game.galaxy().pathBetween(game.currentStar(), star);
-            if (path) {
+            var path = self.game().galaxy().pathBetween(game.currentStar(), star, self.cheats.noFog());
+
+            if (path)
+            {
                 // Discard the source node.
                 path.shift();
 
                 self.moveStep(path);
-            } else {
-                console.error("Unable to find path for move command", game.currentStar(), star);
             }
+            else
+                console.error("Unable to find path for move command", game.currentStar(), star);
+
         };
-        _.forEach(self.galaxy.systems(), function(system, star) {
+
+        _.forEach(self.galaxy.systems(), function(system, star)
+        {
             system.click.subscribe(function() {
                 if (self.canSelect(star))
                     self.selection.star(star);
@@ -1204,7 +1250,6 @@ requireGW([
             var play_tech_audio = !!tech_card;
 
             game.winTurn(selected_card_index).then(function(didWin) {
-
                 if (!didWin) {
                     console.error('Failed winning turn', game);
                     return;
@@ -1294,7 +1339,7 @@ requireGW([
                 hireReferee,
                 liveGameScriptLoad,
                 liveGameScriptPatchLoad
-            ).then(function(
+            ).always(function(
                 saveResult,
                 referee,
                 liveGameScriptGet,
@@ -1305,69 +1350,70 @@ requireGW([
                 });
 
                 referee.stripSystems();
-                referee.mountFiles().always(function() {
-                referee.tagGame();
+                referee.mountFiles().always(function()
+                {
+                    referee.tagGame();
 
-                self.battleConfig(referee.config());
+                    self.battleConfig(referee.config());
 
-                // Come back if we fail.
-                self.connectFailDestination(window.location.href);
+                    // Come back if we fail.
+                    self.connectFailDestination(window.location.href);
 
-                var tutorial = ko.observable().extend({ session: 'current_system_tutorial' });
-                tutorial(model.currentSystem().star.tutorial());
+                    var tutorial = ko.observable().extend({ session: 'current_system_tutorial' });
+                    tutorial(model.currentSystem().star.tutorial());
 
-                // Remove the tutorial commander from the game.  (It's not supposed to persist.)
-                if (tutorialCommander) {
-                    inventory.units().pop();
-                    game.inventory().setTag('global', 'commander', oldCommander);
-                }
+                    // Remove the tutorial commander from the game.  (It's not supposed to persist.)
+                    if (tutorialCommander) {
+                        inventory.units().pop();
+                        game.inventory().setTag('global', 'commander', oldCommander);
+                    }
 
-                var params = {
-                    action: 'start',
-                    mode: 'gw',
-                    content: game.content(),
-                };
+                    var params = {
+                        action: 'start',
+                        mode: 'gw',
+                        content: game.content(),
+                    };
 
-                if (self.useLocalServer()) {
-                    self.serverType('local');
-                    params['local'] = true;
-                }
-                else {
-                    self.serverType('uber');
-                }
+                    if (self.useLocalServer()) {
+                        self.serverType('local');
+                        params['local'] = true;
+                    }
+                    else {
+                        self.serverType('uber');
+                    }
 
-                var connect = function () {
-                    api.debug.log('start gw: ok');
-                    self.serverSetup('game');
-                    window.location.href = 'coui://ui/main/game/connect_to_game/connect_to_game.html?' + $.param(params);
-                }
+                    var connect = function () {
+                        api.debug.log('start gw: ok');
+                        self.serverSetup('game');
+                        window.location.href = 'coui://ui/main/game/connect_to_game/connect_to_game.html?' + $.param(params);
+                    }
 
-                if (!allowLoad())
-                    connect();
-                else if (self.useLocalServer()) {
-                    api.file.listReplays().then(function (replays) {
-                        if (_.has(replays, game.replayName())) {
-                            var paths = replays[game.replayName()];
-                            api.debug.log('local gw loadsave: ok', game.replayName(), paths);
-                            self.serverSetup('loadsave');
-                            self.serverType('uber');
-                            params['mode'] = 'loadsave'
-                            params['loadpath'] = paths.replay;
-                        } else {
-                            /* we could not find a match.  the replay is missing or the data is corrupted. */
-                            console.log('loadsave: failed with' + game.replayName());
-                        }
-
+                    if (!self.allowLoad())
                         connect();
-                    });
-                }
-                else {
-                    api.debug.log('remote gw loadsave: ok');
-                    self.serverSetup('loadsave');
-                    params['mode'] = 'loadsave'
-                    params['replayid'] = game.replayLobbyId();
-                    connect();
-                }
+                    else if (self.useLocalServer()) {
+                        api.file.listReplays().then(function (replays) {
+                            if (_.has(replays, game.replayName())) {
+                                var paths = replays[game.replayName()];
+                                api.debug.log('local gw loadsave: ok', game.replayName(), paths);
+                                self.serverSetup('loadsave');
+                                self.serverType('uber');
+                                params['mode'] = 'loadsave'
+                                params['loadpath'] = paths.replay;
+                            } else {
+                                /* we could not find a match.  the replay is missing or the data is corrupted. */
+                                console.log('loadsave: failed with' + game.replayName());
+                            }
+
+                            connect();
+                        });
+                    }
+                    else {
+                        api.debug.log('remote gw loadsave: ok');
+                        self.serverSetup('loadsave');
+                        params['mode'] = 'loadsave'
+                        params['replayid'] = game.replayLobbyId();
+                        connect();
+                    }
                 });
             });
         };
@@ -1437,7 +1483,6 @@ requireGW([
             self.hoverOffset(left.toString() + 'px');
             self.hoverCard(card);
         };
-
         self.discardHoverCard = function(card) {
             var discard = self.hoverCard();
             if (!discard)
@@ -1463,25 +1508,24 @@ requireGW([
             });
         };
 
-        var updateCards = function() {
-            //console.log("Something happened and we're trying to update (visible?) cards/slots");
+        self.updateCards = function()
+        {
             var inventory = game.inventory();
             var cards = inventory.cards();
             var cardModels = self.cards();
             var numCards = inventory.maxCards();
-            if (numCards < cardModels.length) {
+            if (numCards < cardModels.length)
                 self.cards.splice(numCards, cardModels.length);
-            } else {
+            else {
                 while (numCards > cardModels.length) {
                     self.cards.push(new CardViewModel(cards[cardModels.length]));
                 }
             }
 
-            // Updates the visible list of cards(?)
-            _.forEach(cardModels, function(model, index) {
+            _.forEach(cardModels, function(cardModel, index) {
                 var card = cards[index];
-                if (!_.isEqual(card, model.params()))
-                    model.params(card);
+                if (!_.isEqual(card, cardModel.params()))
+                    cardModel.params(card);
             });
 
             //var cardModelsOfType = self.cardsOfType();
@@ -1534,20 +1578,23 @@ requireGW([
         // Note: The cards array in the inventory mutates multiple times when
         // some cards are received.  To avoid flashing of the inventory panel,
         // wait a little while before applying changes.
-        var cardsDirty = false;
-        var cardsChanged = function() {
-            if (cardsDirty)
+        self.cardsDirty = false;
+        self.cardsChanged = function()
+        {
+            if (self.cardsDirty)
                 return;
-            cardsDirty = true;
-            game.busy.then(function() {
-                cardsDirty = false;
-                updateCards();
+            self.cardsDirty = true;
+            game.busy.then(function()
+            {
+                self.cardsDirty = false;
+                self.updateCards();
             });
         };
-        game.inventory().cards.subscribe(cardsChanged);
-        game.inventory().maxCards.subscribe(cardsChanged);
-        game.inventory().maxCardsOfType.subscribe(cardsChanged);
-        updateCards();
+        game.inventory().cards.subscribe(self.cardsChanged);
+        game.inventory().maxCards.subscribe(self.cardsChanged);
+        game.inventory().maxCardsOfType.subscribe(self.cardsChanged);
+
+        self.updateCards();
 
         self.currentSystemCardList = ko.computed(function() {
             var ok = true;
@@ -1570,7 +1617,8 @@ requireGW([
         });
 
         self.currentSystemCardListConditions = ko.observable([]);
-        var currentSystemCardListConditionsRule = ko.computed(function() {
+
+        self.currentSystemCardListConditionsRule = ko.computed(function() {
 
             if (self.driveAccessInProgress())
                 return;
@@ -1586,8 +1634,8 @@ requireGW([
                     'duplicate': duplicate,
                     'can_fit': fit,
                     'loadout': loadout,
-                    'ok': !duplicate && fit,
-                    'type': type
+                    'type': type,
+                    'ok': !duplicate && fit
                 };
             });
 
@@ -1595,7 +1643,7 @@ requireGW([
         });
 
         self.showDataBankFullWarning = ko.observable(false);
-        var showDataBankFullWarningRule = ko.computed(function () {
+        self.showDataBankFullWarningRule = ko.computed(function () {
 
             if (self.driveAccessInProgress())
                 return;
@@ -1604,8 +1652,6 @@ requireGW([
 
             var result =  _.any(self.currentSystemCardListConditions(), function (element) {
                 if (!element.can_fit) {
-                    //console.log("Looking at ");
-                    //console.log(element);
                     //console.log("Can't fit any more + " + element.type + " cards!");
                     return element.type;
                 }
@@ -1616,7 +1662,9 @@ requireGW([
 
         self.inventoryOverflowLeft = ko.observable(false);
         self.inventoryOverflowRight = ko.observable(false);
-        self.updateInventoryOverflow = function() {
+
+        self.updateInventoryOverflow = function()
+        {
             var $wrapper = $("#inventory .scroll-wrapper");
             var inventoryWidth = $wrapper.innerWidth();
             var containerWidth = $("#inventory .scroll-container").width();
@@ -1625,22 +1673,27 @@ requireGW([
             self.inventoryOverflowRight(scrollRight > 0);
         };
         self.cards.subscribe(self.updateInventoryOverflow);
+
         $(window).resize(self.updateInventoryOverflow);
         // Note: This ties the overflow state to the visibility of the cards.
-        var computeInventoryOverflowBusy = false;
-        ko.computed(function() {
+
+        self.computeInventoryOverflowBusy = false;
+
+        self.computeInventoryOverflow = ko.computed(function()
+        {
             var cards = self.cards();
             var visible = _.reduce(cards, function(n, card) { return card.visible(); });
-            if (!computeInventoryOverflowBusy) {
-                computeInventoryOverflowBusy = true;
+            if (!self.computeInventoryOverflowBusy) {
+                self.computeInventoryOverflowBusy = true;
                 _.delay(function() {
                     self.updateInventoryOverflow(visible);
-                    computeInventoryOverflowBusy = false;
+                    self.computeInventoryOverflowBusy = false;
                 });
             }
         });
 
-        self.gameOver = ko.computed(function() {
+        self.gameOver = ko.computed(function()
+        {
             if (game.gameState() === GW.Game.gameStates.lost)
                 return true;
             if (game.gameState() !== GW.Game.gameStates.won)
@@ -1760,8 +1813,22 @@ requireGW([
                 model.showSideBar(!model.showSideBar());
         }
 
-        self.start = function() {
-            ko.observable().extend({ session: 'has_entered_game' })(true);
+        self.gameOverCHeck = ko.computed(function()
+        {
+            if (self.gameOver())
+            {
+                self.exitGate().then(function()
+                {
+                    window.location.href = 'coui://ui/main/game/galactic_war/gw_war_over/gw_war_over.html';
+                });
+            }
+        });
+
+        self.hasEnteredGame = ko.observable().extend({ session: 'has_entered_game' });
+
+        self.start = function()
+        {
+            self.hasEnteredGame(true);
 
             // Set up resize event for window so we can update the canvas resolution
             $(window).resize(self.resize);
@@ -1769,14 +1836,8 @@ requireGW([
 
             self.centerOnOrigin();
 
-            ko.computed(function() {
-                if (self.gameOver()) {
-                    self.exitGate().then(function() {
-                        window.location.href = 'coui://ui/main/game/galactic_war/gw_war_over/gw_war_over.html';
-                    });
-                }
-            });
-            if (!self.gameOver()) {
+            if (!self.gameOver())
+            {
                 self.handleIntro();
             }
 
@@ -1790,21 +1851,23 @@ requireGW([
             }
         };
 
-        self.isUberBarVisible = ko.observable(false);
-        var updateUberBarVisibility = function () {
-            api.Panel.message('uberbar', 'visible', { 'value': self.isUberBarVisible() });
+        self.showSocial = ko.observable(true).extend({ session: 'show_social' });
+
+        self.isUberBarVisible = self.showSocial;
+
+        self.updateSocialVisibility = function()
+        {
+            api.Panel.message('uberbar', 'visible', { 'value': self.showSocial() });
         }
-        self.isUberBarVisible.subscribe(updateUberBarVisibility);
 
-        api.Panel.query(api.Panel.parentId, 'query.live_game_uberbar', {}).then(function (result) {
-            self.isUberBarVisible(result);
-        });
+        self.showSocial.subscribe(self.updateSocialVisibility);
 
-        self.toggleUberBar = function () {
-            api.Panel.query(api.Panel.parentId, 'toggle_uberbar', {}).then(function (result) {
-                self.isUberBarVisible(result);
-            });
+        self.toggleSocial = function ()
+        {
+            self.showSocial(!self.showSocial());
         };
+
+        self.toggleUberBar = self.toggleSocial;
 
         // Note: This is a fix for games that got into a situation where the
         // game explored a system it wasn't supposed to due to a bug that
@@ -1812,6 +1875,34 @@ requireGW([
         if (self.exploring() && !self.currentStar().hasCard()) {
             game.turnState('begin');
         }
+
+        self.unitSpecs = ko.observable({});
+
+        self.setup = function()
+        {
+            engine.call('request_spec_data', api.Panel.pageId);
+
+            $("body").mousemove(function(event)
+            {
+                var halfWidth = window.innerWidth / 2;
+                var halfHeight = window.innerHeight / 2;
+                var pos = [event.pageX - halfWidth, event.pageY - halfHeight];
+                if (!self.firstMousePosition())
+                {
+                    // Use the first mouse movement as an origin to avoid popping.
+                    self.firstMousePosition(pos)
+                    return;
+                }
+                VMath._sub_v2(pos, self.firstMousePosition());
+                self.galaxy.parallax(pos);
+                // Smoothly reset the center of parallax to the origin.
+                VMath._mul_v2_s(self.firstMousePosition(), 0.9);
+            });
+
+            _.defer(self.updateSocialVisibility);
+        }
+
+        self.activeGameId = ko.observable().extend({ local: 'gw_active_game' });
     }
 
     // Start loading the game & document
@@ -1831,7 +1922,7 @@ requireGW([
         if (!game) {
             // TODO: Maybe tell the player what's up?
             console.error('Failed loading game');
-            exitGame();
+            self.exitGame();
             return;
         }
 
@@ -1841,7 +1932,9 @@ requireGW([
 
         // process any battle results.
         var battleResult = game.lastBattleResult();
-        if (battleResult) {
+
+        if (battleResult)
+        {
             game.lastBattleResult(null);
             if (battleResult === 'win')
                 game.winTurn().then(function () {
@@ -1859,20 +1952,7 @@ requireGW([
 
         model = new GameViewModel(game);
 
-        $("body").mousemove(function(event) {
-            var halfWidth = window.innerWidth / 2;
-            var halfHeight = window.innerHeight / 2;
-            var pos = [event.pageX - halfWidth, event.pageY - halfHeight];
-            if (!model.firstMousePosition()) {
-                // Use the first mouse movement as an origin to avoid popping.
-                model.firstMousePosition(pos)
-                return;
-            }
-            VMath._sub_v2(pos, model.firstMousePosition());
-            model.galaxy.parallax(pos);
-            // Smoothly reset the center of parallax to the origin.
-            VMath._mul_v2_s(model.firstMousePosition(), 0.9);
-        });
+        model.setup();
 
         handlers = {};
 
@@ -1889,6 +1969,11 @@ requireGW([
         handlers.finish_video = function (payload) {
             model.showIntro(false);
         };
+
+        handlers.unit_specs = function(payload)
+        {
+            model.unitSpecs(payload);
+        }
 
         api.Panel.message('uberbar', 'visible', { 'value': false });
 
