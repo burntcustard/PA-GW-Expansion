@@ -18,7 +18,7 @@ define(['shared/gw_common'], function(GW) {
             var comm = '/pa/units/commanders/base_commander/base_commander.json';
             var weap = '/pa/tools/uber_cannon/uber_cannon.json';
             var ammo = '/pa/ammo/cannon_uber/cannon_uber.json';
-            inventory.addMods([
+            var mods = [
                 {
                     // Re-add secondary fire
                     file: comm,
@@ -39,7 +39,7 @@ define(['shared/gw_common'], function(GW) {
                     value: {
                         'audio_cue': '/SE/Impacts/bot_spark_impact',
                         'effect_spec': '/pa/units/air/titan_air/titan_air_ammo_beam_hit.pfx',
-                        'effect_scale': 0.7
+                        'effect_scale': 0.8
                     }
                 },
                 {
@@ -471,31 +471,71 @@ define(['shared/gw_common'], function(GW) {
                         }
                     ]
                 },
-                {
-                    file: ammo,
-                    path: 'damage',
-                    op: 'replace',
-                    value: 1500
-                },
-                {
-                    file: weap,
-                    path: 'ammo_per_shot',
-                    op: 'multiply',
-                    value: 2
-                },
-                {
-                    file: weap,
-                    path: 'ammo_capacity',
-                    op: 'multiply',
-                    value: 2
-                },
-                {
-                    file: weap,
-                    path: 'ammo_demand',
-                    op: 'multiply',
-                    value: 2
-                }
-            ]);
+            ];
+
+            if (inventory.hasCard('gwc_overcharged_tesla')) {
+                mods.push(
+                    {
+                        // Damage 700 -> 1400 (Zeus is 1500)
+                        file: ammo,
+                        path: 'damage',
+                        op: 'replace',
+                        value: 1400
+                    },
+                    {
+                        // Energy per shot 10000 -> 20000
+                        file: weap,
+                        path: 'ammo_per_shot',
+                        op: 'multiply',
+                        value: 2
+                    },
+                    {
+                        // Energy capacity 10000 -> 20000
+                        file: weap,
+                        path: 'ammo_capacity',
+                        op: 'multiply',
+                        value: 2
+                    },
+                    {
+                        // Energy demand 2500 -> 5000
+                        file: weap,
+                        path: 'ammo_demand',
+                        op: 'multiply',
+                        value: 2
+                    }
+                );
+            } else {
+                mods.push(
+                    {
+                        // Damage 700 -> 1400 (Zeus is 1500) x1.4
+                        file: ammo,
+                        path: 'damage',
+                        op: 'replace',
+                        value: 1960
+                    },
+                    {
+                        // Energy per shot 10000 -> 20000 x2
+                        file: weap,
+                        path: 'ammo_per_shot',
+                        op: 'multiply',
+                        value: 4
+                    },
+                    {
+                        // Energy capacity 10000 -> 20000 x2
+                        file: weap,
+                        path: 'ammo_capacity',
+                        op: 'multiply',
+                        value: 4
+                    },
+                    {
+                        // Energy demand 2500 -> 5000 x2
+                        file: weap,
+                        path: 'ammo_demand',
+                        op: 'multiply',
+                        value: 4
+                    }
+                );
+            }
         }
     };
 });
