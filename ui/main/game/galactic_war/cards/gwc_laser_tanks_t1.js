@@ -32,7 +32,7 @@ define(['shared/gw_common'], function(GW) {
                     value: 'Light Tank - Fast, low damage variANT. ＋⁠20% speed ＋⁠20% RoF －⁠30% damage.'
                 },
                 {
-                    // 10 to 12 move speed
+                    // Move speed 10 -> 12
                     file: unit,
                     path: 'navigation.move_speed',
                     op: 'multiply',

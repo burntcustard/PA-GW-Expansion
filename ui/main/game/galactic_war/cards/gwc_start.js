@@ -27,10 +27,10 @@ define(['shared/gw_common'], function (GW) {
             inventory.addMods(
                 {
                     // Remove the commanders Uber cannon by removing secondaryFire
-                    file: '/pa/units/commanders/base_commander/base_commander.json',
-                    path: 'command_caps',
-                    op: 'pull',
-                    value: 'ORDER_FireSecondaryWeapon'
+                    // file: '/pa/units/commanders/base_commander/base_commander.json',
+                    // path: 'command_caps',
+                    // op: 'pull',
+                    // value: 'ORDER_FireSecondaryWeapon'
                 },
                 {
                     // Uber weaps do more damage than vanilla to other commanders & structures .25 -> .5

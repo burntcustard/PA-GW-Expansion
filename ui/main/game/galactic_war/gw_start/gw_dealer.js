@@ -9,7 +9,7 @@ define([
         'gwc_commander_regen',
         'gwc_commander_servo',
         'gwc_commander_tesla_gun',
-        'gwc_commander_uber_basic',
+        //'gwc_commander_uber_basic',
         'gwc_commander_uber_dox',
         'gwc_commander_uber_summon',
         'gwc_commander_uber_tesla',

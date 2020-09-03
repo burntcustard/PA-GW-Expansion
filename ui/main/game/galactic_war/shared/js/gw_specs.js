@@ -205,27 +205,10 @@ define([], function() {
          */
         modSpecs: function(specs, mods, specTag, debug) {
             var load = function(specId, debug) {
-                // console.log("Trying to load() specId:");
-                // console.log(JSON.stringify(specId));
                 taggedId = specId;
-
-                if (taggedId.indexOf(' ') > 0) {
-                    var substrs = taggedId.split(' ');
-                    _.forEach(substrs, function(substr, i) {
-                        if (substr.indexOf('/pa/') === 0) {
-                            taggedId = substr;
-                        }
-                    });
-                }
-
                 if (!specs.hasOwnProperty(taggedId)) {
-                    //console.log("specs doesn't have prop of:");
-                    //console.log(taggedId);
                     var taggedId = specId + specTag;
-                    //console.log("So we're trying with the specTag added:");
-                    //console.log(taggedId);
                     if (!specs.hasOwnProperty(taggedId)) {
-                        //console.log("Nope stuff nothin' :(");
                         return;
                     }
                 }

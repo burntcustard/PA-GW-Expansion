@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'commanderSecondary',
-        describe: 'Gives the commander a Dox launcher alt fire ability!',
+        describe: 'Gives the commander a Dox launcher alt fire ability.',
         summarize: 'Commander Dox Launcher',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
