@@ -43,7 +43,7 @@ define([
         'gwc_laser_damage',
         'gwc_laser_tanks_t1',
         'gwc_minion',
-        'gwc_overcharged_tesla'
+        'gwc_overcharged_tesla',
     ];
 
     var aiDeck = [
@@ -67,7 +67,7 @@ define([
         'gwc_bld_efficiency_fabs',
         'gwc_storage_1',
         'gwc_storage_and_buff',
-        'gwc_minion'
+        'gwc_minion',
     ];
 
     var extraDeck = [
@@ -79,7 +79,7 @@ define([
         'gwc_start_artillery',
         'gwc_start_subcdr',
         'gwc_start_combatcdr',
-        'gwc_start_allfactory'
+        'gwc_start_allfactory',
     ];
 
     var cards = [];
@@ -93,7 +93,6 @@ define([
     var saveDeck = deck;
     deck = [];
     _.forEach(saveDeck, function (cardId) {
-        //console.log("Saving deck?");
         //api.debug.log('ADDING CARD: '+cardId);
         require(['cards/' + cardId], function (card) {
             card.id = cardId;
@@ -147,13 +146,8 @@ define([
                 var remainingAIDeck = aiDeck.slice(0);
 
                 _.forEach(allCards, function(card) {
-                    if (!cardContexts[card.id]) {
-                        if (card.getContext) {
-                            cardContexts[card.id] = card.getContext(galaxy, inventory);
-                        } else {
-                            cardContexts[preCard] = { totalSize: galaxy.stars().length };
-                        }
-                    }
+                    if (card.getContext && !cardContexts[card.id])
+                        cardContexts[card.id] = card.getContext(galaxy, inventory);
                 });
 
                 var CARDS_PER_NORMAL_SYSTEM = 3;
@@ -183,13 +177,8 @@ define([
                             predealtCard = true;
 
                             var extra = extraCards[preCard];
-                            if (extra && extra.getContext && !cardContexts[preCard]) {
-                                if (extra.getContext) {
-                                    cardContexts[preCard] = extra.getContext(galaxy, inventory);
-                                } else {
-                                    cardContexts[preCard] = { totalSize: galaxy.stars().length };
-                                }
-                            }
+                            if (extra && extra.getContext && !cardContexts[preCard])
+                                cardContexts[preCard] = extra.getContext(galaxy, inventory);
                             var context = cardContexts[preCard];
                             var deal = extra && extra.deal(system, context);
                             if (deal && _.isObject(deal)) {
@@ -216,8 +205,6 @@ define([
                                 });
 
                                 var result = card.deal && card.deal(system, context, inventory);
-
-                                // Stops two identical cards being in the same set to choose from?
                                 if (match)
                                     result.chance = 0;
 
@@ -328,20 +315,10 @@ define([
                 var card = _.find(allCards, { id: params.id });
 
                 // Simulate a deal
-                //console.log("simulate a deal");
-                //console.log("card.getContext:");
-                //console.log(card.getContext);
                 var context = card.getContext && card.getContext(params.galaxy, params.inventory);
-                //console.log(context);
 
                 var deal = (card.deal && card.deal(params.star, context));
-
-                //console.log("Dealing this card out to a star:");
-                //console.log(card);
-
-                var product = {
-                    id: params.id
-                };
+                var product = { id: params.id };
                 var cardParams = deal && deal.params;
                 if (cardParams && _.isObject(cardParams))
                     _.extend(product, cardParams);
