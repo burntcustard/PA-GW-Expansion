@@ -9,8 +9,7 @@ define(['shared/gw_common'], function(GW) {
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_flamethrower_range') &&
-                inventory.hasCard('gwc_enable_infernos')) { // Only finadable after infernos
+            if (!inventory.hasCard('gwc_flamethrower_range')) {
                 chance = (dist <= 5) ? 40 : 0;
             }
             return { chance: chance };

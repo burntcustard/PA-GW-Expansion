@@ -19,7 +19,7 @@ define([
         'gwc_enable_defenses_t2',
         'gwc_enable_drifters',
         'gwc_enable_icarus',
-        'gwc_enable_infernos',
+        //'gwc_enable_infernos',
         'gwc_enable_kaiju',
         'gwc_enable_lob_booms',
         'gwc_enable_lob_dox',

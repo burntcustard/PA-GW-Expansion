@@ -57,7 +57,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
                 '/pa/units/land/tank_light_laser/tank_light_laser.json',
                 '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
-                //'/pa/units/land/tank_armor/tank_armor.json',
+                '/pa/units/land/tank_armor/tank_armor.json',
                 //'/pa/units/land/tank_hover/tank_hover.json',
                 '/pa/units/land/land_scout/land_scout.json',
                 // T2 Vehicles
@@ -83,7 +83,7 @@ define(['shared/gw_common'], function (GW) {
                 '/pa/units/land/assault_bot_adv/assault_bot_adv.json',
                 '/pa/units/land/bot_tactical_missile/bot_tactical_missile.json',
                 '/pa/units/land/bot_sniper/bot_sniper.json',
-                //'/pa/units/land/bot_nanoswarm/bot_nanoswarm.json',
+                '/pa/units/land/bot_nanoswarm/bot_nanoswarm.json',
                 '/pa/units/land/bot_support_commander/bot_support_commander.json',
                 // T1 Air
                 '/pa/units/air/air_factory/air_factory.json',
