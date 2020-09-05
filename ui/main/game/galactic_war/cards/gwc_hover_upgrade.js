@@ -9,9 +9,13 @@ define(['shared/gw_common'], function(GW) {
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_hover_upgrade') &&
-                inventory.hasCard('gwc_enable_drifters')) { // Only findable after drifters unlocked
-                chance = (dist <= 5 ? 40 : 0);
+            if (!inventory.hasCard('gwc_hover_upgrade')) {
+                if (inventory.hasCard('gwc_enable_drifters') ||
+                    inventory.hasCard('gwc_enable_kaiju') ||
+                    inventory.hasCard('gwc_enable_titan_vehicle')) {
+                        chance = (dist <= 5 ? 40 : 0);
+                    }
+                }
             }
             return { chance: chance };
         },

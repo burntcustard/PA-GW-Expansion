@@ -10,7 +10,12 @@ define(['shared/gw_common'], function(GW) {
             var chance = 0;
             var dist = system.distance();
             if (!inventory.hasCard('gwc_enable_titan_structure')) {
-                chance = (2 < dist && dist <= 5 ? 40 : 0);
+                if (inventory.hasCard('gwc_enable_t2_air') ||
+                    inventory.hasCard('gwc_enable_t2_bots') ||
+                    inventory.hasCard('gwc_enable_t2_naval') ||
+                    inventory.hasCard('gwc_enable_t2_vehicles')) {
+                    chance = (2 < dist && dist <= 5 ? 40 : 0);
+                }
             }
             return { chance: chance };
         },

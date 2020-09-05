@@ -9,8 +9,10 @@ define(['shared/gw_common'], function(GW) {
         deal: function(system, context, inventory) {
             var chance = 0;
             var dist = system.distance();
-            if (!inventory.hasCard('gwc_enable_t2_vehicles')) {
-                chance = (2 < dist && dist <= 5 ? 40 : 0);
+            if (!inventory.hasCard('gwc_enable_titan_vehicle')) {
+                if (inventory.hasCard('gwc_enable_t2_vehicles')) {
+                    chance = (2 < dist && dist <= 5 ? 40 : 0);
+                }
             }
             return { chance: chance };
         },
