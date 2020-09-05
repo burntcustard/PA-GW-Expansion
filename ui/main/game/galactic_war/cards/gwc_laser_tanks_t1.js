@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>＋20% speed, ＋20% RoF, ＋20% damage',
+        describe: 'Replaces the T1 tank with a more manuverable laser equipped variANT.<br><br>+20% speed, +20% RoF, +20% damage',
         summarize: 'Light Laser Tank',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_vehicle.png',
         audio: '/VO/Computer/gw/board_tech_available_vehicle',
@@ -29,7 +29,7 @@ define(['shared/gw_common'], function(GW) {
                     file: unit,
                     path: 'description',
                     op: 'replace',
-                    value: 'Light Tank - Fast, low damage variANT. ＋⁠20% speed ＋⁠20% RoF －⁠30% damage.'
+                    value: 'Light Tank - Fast, low damage variANT. +⁠20% speed +⁠20% RoF -⁠30% damage.'
                 },
                 {
                     // Move speed 10 -> 12
@@ -131,7 +131,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Capacitors: ＋⁠30% damage.'
+                        value: ' Overcharged Capacitors: +⁠30% damage.'
                     },
                     {
                         file: ammo,

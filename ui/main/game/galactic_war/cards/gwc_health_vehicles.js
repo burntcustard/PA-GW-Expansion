@@ -17,15 +17,15 @@ define(['shared/gw_common'], function(GW) {
         buff: function(inventory) {
             var units = [
                 '/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
-                '/pa/units/land/tank_light_laser/tank_light_laser.json',
+                '/pa/units/land/tank_light_laser/tank_light_laser.json', // 250 -> 325
                 '/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json',
-                '/pa/units/land/tank_armor/tank_armor.json',
+                '/pa/units/land/tank_armor/tank_armor.json', // 1000 -> 1300
                 '/pa/units/land/land_scout/land_scout.json',
                 '/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json',
                 '/pa/units/land/tank_laser_adv/tank_laser_adv.json',
                 '/pa/units/land/tank_heavy_armor/tank_heavy_armor.json',
                 '/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json',
-                '/pa/units/land/tank_hover/tank_hover.json',
+                '/pa/units/land/tank_hover/tank_hover.json',  // 250 -> 325
                 '/pa/units/land/tank_flak/tank_flak.json',
                 '/pa/units/land/tank_nuke/tank_nuke.json'
             ];
@@ -41,7 +41,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Armor Tech: ＋⁠30% health.'
+                        value: ' Armor Tech: +⁠30% health.'
                     }
                 ]);
             });

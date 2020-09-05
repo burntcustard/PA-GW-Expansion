@@ -1,3 +1,4 @@
+// This got added to the base game! Wohoo gunship icarus!
 // !LOCNS:galactic_war
 define(['shared/gw_common'], function(GW) {
     return {

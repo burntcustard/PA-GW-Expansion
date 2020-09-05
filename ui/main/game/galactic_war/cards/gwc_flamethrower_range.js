@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Increases the range of flamethrowers by ＋⁠40%',
+        describe: 'Increases the range of flamethrowers by +⁠40%',
         summarize: 'Flamethrower Range Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_super_weapons.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -24,7 +24,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Flamethrower Tech: ＋⁠40% range.'
+                        value: ' Flamethrower Tech: +⁠40% range.'
                     }
                 ]);
             });
@@ -63,13 +63,13 @@ define(['shared/gw_common'], function(GW) {
                         op: 'push',
                         value: {
                             "bLoop": false,
-                            "drag": 0.92,
+                            "drag": 0.9,
                             "emissionBursts": 1,
-                            "emissionRate": 70,
-                            "emitterLifetime": 0.6,
-                            "endDistance": 3200,
+                            "emissionRate": 80,
+                            "emitterLifetime": 0.3,
+                            "endDistance": 6400,
                             "gravity": 25,
-                            "lifetime": 1,
+                            "lifetime": 2,
                             "sizeRangeY": 1.5,
                             "sizeX": 2,
                             "sizeY": 3.5,
@@ -144,7 +144,7 @@ define(['shared/gw_common'], function(GW) {
                                 }
                             },
                             "useWorldSpace": true,
-                            "velocity": 85,
+                            "velocity": 130,
                             "velocityRange": 30,
                             "velocityRangeX": 0.07,
                             "velocityRangeZ": 0.07,

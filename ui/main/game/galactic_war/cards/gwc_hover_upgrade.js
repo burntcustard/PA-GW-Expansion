@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: 'Increases the speed and maneuverability of Drifters (＋⁠10%), Kaiju (＋⁠20%), and the Ares Titan (＋⁠30%).',
+        describe: 'Increases the speed and maneuverability of Drifters (+⁠10%), Kaiju (+⁠20%), and the Ares Titan (+⁠30%).',
         summarize: 'Hi-Tech Heavy Grav Tracks',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_bot_combat.png',
         audio: 'PA/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -21,43 +21,41 @@ define(['shared/gw_common'], function(GW) {
                 '/pa/units/land/hover_ship/hover_ship.json',      // 11 -> 13 speed
                 '/pa/units/land/titan_vehicle/titan_vehicle.json' // 10 -> 13 speed
             ];
-            var i = 1;
-            _.forEach(units, function(unit) {
-                inventory.addMods([
-                    {
-                        file: unit,
-                        path: 'navigation.acceleration',
-                        op: 'multiply',
-                        value: 1 + i / 10
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.brake',
-                        op: 'multiply',
-                        value: 1 + i / 10
-                    },
-                    {
-                        // % Wise this is incorrect but gives nice numbers & is close enough
-                        file: unit,
-                        path: 'navigation.move_speed',
-                        op: 'add',
-                        value: i
-                    },
-                    {
-                        file: unit,
-                        path: 'navigation.turn_speed',
-                        op: 'multiply',
-                        value: 1 + i / 10
-                    },
-                    {
-                        file: unit,
-                        path: 'description',
-                        op: 'add',
-                        value: ' Hi-Tech Grav Tracks: ＋⁠' + i + '0% speed.'
-                    }
-                ]);
-                i++;
-            });
+            for (var i = 1; i <= units.length; i++) {
+              inventory.addMods([
+                  {
+                      file: unit,
+                      path: 'navigation.acceleration',
+                      op: 'multiply',
+                      value: 1 + i / 10
+                  },
+                  {
+                      file: unit,
+                      path: 'navigation.brake',
+                      op: 'multiply',
+                      value: 1 + i / 10
+                  },
+                  {
+                      // % Wise this is incorrect but gives nice numbers & is close enough
+                      file: unit,
+                      path: 'navigation.move_speed',
+                      op: 'add',
+                      value: i
+                  },
+                  {
+                      file: unit,
+                      path: 'navigation.turn_speed',
+                      op: 'multiply',
+                      value: 1 + i / 10
+                  },
+                  {
+                      file: unit,
+                      path: 'description',
+                      op: 'add',
+                      value: ' Hi-Tech Grav Tracks: +⁠' + i + '0% speed.'
+                  }
+              ]);
+            }
         }
     };
 });

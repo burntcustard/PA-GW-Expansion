@@ -34,7 +34,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Bot Mass Production Tech: All units －⁠20% cost, －⁠30% roll off time.'
+                        value: ' Mass Production Tech: All bots -⁠20% cost, -⁠30% roll off time.'
                     }
                 );
             });
@@ -72,7 +72,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Bot Mass Production Tech: －⁠20% cost.'
+                        value: ' Bot Mass Production Tech: -⁠20% cost.'
                     }
                 );
             });

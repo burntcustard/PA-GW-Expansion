@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'commanderPassive',
-        describe: 'The commander automatically repairs itself 62.5 health per second, and the cost to repair it with fabricators is halved.',
+        describe: 'The commander automatically repairs itself 62 health per second, and the manual repair cost is halved.',
         summarize: 'Commander Regen Tech',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_commander_armor.png',
         audio: '/VO/Computer/gw/board_tech_available_armor',

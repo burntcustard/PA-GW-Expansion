@@ -11,7 +11,7 @@ define([], function() {
             if (obj.hasOwnProperty(key)) {
                 if (typeof obj[key] === 'string') {
                     var value = '' + obj[key];
-                    //console.log("String value: " + value);
+                    // console.log("applyTag String value: " + value);
                     if (value.indexOf(' ') > 0) {
                         var substrs = value.split(' ');
                         //console.log("There were spaces in the string: " + value);
@@ -68,9 +68,13 @@ define([], function() {
 
         // Effects
         if (spec.events && spec.events.fired && _.isString(spec.events.fired.effect_spec)) {
+            //console.log('applyTag to spec.events.fired:')
+            //console.log(spec.events.fired);
             applyTag(spec.events.fired, 'effect_spec');
         }
         if (spec.fx_trail && _.isString(spec.fx_trail.filename)) {
+            //console.log('applyTag to spec.fx_trail:')
+            //console.log(spec.fx_trail);
             applyTag(spec.fx_trail, 'filename');
         }
 
@@ -115,44 +119,46 @@ define([], function() {
                 var item;
                 var pending = 0;
                 var fetch = function(item) {
-                    if (!item) {
-                        //console.log("Missing item when loading spec");
-                        _.delay(step);
-                    } else {
-                        $.ajax({
-                            url: 'coui:/' + item,
-                            success: function(data) {
-                                try {
-                                    data = JSON.parse(data);
-                                }
-                                catch (e) {
-                                }
-                                var newWork = tagSpec(item, tag, data);
-                                work = work.concat(newWork);
-                                results[item + tag] = data;
-                            },
-                            error: function(request, status, error) {
-                                console.log('error loading spec:', item, request, status, error);
-                            },
-                            complete: function() {
-                                --pending;
-                                if (!pending) {
-                                    _.delay(step);
-                                }
+                    //console.log('Trying to load a spec:');
+                    //console.log(item);
+                    $.ajax({
+                        url: 'coui:/' + item,
+                        success: function(data) {
+                            try
+                            {
+                                data = JSON.parse(data);
                             }
-                        });
-                    }
+                            catch (e)
+                            {
+                            }
+                            var newWork = tagSpec(item, tag, data);
+                            work = work.concat(newWork);
+                            results[item + tag] = data;
+                        },
+                        error: function(request, status, error) {
+                            console.log('error loading spec:', item, request, status, error);
+                        },
+                        complete: function() {
+                            --pending;
+                            if (!pending)
+                                _.delay(step);
+                        }
+                    });
                 };
-                while (work.length) {
+                while (work.length)
+                {
                     item = work.pop();
+                    if (item.trim() === '') {
+                        //console.log ("Failed to fetch an item because was empty string");
+                        continue;
+                    }
                     if (results.hasOwnProperty(item + tag))
                         continue;
                     ++pending;
                     fetch(item);
                 }
-                if (!pending) {
+                if (!pending)
                     _.delay(finish);
-                }
             };
             var finish = _.once(function() {
                 results['/pa/units/unit_list.json' + tag] = {
@@ -247,7 +253,7 @@ define([], function() {
                 },
                 pull: function(attribute, value) {
                     if (_.isArray(attribute)) {
-                        console.log('!!! Trying to do a _.pull');
+                        //console.log('!!! Trying to do a _.pull');
                         _.pull(attribute, value);
                     } else {
                         console.error('Failed to pull ' + value + ' from non-array attribute');
@@ -268,7 +274,7 @@ define([], function() {
                 },
                 clone: function(attribute, value) {
                     // console.log("--- Cloning a thing ---");
-                    var loaded = load(attribute, true);
+                    var loaded = load(attribute);
                     // console.log("loaded");
                     // console.log(JSON.stringify(loaded));
                     if (loaded) {
@@ -289,14 +295,14 @@ define([], function() {
                 // Tag value doesn't do anything??
                 tag: function(attribute, value) {
                     if (attribute.indexOf(' ') > 0) {
-                        console.log("Doing advanced tagging")
+                        // console.log("Doing advanced tagging")
                         var substrs = attribute.split(' ');
                         _.forEach(substrs, function(substr, i) {
                             if (substr.indexOf('/pa/') === 0) {
                                 substrs[i] = substr + specTag;
                             }
                         });
-                        console.log("Returning: " + substrs.join(' '));
+                        // console.log("Returning: " + substrs.join(' '));
                         return substrs.join(' ');
                     } else {
                         return attribute + specTag;
@@ -324,7 +330,7 @@ define([], function() {
                 }
             };
             var applyMod = function(mod) {
-                console.log(JSON.stringify(mod));
+                // console.log(JSON.stringify(mod));
                 var spec = load(mod.file);
 
                 if (!spec) {
@@ -390,7 +396,7 @@ define([], function() {
                 // console.log("Ended up with spec:");
                 // console.log(JSON.stringify(spec));
             };
-            console.log("Applying mods:");
+            // console.log("Applying mods:");
             _.forEach(mods, applyMod);
         }
     }

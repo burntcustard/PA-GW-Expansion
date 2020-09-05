@@ -189,7 +189,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Flamethrower Tech: ＋⁠40% range.'
+                        value: ' Flamethrower Tech: +⁠40% range.'
                     },
                     {
                         file: weap,

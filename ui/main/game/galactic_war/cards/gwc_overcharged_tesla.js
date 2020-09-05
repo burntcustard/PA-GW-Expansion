@@ -2,7 +2,7 @@
 define(['shared/gw_common'], function(GW) {
     return {
         type: 'upgrades',
-        describe: "Increase the damage (＋⁠40%) and the energy consumption (＋⁠100%) of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon",
+        describe: "Increase the damage (+⁠40%) and the energy consumption (+⁠100%) of tesla weaponry.<br><br>Effects: Tesla Bot, Icarus Drone, Zeus Titan, Tesla Vanguard, Commander Tesla Uber Weapon",
         summarize: 'Overcharged Tesla Weapons',
         icon: 'coui://ui/main/game/galactic_war/gw_play/img/tech/gwc_energy.png',
         audio: '/VO/Computer/gw/board_tech_available_weapon_upgrade',
@@ -31,7 +31,7 @@ define(['shared/gw_common'], function(GW) {
                         file: unit,
                         path: 'description',
                         op: 'add',
-                        value: ' Overcharged Tesla: ＋⁠40% damage, ＋⁠100% energy consumption.'
+                        value: ' Overcharged Tesla: +⁠40% damage, +⁠100% energy consumption.'
                     }
                 );
             });
